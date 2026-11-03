@@ -59,8 +59,8 @@ a:hover { color: var(--violeta-oscuro); }
 
 :focus-visible { outline: 3px solid var(--amarillo); outline-offset: 2px; }
 
-/* Anchos de contenido iguales a los de Kubio (grilla tipo Bootstrap):
-   <576 px: todo el ancho · ≥576: 540 · ≥768: 720 · ≥1024: 960 · ≥1200: 1140 */
+/* Anchos de contenido iguales a los de Kubio (.h-section-boxed-container):
+   <576 px: todo el ancho · ≥576: 540 · ≥768: 720 · ≥1024: 960 · ≥1200: 1232 (+15 px de margen a cada lado) */
 .contenedor,
 .contenedor-angosto {
   width: 100%;
@@ -70,7 +70,7 @@ a:hover { color: var(--violeta-oscuro); }
 @media (min-width: 576px) { .contenedor, .contenedor-angosto { max-width: 540px; } }
 @media (min-width: 768px) { .contenedor, .contenedor-angosto { max-width: 720px; } }
 @media (min-width: 1024px) { .contenedor { max-width: 960px; } .contenedor-angosto { max-width: 820px; } }
-@media (min-width: 1200px) { .contenedor { max-width: 1140px; } }
+@media (min-width: 1200px) { .contenedor { max-width: 1262px; } }
 
 /* ---- Escala de títulos del tema ----
    Kubio define los títulos en "em" sobre una base de 18,67 px:

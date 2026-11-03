@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import IconoRed from '../components/IconoRed.astro';
+import IconoKubio from '../components/IconoKubio.astro';
 import Video from '../components/Video.astro';
 import nosotras from '../data/nosotras.json';
 import { url, formato, parrafos } from '../lib/url';
@@ -54,7 +55,11 @@ const { hero, ser_monomarental, videos = [], historia, equipo, cierre } = nosotr
                 <div class="persona__redes">
                   {p.redes.map((r) => (
                     <a href={r.url} target="_blank" rel="noopener" aria-label={`${r.red} de ${p.nombre}`}>
-                      <IconoRed red={r.red} size={30} />
+                      {r.red === 'instagram' || r.red === 'linkedin' ? (
+                      <IconoKubio nombre={r.red} size={20} />
+                    ) : (
+                      <IconoRed red={r.red} size={20} />
+                    )}
                     </a>
                   ))}
                 </div>
@@ -103,7 +108,8 @@ const { hero, ser_monomarental, videos = [], historia, equipo, cierre } = nosotr
   .persona__bio p { margin-bottom: 0.5rem; }
   .persona__video { width: min(100%, 485px); margin: 0.75rem auto 0; }
   .persona__video :global(.video) { border-radius: 0; }
-  .persona__redes { display: flex; justify-content: center; gap: 1rem; margin-top: auto; padding-top: 1.75rem; }
-  .persona__redes a { color: var(--amarillo); }
-  .persona__redes a:hover { color: var(--violeta); }
+  /* Íconos de Font Awesome de 20 px + 5 px de aire, amarillo al 80 %; al pasar el mouse, rojo (1 s) */
+  .persona__redes { display: flex; justify-content: center; gap: 5px; margin-top: auto; padding-top: 1.25rem; }
+  .persona__redes a { display: inline-flex; padding: 5px; color: rgba(245, 183, 60, 0.8); transition: color 1s; }
+  .persona__redes a:hover { color: var(--rojo); }
 </style>

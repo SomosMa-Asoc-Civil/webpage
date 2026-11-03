@@ -42,7 +42,7 @@ const usuarioIG = feed.usuario || instagram.usuario;
         <div class="cifras__tarjeta">
           {cifras.items.map((c, i) => (
             <div class="cifra">
-              <span class="cifra__icono"><Icono nombre={iconosCifras[i % 2]} size={44} trazo={1.5} /></span>
+              <span class="cifra__icono"><Icono nombre={iconosCifras[i % 2]} size={40} trazo={1.5} /></span>
               <p class="cifra__dato" set:html={formato(c.dato).join('<br />')} />
               <p class="cifra__texto" set:html={formato(c.texto).join('<br />')} />
               {c.fuente && <p class="cifra__fuente">({c.fuente})</p>}
@@ -58,7 +58,7 @@ const usuarioIG = feed.usuario || instagram.usuario;
 
         <div class="cifras__tarjeta">
           <div class="cifra">
-            <span class="cifra__icono"><Icono nombre="maletin" size={44} trazo={1.5} /></span>
+            <span class="cifra__icono"><Icono nombre="maletin" size={40} trazo={1.5} /></span>
             {cifras.destacado.lugar && <p class="cifra__lugar" set:html={formato(cifras.destacado.lugar).join('<br />')} />}
             <p class="cifra__dato">{cifras.destacado.dato}</p>
             <p class="cifra__texto" set:html={formato(cifras.destacado.texto).join('<br />')} />
@@ -91,18 +91,20 @@ const usuarioIG = feed.usuario || instagram.usuario;
     </div>
   </section>
 
-  <!-- Alianzas que transforman + mapa -->
+  <!-- Alianzas que transforman + mapa (en escritorio, texto a la izquierda y mapa a la derecha) -->
   <section class="seccion alianzas">
-    <div class="alianzas__texto texto-largo">
-      <h2 class="centrado">{alianzas.titulo}</h2>
-      {formato(alianzas.texto).map((p) => <p set:html={p} />)}
-    </div>
-    {alianzas.mapa && (
-      <div class="contenedor alianzas__mapa">
-        <hr class="separador" style="border-top-color: var(--texto-suave)" />
-        <iframe src={alianzas.mapa} title="Mapa de alianzas estratégicas" loading="lazy" allowfullscreen></iframe>
+    <div class="contenedor alianzas__grilla">
+      <div class="alianzas__texto texto-largo">
+        <h2 class="alianzas__titulo">{alianzas.titulo}</h2>
+        {formato(alianzas.texto).map((p) => <p set:html={p} />)}
       </div>
-    )}
+      {alianzas.mapa && (
+        <div class="alianzas__mapa">
+          <hr class="separador alianzas__linea" />
+          <iframe src={alianzas.mapa} title="Mapa de alianzas estratégicas" loading="lazy" allowfullscreen></iframe>
+        </div>
+      )}
+    </div>
     <div class="botones botones--centro">
       <a class="boton" href={url(alianzas.boton.url)}>{alianzas.boton.texto}</a>
     </div>
@@ -115,24 +117,28 @@ const usuarioIG = feed.usuario || instagram.usuario;
   .hero__texto { font-family: var(--fuente-titulos); font-size: 0.95rem; }
 
   .cifras__titulo { text-transform: uppercase; font-size: clamp(2rem, 4.5vw, 3.2rem); margin-bottom: 3rem; }
-  .cifras__grilla { display: grid; gap: 1.75rem; grid-template-columns: repeat(3, 1fr); }
+  .cifras__grilla { display: grid; gap: 30px; grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 1023px) {
     .cifras__grilla { grid-template-columns: 1fr; max-width: 680px; margin-inline: auto; }
   }
+  /* Tarjetas de Kubio: fondo #302f30 al 6 %, radio 30 px; la roja con alto mínimo de 350 px */
   .cifras__tarjeta {
-    background: var(--gris-tarjeta);
-    border-radius: 32px;
-    padding: 2.5rem 2rem;
+    background: rgba(48, 47, 48, 0.06);
+    border-radius: 30px;
+    padding: 2.5rem 1.5rem;
     display: grid;
-    gap: 3rem;
+    gap: 2.5rem;
     align-content: center;
     text-align: center;
   }
-  .cifras__tarjeta--roja { background: var(--rojo); color: var(--blanco); gap: 1.75rem; justify-items: center; padding-block: 3.5rem; }
+  .cifras__tarjeta--roja { background: var(--rojo); color: var(--blanco); gap: 1.75rem; justify-items: center; padding-block: 3.5rem; min-height: 350px; }
+  /* Botón "Conocer más": Open Sans 600, 12 px, durazno con texto rojo; hover violeta */
+  .cifras__tarjeta--roja .boton { font-family: 'Open Sans', var(--fuente-texto); font-weight: 600; font-size: 12px; line-height: 1; letter-spacing: 1px; padding: 15px 30px; border-radius: 5px; }
+  .cifras__tarjeta--roja .boton:hover { background: var(--violeta-oscuro); color: var(--blanco); }
   .cifras__tarjeta--roja h3 { color: var(--blanco); font-weight: 700; font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.15; margin: 0; }
   .cifras__pregunta { font-family: var(--fuente-titulos); font-weight: 600; font-size: clamp(1.25rem, 2.6vw, 1.65rem); margin: 0; }
   .cifra p { margin: 0; font-family: var(--fuente-titulos); }
-  .cifra__icono { display: inline-flex; color: var(--rojo); margin-bottom: 1rem; }
+  .cifra__icono { display: inline-flex; color: var(--rojo); margin-bottom: 0.75rem; }
   .cifra__dato { font-weight: 700; font-size: clamp(2.2rem, 4.5vw, 3rem); line-height: 1.2; color: var(--texto); }
   .cifra__texto { margin-top: 1rem !important; font-size: clamp(1rem, 2vw, 1.3rem); line-height: 1.5; }
   .cifra__lugar { font-size: 1.15rem; margin-bottom: 0.5rem !important; }
@@ -164,9 +170,19 @@ const usuarioIG = feed.usuario || instagram.usuario;
   .instagram__grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform 0.3s; }
   .instagram__grilla a:hover img { transform: scale(1.05); }
 
-  .alianzas__texto { width: min(620px, 100% - 2.5rem); margin-inline: auto; }
-  .alianzas__texto h2 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.15; }
-  .alianzas__mapa { max-width: 900px; margin-top: 2.5rem; }
+  .alianzas__texto { width: 100%; max-width: 620px; margin-inline: auto; }
+  .alianzas__titulo { font-weight: 700; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.15; text-align: center; }
+  .alianzas__mapa { width: 100%; max-width: 900px; margin: 2.5rem auto 0; }
+  .alianzas__linea { margin-top: 0; border-top-color: var(--texto-suave); }
   .alianzas__mapa iframe { display: block; width: 100%; height: 480px; border: 0; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+
+  /* Escritorio: dos columnas como en Kubio */
+  @media (min-width: 1024px) {
+    .alianzas__grilla { display: grid; grid-template-columns: 1fr 1fr; column-gap: 50px; align-items: center; }
+    .alianzas__texto { max-width: none; margin: 0; }
+    .alianzas__titulo { text-align: left; font-size: 3.2rem; }
+    .alianzas__mapa { max-width: none; margin: 0; }
+    .alianzas__mapa iframe { height: 630px; }
+  }
   .alianzas .botones { margin-top: 3.5rem; }
 </style>
