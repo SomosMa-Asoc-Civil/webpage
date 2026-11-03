@@ -179,8 +179,9 @@ a:hover { color: var(--violeta-oscuro); }
 .formulario { display: grid; gap: 0; font-family: var(--fuente-texto); font-size: 16px; color: var(--texto); }
 .formulario__campo { display: block; margin: 0 0 1em; padding: 0; border: 0; font-weight: 500; line-height: 1.6; }
 .formulario__campo > span, .formulario__campo > legend { display: block; margin-bottom: 0.15rem; padding: 0; }
-/* En el original, los selectores y grupos de casillas no van dentro de <label>: texto liviano */
-.formulario__campo--grupo { font-weight: 300; }
+/* Asterisco de campo obligatorio en el rojo del tema (el mismo de los hover) */
+.formulario__requerido { margin-left: 0.15em; color: var(--rojo); font-weight: 700; }
+.formulario__nota { margin: 0 0 0.75rem; font-size: 14px; font-weight: 300; }
 .formulario input:not([type='checkbox']),
 .formulario select,
 .formulario textarea {
@@ -204,7 +205,7 @@ a:hover { color: var(--violeta-oscuro); }
 .formulario textarea { min-height: 22.5rem; resize: vertical; }
 /* Casillas en línea, como las de Contact Form 7 */
 .formulario__opciones { display: flex; flex-wrap: wrap; gap: 0.35rem 0; margin: 0.15rem 0 1rem; }
-.formulario__opcion { display: inline-flex; align-items: center; gap: 0.4rem; margin-left: 1em; font-weight: 500; }
+.formulario__opcion { display: inline-flex; align-items: center; gap: 0.4rem; margin-left: 1em; font-weight: 300; }
 .formulario__opcion input { width: 1rem; height: 1rem; margin: 0; accent-color: var(--violeta); }
 .formulario .boton {
   width: 100%;

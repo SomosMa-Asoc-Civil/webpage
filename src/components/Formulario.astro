@@ -34,8 +34,8 @@ const clave = sitio.formularios?.web3forms_key?.trim() ?? '';
 
   {campos.map((c) =>
     c.tipo === 'checkbox' ? (
-      <fieldset class="formulario__campo formulario__campo--grupo" data-requerido={c.requerido ? '1' : undefined} data-nombre={c.etiqueta}>
-        <legend>{c.etiqueta}{c.requerido && '*'}</legend>
+      <fieldset class="formulario__campo" data-requerido={c.requerido ? '1' : undefined} data-nombre={c.etiqueta}>
+        <legend>{c.etiqueta}{c.requerido && <span class="formulario__requerido" aria-hidden="true">*</span>}</legend>
         <div class="formulario__opciones">
           {(c.opciones ?? []).map((o) => (
             <label class="formulario__opcion">
@@ -45,8 +45,8 @@ const clave = sitio.formularios?.web3forms_key?.trim() ?? '';
         </div>
       </fieldset>
     ) : (
-      <label class:list={['formulario__campo', { 'formulario__campo--grupo': c.tipo === 'select' }]}>
-        <span>{c.etiqueta}{c.requerido && '*'}</span>
+      <label class="formulario__campo">
+        <span>{c.etiqueta}{c.requerido && <span class="formulario__requerido" aria-hidden="true">*</span>}</span>
         {c.tipo === 'textarea' ? (
           <textarea name={c.nombre} required={c.requerido} rows="10"></textarea>
         ) : c.tipo === 'select' ? (
@@ -61,6 +61,7 @@ const clave = sitio.formularios?.web3forms_key?.trim() ?? '';
     )
   )}
 
+  <p class="formulario__nota"><span class="formulario__requerido" aria-hidden="true">*</span> Campos obligatorios</p>
   <button class="boton" type="submit">{boton}</button>
   <p class="formulario__estado" role="status" aria-live="polite"></p>
 </form>
