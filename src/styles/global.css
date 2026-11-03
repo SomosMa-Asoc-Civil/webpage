@@ -178,7 +178,7 @@ a:hover { color: var(--violeta-oscuro); }
 }
 .formulario { display: grid; gap: 0; font-family: var(--fuente-texto); font-size: 16px; color: var(--texto); }
 .formulario__campo { display: block; margin: 0 0 1em; padding: 0; border: 0; font-weight: 500; line-height: 1.6; }
-.formulario__campo > span, .formulario__campo > legend { display: block; margin-bottom: 0.15rem; padding: 0; }
+.formulario__campo > label, .formulario__campo > legend { display: block; margin-bottom: 0.15rem; padding: 0; }
 /* Asterisco de campo obligatorio en el rojo del tema (el mismo de los hover) */
 .formulario__requerido { margin-left: 0.15em; color: var(--rojo); font-weight: 700; }
 .formulario__nota { margin: 0 0 0.75rem; font-size: 14px; font-weight: 300; }
@@ -218,10 +218,23 @@ a:hover { color: var(--violeta-oscuro); }
   letter-spacing: 0;
   text-transform: none;
 }
-.formulario__estado { margin: 1rem 0 0; font-weight: 400; }
-.formulario__estado:empty { display: none; }
-.formulario__estado[data-tipo='ok'] { color: #0f7b3e; }
-.formulario__estado[data-tipo='error'] { color: #b42318; }
+/* Errores como Contact Form 7: mensaje rojo debajo del campo y borde rojo */
+.formulario__error { display: block; margin: -0.75rem 0 0.25rem; font-size: 14px; font-weight: 400; line-height: 1.4; color: var(--rojo); }
+.formulario__error:empty { display: none; }
+.formulario__campo--grupo .formulario__error, fieldset .formulario__error { margin-top: -0.5rem; }
+.formulario__campo--invalido input:not([type='checkbox']),
+.formulario__campo--invalido select,
+.formulario__campo--invalido textarea { border-color: var(--rojo); }
+.formulario__campo--invalido input:focus,
+.formulario__campo--invalido select:focus,
+.formulario__campo--invalido textarea:focus { box-shadow: 0 0 0 3px rgba(230, 39, 33, 0.18); }
+.formulario__campo--invalido .formulario__opcion input { outline: 1px solid var(--rojo); outline-offset: 1px; }
+
+/* Recuadro de respuesta debajo del botón (colores de Contact Form 7) */
+.formulario__respuesta { margin: 1.5rem 0 0; padding: 0.5rem 1rem; border: 2px solid #00a0d2; font-size: 15px; font-weight: 400; line-height: 1.5; }
+.formulario__respuesta[data-tipo='invalido'] { border-color: #ffb900; }
+.formulario__respuesta[data-tipo='ok'] { border-color: #46b450; }
+.formulario__respuesta[data-tipo='falla'] { border-color: #dc3232; }
 .oculto { position: absolute !important; left: -9999px !important; }
 
 /* Video de YouTube responsive */

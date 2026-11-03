@@ -4,6 +4,13 @@
  * La clave se carga en src/data/sitio.json -> formularios.web3forms_key
  * (o desde Pages CMS: "Configuración del sitio"). Mientras esté vacía, el formulario
  * avisa que no está configurado y ofrece escribir directo por mail.
+ *
+ * Validación igual a la de Contact Form 7 (el plugin que usaba WordPress):
+ * - Se valida al enviar (todos los campos a la vez) y al salir de cada campo.
+ * - El error aparece debajo de cada campo y el campo queda marcado en rojo.
+ * - Debajo del botón, un recuadro resume el resultado: naranja (errores), verde (enviado), rojo (falló).
+ * - Reglas: obligatorios, mail válido, teléfono válido, al menos una casilla por grupo obligatorio,
+ *   máximo 400 caracteres en textos y 2000 en áreas de texto.
  */
 import sitio from '../data/sitio.json';
 
@@ -26,6 +33,7 @@ interface Props {
 
 const { id, asunto, campos, boton = 'Enviar' } = Astro.props;
 const clave = sitio.formularios?.web3forms_key?.trim() ?? '';
+const idError = (c: Campo) => `${id}-${c.nombre}-error`;
 ---
 <form class="formulario" id={id} data-clave={clave} data-email={sitio.email} novalidate>
   <input type="hidden" name="subject" value={asunto} />
@@ -34,7 +42,12 @@ const clave = sitio.formularios?.web3forms_key?.trim() ?? '';
 
   {campos.map((c) =>
     c.tipo === 'checkbox' ? (
-      <fieldset class="formulario__campo" data-requerido={c.requerido ? '1' : undefined} data-nombre={c.etiqueta}>
+      <fieldset
+        class="formulario__campo"
+        data-campo="grupo"
+        data-requerido={c.requerido ? '1' : undefined}
+        aria-describedby={idError(c)}
+      >
         <legend>{c.etiqueta}{c.requerido && <span class="formulario__requerido" aria-hidden="true">*</span>}</legend>
         <div class="formulario__opciones">
           {(c.opciones ?? []).map((o) => (
@@ -43,68 +56,161 @@ const clave = sitio.formularios?.web3forms_key?.trim() ?? '';
             </label>
           ))}
         </div>
+        <span class="formulario__error" id={idError(c)}></span>
       </fieldset>
     ) : (
-      <label class="formulario__campo">
-        <span>{c.etiqueta}{c.requerido && <span class="formulario__requerido" aria-hidden="true">*</span>}</span>
+      <div class="formulario__campo" data-campo={c.tipo ?? 'text'}>
+        <label for={`${id}-${c.nombre}`}>
+          {c.etiqueta}{c.requerido && <span class="formulario__requerido" aria-hidden="true">*</span>}
+        </label>
         {c.tipo === 'textarea' ? (
-          <textarea name={c.nombre} required={c.requerido} rows="10"></textarea>
+          <textarea
+            id={`${id}-${c.nombre}`}
+            name={c.nombre}
+            rows="10"
+            maxlength="2000"
+            data-requerido={c.requerido ? '1' : undefined}
+            aria-required={c.requerido ? 'true' : undefined}
+            aria-describedby={idError(c)}
+          ></textarea>
         ) : c.tipo === 'select' ? (
-          <select name={c.nombre} required={c.requerido}>
+          <select
+            id={`${id}-${c.nombre}`}
+            name={c.nombre}
+            data-requerido={c.requerido ? '1' : undefined}
+            aria-required={c.requerido ? 'true' : undefined}
+            aria-describedby={idError(c)}
+          >
             <option value="">{c.placeholder ?? 'Seleccioná una opción'}</option>
             {(c.opciones ?? []).map((o) => <option value={o}>{o}</option>)}
           </select>
         ) : (
-          <input type={c.tipo ?? 'text'} name={c.nombre} required={c.requerido} autocomplete={c.autocompletar} />
+          <input
+            id={`${id}-${c.nombre}`}
+            type={c.tipo ?? 'text'}
+            name={c.nombre}
+            maxlength="400"
+            autocomplete={c.autocompletar}
+            data-requerido={c.requerido ? '1' : undefined}
+            aria-required={c.requerido ? 'true' : undefined}
+            aria-describedby={idError(c)}
+          />
         )}
-      </label>
+        <span class="formulario__error" id={idError(c)}></span>
+      </div>
     )
   )}
 
   <p class="formulario__nota"><span class="formulario__requerido" aria-hidden="true">*</span> Campos obligatorios</p>
   <button class="boton" type="submit">{boton}</button>
-  <p class="formulario__estado" role="status" aria-live="polite"></p>
+  <div class="formulario__respuesta" role="status" aria-live="polite" hidden></div>
 </form>
 
 <script>
+  const MENSAJES = {
+    requerido: 'Completá este campo.',
+    grupo: 'Elegí al menos una opción.',
+    email: 'Ingresá un correo electrónico válido.',
+    tel: 'Ingresá un número de teléfono válido.',
+    largo: (max: number) => `Este campo admite como máximo ${max} caracteres.`,
+    resumen: 'Uno o más campos tienen un error. Por favor, revisalos e intentá de nuevo.',
+    enviando: 'Enviando…',
+    ok: '¡Gracias por tu mensaje! Ya lo recibimos y te vamos a responder a la brevedad.',
+    falla: (email: string) => `Hubo un error al enviar tu mensaje. Probá de nuevo más tarde o escribinos a ${email}.`,
+    sinClave: (email: string) => `El formulario todavía no está habilitado. Mientras tanto, escribinos a ${email}.`,
+  };
+  const RE_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  // Igual que Contact Form 7: números, espacios, +, -, paréntesis y puntos
+  const RE_TEL = /^[+]?[0-9() .-]{6,}$/;
+
+  type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+
   document.querySelectorAll<HTMLFormElement>('form.formulario').forEach((form) => {
     if (form.dataset.listo) return;
     form.dataset.listo = '1';
-    const estado = form.querySelector<HTMLElement>('.formulario__estado')!;
     const boton = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-    const mostrar = (tipo: 'ok' | 'error' | '', texto: string) => {
-      estado.dataset.tipo = tipo;
-      estado.textContent = texto;
+    const respuesta = form.querySelector<HTMLElement>('.formulario__respuesta')!;
+    const campos = [...form.querySelectorAll<HTMLElement>('[data-campo]')];
+
+    const mostrarRespuesta = (tipo: '' | 'invalido' | 'ok' | 'falla', texto: string) => {
+      respuesta.dataset.tipo = tipo;
+      respuesta.textContent = texto;
+      respuesta.hidden = !texto;
     };
+
+    /** Devuelve el mensaje de error del campo, o '' si está bien. */
+    const errorDe = (campo: HTMLElement): string => {
+      if (campo.dataset.campo === 'grupo') {
+        const requerido = campo.dataset.requerido === '1';
+        return requerido && !campo.querySelector('input:checked') ? MENSAJES.grupo : '';
+      }
+      const control = campo.querySelector<Control>('input, select, textarea')!;
+      const valor = control.value.trim();
+      if (!valor) return control.dataset.requerido === '1' ? MENSAJES.requerido : '';
+      const max = Number(control.getAttribute('maxlength')) || 0;
+      if (max && valor.length > max) return MENSAJES.largo(max);
+      if (campo.dataset.campo === 'email' && !RE_EMAIL.test(valor)) return MENSAJES.email;
+      if (campo.dataset.campo === 'tel' && !RE_TEL.test(valor)) return MENSAJES.tel;
+      return '';
+    };
+
+    /** Muestra u oculta el error de un campo. Devuelve true si es válido. */
+    const validar = (campo: HTMLElement): boolean => {
+      const mensaje = errorDe(campo);
+      const caja = campo.querySelector<HTMLElement>('.formulario__error')!;
+      caja.textContent = mensaje;
+      campo.classList.toggle('formulario__campo--invalido', !!mensaje);
+      const objetivo = campo.dataset.campo === 'grupo' ? campo : campo.querySelector<Control>('input, select, textarea');
+      objetivo?.setAttribute('aria-invalid', mensaje ? 'true' : 'false');
+      return !mensaje;
+    };
+
+    // Al salir de un campo se valida; si ya tenía error, se revalida mientras se corrige
+    campos.forEach((campo) => {
+      campo.addEventListener('focusout', (e) => {
+        if (campo.dataset.campo === 'grupo' && campo.contains(e.relatedTarget as Node)) return;
+        campo.dataset.tocado = '1';
+        validar(campo);
+      });
+      const revalidar = () => {
+        if (!campo.classList.contains('formulario__campo--invalido')) return;
+        validar(campo);
+        // Si ya no quedan errores, se oculta el aviso naranja
+        if (respuesta.dataset.tipo === 'invalido' && !form.querySelector('.formulario__campo--invalido')) {
+          mostrarRespuesta('', '');
+        }
+      };
+      campo.addEventListener('input', revalidar);
+      campo.addEventListener('change', revalidar);
+    });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (!form.checkValidity()) {
-        form.reportValidity();
+      const resultados = campos.map(validar);
+      if (resultados.includes(false)) {
+        mostrarRespuesta('invalido', MENSAJES.resumen);
+        const primero = form.querySelector<HTMLElement>('.formulario__campo--invalido');
+        primero?.querySelector<HTMLElement>('input, select, textarea')?.focus();
         return;
       }
-      // Grupos de casillas obligatorios: al menos una marcada
-      for (const grupo of form.querySelectorAll<HTMLFieldSetElement>('fieldset[data-requerido]')) {
-        if (!grupo.querySelector('input:checked')) {
-          mostrar('error', `Elegí al menos una opción en "${grupo.dataset.nombre}".`);
-          grupo.querySelector('input')?.focus();
-          return;
-        }
-      }
+
       const clave = form.dataset.clave;
+      const email = form.dataset.email ?? '';
       if (!clave) {
-        mostrar('error', `El formulario todavía no está configurado. Escribinos a ${form.dataset.email}.`);
+        mostrarRespuesta('falla', MENSAJES.sinClave(email));
         return;
       }
+
       // Las casillas con el mismo nombre se envían juntas: "Mañana, Tarde"
       const datos: Record<string, string> = {};
       for (const [k, v] of new FormData(form).entries()) {
-        const valor = String(v);
+        const valor = String(v).trim();
         datos[k] = datos[k] ? `${datos[k]}, ${valor}` : valor;
       }
       datos.access_key = clave;
+
       boton.disabled = true;
-      mostrar('', 'Enviando…');
+      mostrarRespuesta('', MENSAJES.enviando);
       try {
         const r = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
@@ -114,9 +220,13 @@ const clave = sitio.formularios?.web3forms_key?.trim() ?? '';
         const res = await r.json();
         if (!r.ok || !res.success) throw new Error(res.message || 'Error');
         form.reset();
-        mostrar('ok', '¡Gracias! Recibimos tu mensaje y te vamos a responder a la brevedad.');
+        campos.forEach((c) => {
+          c.classList.remove('formulario__campo--invalido');
+          c.querySelector('.formulario__error')!.textContent = '';
+        });
+        mostrarRespuesta('ok', MENSAJES.ok);
       } catch {
-        mostrar('error', `No pudimos enviar el mensaje. Probá de nuevo o escribinos a ${form.dataset.email}.`);
+        mostrarRespuesta('falla', MENSAJES.falla(email));
       } finally {
         boton.disabled = false;
       }
