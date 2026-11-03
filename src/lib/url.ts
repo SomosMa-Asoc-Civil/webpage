@@ -19,6 +19,7 @@ export function fecha(d: Date): string {
  * - Línea en blanco: párrafo nuevo
  * - Salto de línea: <br>
  * - **texto**: negrita
+ * - _texto_: cursiva
  */
 export function formato(texto?: string | null): string[] {
   const escapar = (s: string) =>
@@ -26,8 +27,14 @@ export function formato(texto?: string | null): string[] {
   return parrafos(texto).map((p) =>
     escapar(p)
       .replace(/\*\*([\s\S]+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|[\s(“"])_(\S[\s\S]*?\S|\S)_(?=$|[\s.,;:!?)”"])/g, '$1<em>$2</em>')
       .replace(/\n/g, '<br />'),
   );
+}
+
+/** Igual que formato() pero todo en un solo bloque (para títulos o datos cortos). */
+export function formatoLinea(texto?: string | null): string {
+  return formato(texto).join('<br />');
 }
 
 /** Separa un texto en párrafos (doble salto de línea). */

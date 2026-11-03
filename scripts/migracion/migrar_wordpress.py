@@ -108,6 +108,14 @@ def rich(h: str) -> str:
         trail = re.search(r"(\s|&nbsp;)*$", inner).group(0)
         return f"{lead}**{inner.strip()}**{trail}"
     h = re.sub(r"<(strong|b)\b[^>]*>(.*?)</\1>", bold, h, flags=re.S)
+    def italic(m):
+        inner = m.group(2)
+        if not re.sub(r"<[^>]+>|&nbsp;|\s", "", inner):
+            return inner
+        lead = re.match(r"^(\s|&nbsp;)*", inner).group(0)
+        trail = re.search(r"(\s|&nbsp;)*$", inner).group(0)
+        return f"{lead}_{inner.strip()}_{trail}"
+    h = re.sub(r"<(em|i)\b[^>]*>(.*?)</\1>", italic, h, flags=re.S)
     t = clean(h)
     t = re.sub(r"\*\*(\s*)\*\*", r"\1", t)          # **a** **b** pegados -> uno solo
     return t
@@ -255,13 +263,14 @@ def migrar_paginas(by_type, get):
         elif x["type"] == "heading":
             actual["nombre"] = prose(x["text"])
         elif x["type"] == "text":
-            parts = x["text"].split("\n", 1)
+            texto = rich(x.get("html", "")) or x["text"]
+            parts = texto.split("\n", 1)
             if not actual["cargo"]:
-                actual["cargo"] = parts[0].strip()
+                actual["cargo"] = parts[0].strip().strip("*_")
                 if len(parts) > 1:
-                    actual["bio"] = prose(parts[1])
+                    actual["bio"] = parts[1].strip()
             else:
-                actual["bio"] = (actual["bio"] + "\n\n" + prose(x["text"])).strip()
+                actual["bio"] = (actual["bio"] + "\n\n" + texto).strip()
         elif x["type"] == "social" and x["text"]:
             url = fix_instagram(x["text"])
             red = "linkedin" if "linkedin" in url else "instagram"
@@ -275,10 +284,10 @@ def migrar_paginas(by_type, get):
         },
         "ser_monomarental": {
             "titulo": prose(n[2]["text"]).rstrip("."),
-            "parrafos": [prose(x["text"]) for x in n[3:i_hist] if x["type"] == "paragraph"],
+            "parrafos": [rich(x["html"]) for x in n[3:i_hist] if x["type"] == "paragraph"],
         },
         "videos": [youtube_id(x["text"]) for x in n[:i_hist] if x["type"] == "video"],
-        "historia": {"titulo": prose(n[i_hist]["text"]), "texto": prose(n[i_hist + 1]["text"])},
+        "historia": {"titulo": prose(n[i_hist]["text"]), "texto": rich(n[i_hist + 1]["html"])},
         "equipo": {"titulo": prose(n[i_eq]["text"]), "texto": prose(n[i_eq + 1]["text"]), "integrantes": equipo},
         "cierre": {"texto": "Sumate vos también", "url": "/sumate/"},
     })

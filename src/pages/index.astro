@@ -84,13 +84,13 @@ const publicaciones: { imagen: string; url: string }[] = instagram.publicaciones
 
   <!-- Alianzas que transforman + mapa -->
   <section class="seccion alianzas">
-    <div class="alianzas__texto">
+    <div class="alianzas__texto texto-largo">
       <h2 class="centrado">{alianzas.titulo}</h2>
       {formato(alianzas.texto).map((p) => <p set:html={p} />)}
     </div>
     {alianzas.mapa && (
       <div class="contenedor alianzas__mapa">
-        <hr />
+        <hr class="separador" style="border-top-color: var(--texto-suave)" />
         <iframe src={alianzas.mapa} title="Mapa de alianzas estratégicas" loading="lazy" allowfullscreen></iframe>
       </div>
     )}
@@ -152,9 +152,7 @@ const publicaciones: { imagen: string; url: string }[] = instagram.publicaciones
 
   .alianzas__texto { width: min(620px, 100% - 2.5rem); margin-inline: auto; }
   .alianzas__texto h2 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.15; }
-  .alianzas__texto p { font-size: 1.1rem; line-height: 1.85; }
   .alianzas__mapa { max-width: 900px; margin-top: 2.5rem; }
-  .alianzas__mapa hr { width: 130px; margin: 0 auto 2rem; border: 0; border-top: 2px solid var(--texto-suave); }
   .alianzas__mapa iframe { display: block; width: 100%; height: 480px; border: 0; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
   .alianzas .botones { margin-top: 3.5rem; }
 </style>

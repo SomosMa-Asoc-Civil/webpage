@@ -3,59 +3,67 @@ import Base from '../layouts/Base.astro';
 import IconoRed from '../components/IconoRed.astro';
 import Video from '../components/Video.astro';
 import nosotras from '../data/nosotras.json';
-import { url, parrafos } from '../lib/url';
+import { url, formato, parrafos } from '../lib/url';
 
 const { hero, ser_monomarental, videos = [], historia, equipo, cierre } = nosotras;
 ---
 <Base titulo="Nosotras" descripcion={hero.texto}>
   <section class="seccion">
     <div class="contenedor-angosto centrado">
-      <h1 class="titulo">{hero.titulo} |<br />{hero.antetitulo}</h1>
+      <h1 class="titulo-pagina">{hero.titulo} |<br />{hero.antetitulo}</h1>
       <p class="bajada">{hero.texto}</p>
-
-      <h3 class="subtitulo">{ser_monomarental.titulo}.</h3>
-      {ser_monomarental.parrafos.map((p) => <p class="parrafo">{p}</p>)}
+      <hr class="separador" />
+      <h2 class="subtitulo">{ser_monomarental.titulo}.</h2>
+      <div class="texto-largo">
+        {ser_monomarental.parrafos.flatMap((p) => formato(p)).map((p) => <p set:html={p} />)}
+      </div>
     </div>
 
     {videos.length > 0 && (
-      <div class="contenedor grilla grilla-3 videos">
+      <div class="contenedor videos">
         {videos.map((v) => <Video id={v} titulo="Monomarentales Argentina" />)}
       </div>
     )}
   </section>
 
   <section class="contenedor historia">
-    <h2>{historia.titulo}</h2>
-    {parrafos(historia.texto).map((p) => <p>{p}</p>)}
+    <h2 class="titulo-seccion">{historia.titulo}</h2>
+    <div class="texto-largo">
+      {formato(historia.texto).map((p) => <p set:html={p} />)}
+    </div>
   </section>
 
   <section class="seccion">
     <div class="contenedor">
       <div class="centrado equipo__encabezado">
-        <h2>{equipo.titulo}</h2>
-        <p class="equipo__bajada">{equipo.texto}</p>
+        <h2 class="titulo-seccion">{equipo.titulo}</h2>
+        <p class="bajada">{equipo.texto}</p>
       </div>
-      <div class="grilla grilla-2 equipo">
+      <div class="equipo">
         {equipo.integrantes.map((p) => (
-          <article class="tarjeta persona">
-            {p.foto && <img class="persona__foto" src={url(p.foto)} alt={p.nombre} loading="lazy" width="480" height="480" />}
-            <h3 class="persona__nombre">{p.nombre}</h3>
-            <p class="persona__cargo">{p.cargo}</p>
-            {parrafos(p.bio).map((t) => <p class="persona__bio">{t}</p>)}
-            {p.video && <Video id={p.video} titulo={`Video de ${p.nombre}`} />}
-            {p.redes.length > 0 && (
-              <div class="persona__redes">
-                {p.redes.map((r) => (
-                  <a href={r.url} target="_blank" rel="noopener" aria-label={`${r.red} de ${p.nombre}`}>
-                    <IconoRed red={r.red} size={18} />
-                  </a>
-                ))}
+          <article class="persona">
+            {p.foto && <img class="persona__foto" src={url(p.foto)} alt={p.nombre} loading="lazy" width="630" height="630" />}
+            <div class="persona__cuerpo">
+              <h3 class="persona__nombre">{p.nombre}</h3>
+              <p class="persona__cargo">{p.cargo}</p>
+              <div class="texto-largo persona__bio">
+                {formato(p.bio).map((t) => <p set:html={t} />)}
               </div>
-            )}
+              {p.video && <div class="persona__video"><Video id={p.video} titulo={`Video de ${p.nombre}`} /></div>}
+              {p.redes.length > 0 && (
+                <div class="persona__redes">
+                  {p.redes.map((r) => (
+                    <a href={r.url} target="_blank" rel="noopener" aria-label={`${r.red} de ${p.nombre}`}>
+                      <IconoRed red={r.red} size={30} />
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
           </article>
         ))}
       </div>
-      <div class="botones botones--centro" style="margin-top:3rem">
+      <div class="botones botones--centro" style="margin-top:4rem">
         <a class="boton" href={url(cierre.url)}>{cierre.texto}</a>
       </div>
     </div>
@@ -63,31 +71,39 @@ const { hero, ser_monomarental, videos = [], historia, equipo, cierre } = nosotr
 </Base>
 
 <style>
-  .titulo { font-size: clamp(1.9rem, 3.6vw, 2.6rem); font-weight: 600; }
-  .bajada { color: var(--violeta); font-family: var(--fuente-titulos); font-size: 1.1rem; }
-  .subtitulo { color: var(--rojo); font-size: 1.2rem; font-weight: 600; margin-top: 2.5rem; }
-  .parrafo { font-size: 0.95rem; font-weight: 400; }
-  .videos { margin-top: 2.5rem; }
+  .subtitulo { font-size: clamp(1.4rem, 3vw, 1.75rem); font-weight: 700; margin-bottom: 1.5rem; }
+
+  .videos {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 1023px) {
+    .videos { grid-template-columns: 1fr; max-width: 420px; }
+  }
 
   .historia {
     background: var(--violeta);
-    color: var(--blanco);
-    padding: clamp(2rem, 5vw, 3.5rem);
+    padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2.5rem) clamp(3rem, 7vw, 4.5rem);
   }
-  .historia h2 { color: var(--blanco); font-weight: 600; }
-  .historia p { font-weight: 400; font-size: 0.975rem; }
+  .historia h2 { color: var(--blanco); margin-bottom: 2.5rem; }
+  .historia .texto-largo p { color: var(--blanco); margin-bottom: 0; }
 
-  .equipo__encabezado { margin-bottom: 2.5rem; }
-  .equipo__bajada { font-family: var(--fuente-titulos); font-size: 1.1rem; }
-  .equipo { gap: 2.5rem; }
-  .persona { text-align: center; display: flex; flex-direction: column; gap: 0.25rem; padding: 0 0 2rem; overflow: hidden; }
-  .persona > :not(img) { margin-inline: 2rem; }
-  .persona__foto { width: 100%; aspect-ratio: 1; object-fit: cover; margin-bottom: 1.5rem; }
-  .persona__nombre { font-size: 1.15rem; margin-bottom: 0; }
-  .persona__cargo { font-family: var(--fuente-titulos); font-size: 0.9rem; margin-bottom: 0.75rem; }
-  .persona__bio { font-size: 0.9rem; font-weight: 400; }
-  .persona .video { margin-top: 1rem; }
-  .persona__redes { display: flex; justify-content: center; gap: 0.75rem; margin-top: auto; padding-top: 1.25rem; }
+  .equipo__encabezado { margin-bottom: 3rem; }
+  .equipo { display: grid; gap: 2.5rem; grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 1023px) {
+    .equipo { grid-template-columns: 1fr; }
+  }
+  .persona { background: var(--blanco); box-shadow: 0 20px 40px -12px rgba(23, 25, 72, 0.22); text-align: center; display: flex; flex-direction: column; }
+  .persona__foto { width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .persona__cuerpo { padding: 1.75rem 1.25rem 2.25rem; display: flex; flex-direction: column; flex: 1; }
+  .persona__nombre { font-size: clamp(1.35rem, 2.6vw, 1.6rem); font-weight: 600; margin-bottom: 0.25rem; }
+  .persona__cargo { font-size: 1.2rem; color: var(--texto-suave); margin-bottom: 1.75rem; }
+  .persona__bio p { margin-bottom: 0.5rem; }
+  .persona__video { width: min(100%, 485px); margin: 0.75rem auto 0; }
+  .persona__video :global(.video) { border-radius: 0; }
+  .persona__redes { display: flex; justify-content: center; gap: 1rem; margin-top: auto; padding-top: 1.75rem; }
   .persona__redes a { color: var(--amarillo); }
   .persona__redes a:hover { color: var(--violeta); }
 </style>
