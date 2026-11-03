@@ -1,54 +1,75 @@
 ---
 import Base from '../layouts/Base.astro';
 import Formulario from '../components/Formulario.astro';
-import Icono from '../components/Icono.astro';
-import IconoRed from '../components/IconoRed.astro';
+import IconoKubio from '../components/IconoKubio.astro';
 import datos from '../data/contacto.json';
 import sitio from '../data/sitio.json';
-import { parrafos } from '../lib/url';
+import inicio from '../data/inicio.json';
+import { formato } from '../lib/url';
 
 const { faq, titulo, subtitulo, texto, formulario } = datos;
+const mapa = datos.mapa || inicio.alianzas?.mapa || '';
+const instagram = sitio.redes.find((r) => r.red === 'instagram');
+const linkedin = sitio.redes.find((r) => r.red === 'linkedin');
 ---
 <Base titulo="Contacto" descripcion={texto}>
+  <!-- Preguntas frecuentes: bloque lavanda con ícono de pregunta de 70 px -->
   <section class="contenedor faq">
-    <h1 class="centrado faq__titulo">{faq.titulo}</h1>
+    <h2 class="titulo-h2 centrado faq__titulo">{faq.titulo}</h2>
     <div class="faq__lista">
       {faq.preguntas.map((q) => (
         <div class="faq__item">
-          <span class="faq__icono"><Icono nombre="pregunta" size={34} /></span>
+          <span class="faq__icono"><IconoKubio nombre="pregunta" size={70} /></span>
           <div>
-            <h2 class="faq__pregunta">{q.pregunta}</h2>
-            {parrafos(q.respuesta).map((p) => <p>{p}</p>)}
+            <h3 class="titulo-h4 faq__pregunta">{q.pregunta}</h3>
+            {formato(q.respuesta).map((p) => <p set:html={p} />)}
           </div>
         </div>
       ))}
     </div>
   </section>
 
-  <section class="seccion">
-    <div class="contenedor grilla grilla-2">
+  <!-- Hablemos + datos de contacto + mapa -->
+  <section class="contacto">
+    <div class="contenedor contacto__grilla">
       <div>
         <span class="antetitulo">Contacto | {sitio.nombre_completo}</span>
-        <h2 class="hablemos">{titulo}...</h2>
-        <p class="subtitulo">{subtitulo}</p>
-        {parrafos(texto).map((p) => <p class="texto">{p}</p>)}
+        <h2 class="titulo-h2 contacto__titulo">{titulo}…</h2>
+        <p class="contacto__texto"><strong>{subtitulo}</strong><br />{formato(texto).join(' ').replace(/<br \/>/g, ' ')}</p>
       </div>
-      <ul class="datos">
-        <li><Icono nombre="mail" size={20} /> <a href={`mailto:${sitio.email}`}>{sitio.email}</a></li>
-        {sitio.redes.map((r) => (
-          <li>
-            <IconoRed red={r.red} size={20} />
-            <a href={r.url} target="_blank" rel="noopener">{r.red === 'linkedin' ? 'LinkedIn' : r.red === 'instagram' ? 'Instagram' : 'Web'}</a>
+
+      <ul class="contacto__lista">
+        <li class="contacto__item contacto__item--destacado">
+          <IconoKubio nombre="sobre" size={24} />
+          <a href={`mailto:${sitio.email}`}>{sitio.email}</a>
+        </li>
+        <li class="contacto__item">
+          <IconoKubio nombre="ubicacion" size={24} />
+          <span>{sitio.ubicacion}</span>
+        </li>
+        {instagram && (
+          <li class="contacto__item">
+            <IconoKubio nombre="instagram" size={24} />
+            <a href={instagram.url} target="_blank" rel="noopener">Instagram</a>
           </li>
-        ))}
-        <li><Icono nombre="ubicacion" size={20} /> {sitio.ubicacion}</li>
+        )}
+        {linkedin && (
+          <li class="contacto__item">
+            <IconoKubio nombre="linkedin" size={24} />
+            <a href={linkedin.url} target="_blank" rel="noopener">Linkedin</a>
+          </li>
+        )}
       </ul>
+
+      {mapa && (
+        <iframe class="contacto__mapa" src={mapa} title="Mapa de alianzas estratégicas" loading="lazy" allowfullscreen></iframe>
+      )}
     </div>
   </section>
 
   <section class="seccion" style="padding-top:0">
-    <div class="contenedor-angosto">
-      <h2 class="centrado ayuda">{formulario.titulo}</h2>
+    <div class="contenedor">
+      <p class="ayuda">{formulario.titulo}</p>
       <div class="formulario-tarjeta">
         <Formulario
           id="form-contacto"
@@ -66,21 +87,39 @@ const { faq, titulo, subtitulo, texto, formulario } = datos;
 </Base>
 
 <style>
-  .faq { background: var(--violeta-suave); padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 6vw, 6rem); margin-top: 1.5rem; }
-  .faq__titulo { font-size: clamp(1.8rem, 3.4vw, 2.5rem); margin-bottom: 2.5rem; }
-  .faq__lista { display: grid; gap: 2.5rem; max-width: 760px; margin-inline: auto; }
-  .faq__item { display: flex; gap: 1.75rem; align-items: flex-start; }
-  .faq__icono { flex: none; color: var(--violeta); margin-top: 0.5rem; }
-  .faq__pregunta { font-size: 1.15rem; font-weight: 700; color: var(--violeta); margin-bottom: 0.35rem; }
-  .faq__item p { font-size: 0.925rem; font-weight: 400; margin-bottom: 0; }
+  .faq {
+    margin-top: 20px;
+    padding: 40px 30px 64px;
+    background: rgba(172, 172, 249, 0.25);
+  }
+  .faq__titulo { margin-bottom: 60px; }
+  .faq__lista { display: grid; gap: 50px; }
+  .faq__item { display: grid; grid-template-columns: 70px 1fr; column-gap: 30px; align-items: start; }
+  .faq__icono { color: var(--violeta); }
+  .faq__pregunta { color: var(--violeta); font-weight: 700; margin: 0 0 10px; }
+  .faq__item p { margin: 0; font-size: 16px; font-weight: 300; line-height: 1.6; }
 
-  .hablemos { font-size: clamp(2rem, 4vw, 2.6rem); margin-bottom: 0.5rem; }
-  .subtitulo { font-family: var(--fuente-titulos); font-weight: 600; margin-bottom: 0.25rem; }
-  .texto { font-family: var(--fuente-titulos); }
-  .datos { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.25rem; align-content: center; font-family: var(--fuente-titulos); }
-  .datos li { display: flex; align-items: center; gap: 0.9rem; color: var(--texto); }
-  .datos :global(svg) { color: var(--violeta); flex: none; }
-  .datos a { color: var(--texto); text-decoration: none; }
-  .datos a:hover { color: var(--violeta); }
-  .ayuda { font-size: 1.6rem; font-weight: 600; margin-bottom: 1.75rem; }
+  .contacto { padding: 60px 0 40px; }
+  .contacto__grilla { display: grid; gap: 30px; }
+  .contacto__titulo { margin: 0 0 20px; }
+  .contacto__texto { margin: 0; font-family: var(--fuente-titulos); font-size: 16px; font-weight: 300; line-height: 1.6; }
+  .contacto__texto strong { font-weight: 700; }
+
+  /* Lista de íconos: íconos sólidos violetas de 24 px, 20 px arriba y abajo entre ítems */
+  .contacto__lista { list-style: none; margin: 10px 0 0; padding: 0; display: grid; }
+  .contacto__item { display: flex; align-items: center; gap: 10px; padding: 20px 0; font-family: var(--fuente-titulos); font-size: 16px; font-weight: 300; color: var(--texto); }
+  .contacto__item:first-child { padding-top: 0; }
+  .contacto__item :global(svg) { flex: none; color: var(--violeta); }
+  .contacto__item a { color: inherit; text-decoration: none; transition: color 0.3s; }
+  .contacto__item a:hover { color: var(--violeta); }
+  .contacto__item--destacado { font-weight: 400; }
+
+  .contacto__mapa { display: block; width: 100%; height: 480px; margin: 40px auto 0; border: 0; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+
+  @media (min-width: 1024px) {
+    .contacto__grilla { grid-template-columns: 1fr 1fr; column-gap: 60px; align-items: start; }
+    .contacto__mapa { grid-column: 1 / -1; max-width: 900px; }
+  }
+
+  .ayuda { margin: 30px 0 0; text-align: center; font-family: var(--fuente-titulos); font-weight: 700; font-size: 25px; line-height: 1.4; }
 </style>

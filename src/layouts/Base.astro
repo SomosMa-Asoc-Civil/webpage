@@ -3,6 +3,7 @@ import '../styles/global.css';
 import sitio from '../data/sitio.json';
 import IconoRed from '../components/IconoRed.astro';
 import Icono from '../components/Icono.astro';
+import IconoKubio from '../components/IconoKubio.astro';
 import { url } from '../lib/url';
 
 interface Props {
@@ -58,7 +59,7 @@ const esActual = (destino: string) =>
         </a>
         <button class="cabecera__toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
           <span class="sr-only">Abrir menú</span>
-          <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+          <IconoKubio nombre="menu" size={30} />
         </button>
         <nav id="menu-principal" class="cabecera__menu" aria-label="Menú principal">
           <div class="panel__cabecera">
@@ -195,16 +196,19 @@ const esActual = (destino: string) =>
 
   /* Celular y tablet: menú en panel lateral oscuro, como el de Kubio */
   @media (max-width: 1023px) {
+    /* Ícono "bars" de Line Awesome: 30 px + 5 px de aire, #302f30; al pasar el mouse, rojo (1 s) */
     .cabecera__toggle {
       display: grid;
-      gap: 6px;
-      padding: 10px;
+      place-items: center;
+      padding: 5px;
       background: none;
       border: 0;
+      color: var(--texto);
       cursor: pointer;
+      transition: color 1s;
     }
-    .cabecera__toggle span[aria-hidden] { width: 34px; height: 2px; background: var(--azul-noche); border-radius: 2px; }
-    .cabecera.fija .cabecera__toggle span[aria-hidden] { background: var(--texto); }
+    .cabecera__toggle:hover, .cabecera__toggle:focus-visible { color: var(--rojo); }
+    .cabecera__toggle :global(svg) { width: 30px; height: 30px; }
 
     /* Panel del tema: 300 px, fondo #302f30, ítems 14 px con 20/40 px de relleno,
        hover y página actual en violeta */

@@ -284,6 +284,7 @@ content:
           - { name: titulo, label: Título, type: string }
           - { name: subtitulo, label: Subtítulo, type: string }
           - { name: texto, label: Texto, type: text }
+          - { name: mapa, label: Enlace del mapa (Google My Maps, versión "embed"), type: string }
           - name: formulario
             label: Formulario
             type: object
