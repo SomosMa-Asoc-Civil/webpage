@@ -1,14 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icono from '../components/Icono.astro';
+import IconoKubio from '../components/IconoKubio.astro';
 import datos from '../data/que-hacemos.json';
 import { url } from '../lib/url';
 
 const { titulo, intro, areas_titulo, areas, logros, cta } = datos;
-const iconos = ['personas', 'codigo', 'balanza', 'editar'];
+const iconos = ['grupo', 'codigo', 'balanza', 'editar'] as const;
 const tarjetas = [
   ...areas.map((a, i) => ({ ...a, icono: iconos[i % iconos.length] })),
-  { titulo: logros.titulo, items: logros.items, icono: 'check', logros: true },
+  { titulo: logros.titulo, items: logros.items, icono: 'check' as const, logros: true },
 ];
 ---
 <Base titulo="Qué hacemos" descripcion={intro.join(' ')}>
@@ -22,7 +23,7 @@ const tarjetas = [
     <div class="contenedor areas">
       {tarjetas.map((a) => (
         <article class:list={['area', { 'area--logros': a.logros }]}>
-          <span class="area__icono"><Icono nombre={a.icono} size={36} trazo={2.2} /></span>
+          <span class="area__icono"><IconoKubio nombre={a.icono} size={40} /></span>
           <div>
             <h3 class="area__titulo">{a.titulo}</h3>
             <ul>{a.items.map((it) => <li>{it}</li>)}</ul>
@@ -36,7 +37,7 @@ const tarjetas = [
     <div class="contenedor">
       <a class="cta" href={url(cta.boton.url)}>
         <span class="cta__bloque">
-          <span class="cta__titulo">{cta.titulo} <Icono nombre="flecha" size={30} trazo={1.5} /></span>
+          <span class="cta__titulo">{cta.titulo} <Icono nombre="flecha" size={26} trazo={1.5} /></span>
           <span class="cta__texto">{cta.texto}</span>
         </span>
         {cta.imagen && <img class="cta__imagen" src={url(cta.imagen)} alt="" loading="lazy" width="460" height="460" />}
@@ -54,31 +55,33 @@ const tarjetas = [
   .area {
     background: var(--blanco);
     border-radius: 4px;
-    box-shadow: 0 15px 35px -10px rgba(23, 25, 72, 0.18);
-    padding: 2.5rem 1.75rem 2.75rem;
+    box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.16);
+    padding: 2.5rem 1.5rem 2.25rem;
     display: grid;
     justify-items: center;
     text-align: center;
-    gap: 1.25rem;
+    gap: 0;
   }
+  /* Círculo de 60 px (ícono de 40 + 10 de aire), como en Kubio; al pasar el mouse se vuelve rojo */
   .area__icono {
     display: grid;
     place-items: center;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
+    padding: 10px;
     border-radius: 50%;
-    background: var(--amarillo);
+    background: rgba(245, 183, 60, 0.8);
     color: var(--blanco);
+    transition: background-color 1s ease;
   }
-  .area__titulo { color: var(--azul-noche); text-transform: uppercase; font-size: clamp(1.25rem, 2.8vw, 1.6rem); font-weight: 600; margin: 1.5rem 0 1rem; }
-  .area ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; font-size: 1.15rem; color: var(--texto-suave); }
+  .area:hover .area__icono { background: var(--rojo); }
+  .area__titulo { color: var(--azul-noche); text-transform: uppercase; font-size: 1.375rem; font-weight: 600; margin: 2rem 0 0.75rem; }
+  .area ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; font-size: 1rem; line-height: 1.6; color: var(--texto-suave); }
 
   /* Escritorio: dos columnas, ícono a la izquierda (como en Kubio) */
   @media (min-width: 1024px) {
     .areas { grid-template-columns: repeat(2, 1fr); }
-    .area { grid-template-columns: auto 1fr; justify-items: start; align-items: start; text-align: left; gap: 2.5rem; padding: 2rem 2rem 2.25rem; }
-    .area__icono { width: 60px; height: 60px; }
-    .area__icono :global(svg) { width: 28px; height: 28px; }
+    .area { grid-template-columns: auto 1fr; justify-items: start; align-items: start; text-align: left; column-gap: 2.5rem; padding: 2rem 2rem 2.25rem; }
     .area__titulo { font-size: 1.15rem; font-weight: 700; margin: 0.6rem 0 0.75rem; }
     .area ul { font-size: 0.975rem; font-weight: 400; color: var(--texto); }
     .area--logros { grid-column: 1 / -1; justify-self: center; width: min(100%, 560px); }
@@ -87,7 +90,7 @@ const tarjetas = [
   .cta { display: grid; text-decoration: none; color: var(--blanco); }
   @media (min-width: 576px) { .cta { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 1024px) { .cta { grid-template-columns: 445px 445px; } }
-  .cta__bloque { display: grid; align-content: center; gap: 1.25rem; padding: 3rem 2.5rem; background: var(--violeta); transition: background 0.2s; }
+  .cta__bloque { display: grid; align-content: center; gap: 1rem; padding: 2.5rem 2rem; background: var(--violeta); transition: background 0.3s; }
   .cta:hover .cta__bloque { background: var(--violeta-oscuro); }
   .cta__titulo {
     display: flex;
@@ -96,10 +99,10 @@ const tarjetas = [
     gap: 1rem;
     font-family: var(--fuente-titulos);
     font-weight: 700;
-    font-size: clamp(1.4rem, 3vw, 1.9rem);
-    line-height: 1.3;
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+    line-height: 1.35;
     text-transform: uppercase;
   }
-  .cta__texto { font-size: 1.15rem; font-weight: 400; line-height: 1.6; }
-  .cta__imagen { width: 100%; height: 100%; min-height: 260px; object-fit: cover; }
+  .cta__texto { font-size: 1.05rem; font-weight: 300; line-height: 1.6; }
+  .cta__imagen { width: 100%; height: 100%; min-height: 240px; max-height: 300px; object-fit: cover; }
 </style>
