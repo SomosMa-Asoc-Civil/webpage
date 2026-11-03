@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Formulario from '../components/Formulario.astro';
+import datos from '../data/sumate.json';
+import { url } from '../lib/url';
+
+const { imagen, titulo, voluntariado, formulario } = datos;
+---
+<Base titulo="Sumate" descripcion={voluntariado.texto}>
+  <section class="seccion encabezado">
+    <div class="contenedor grilla grilla-2 alinear-centro">
+      <div>
+        <h1>{titulo}</h1>
+        <h2>{voluntariado.titulo}</h2>
+        <p>{voluntariado.texto}</p>
+        <ul class="areas">{voluntariado.areas.map((a) => <li>{a}</li>)}</ul>
+      </div>
+      {imagen && <img class="encabezado__imagen" src={url(imagen)} alt="" width="640" height="480" />}
+    </div>
+  </section>
+
+  <section class="seccion seccion--suave" id="formulario">
+    <div class="contenedor-angosto">
+      <div class="tarjeta">
+        <h2>{formulario.titulo}</h2>
+        <p>{formulario.texto}</p>
+        <Formulario
+          id="form-voluntariado"
+          asunto={formulario.asunto_mail}
+          boton="Quiero sumarme"
+          campos={[
+            { nombre: 'nombre', etiqueta: 'Nombre y apellido', requerido: true, autocompletar: 'name' },
+            { nombre: 'email', etiqueta: 'Correo electrónico', tipo: 'email', requerido: true, autocompletar: 'email' },
+            { nombre: 'telefono', etiqueta: 'Teléfono / WhatsApp', tipo: 'tel', autocompletar: 'tel' },
+            { nombre: 'localidad', etiqueta: 'Localidad y provincia' },
+            { nombre: 'area', etiqueta: '¿En qué área te gustaría colaborar?', tipo: 'select', opciones: [...voluntariado.areas, 'Otra'] },
+            { nombre: 'mensaje', etiqueta: 'Contanos un poco sobre vos', tipo: 'textarea' },
+          ]}
+        />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .encabezado { background: linear-gradient(180deg, var(--violeta-suave) 0%, var(--blanco) 100%); }
+  .encabezado h1 { color: var(--azul-noche); margin-bottom: 0.25rem; }
+  .encabezado__imagen { border-radius: 18px; box-shadow: var(--sombra); width: 100%; object-fit: cover; }
+  .areas { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .areas li {
+    background: var(--violeta);
+    color: var(--blanco);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    font-family: var(--fuente-titulos);
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+</style>

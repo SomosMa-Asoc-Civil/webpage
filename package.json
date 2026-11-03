@@ -1,0 +1,19 @@
+{
+  "name": "somosma-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio web de la Asociación Civil Monomarentales Argentina (SomosMa)",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^5.15.0"
+  },
+  "engines": {
+    "node": ">=20.3.0"
+  }
+}

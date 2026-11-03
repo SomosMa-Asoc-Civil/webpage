@@ -1,0 +1,97 @@
+---
+/**
+ * Formulario que envía los mensajes por mail usando Web3Forms (gratis, sin servidor).
+ * La clave se carga en src/data/sitio.json -> formularios.web3forms_key
+ * (o desde Pages CMS: "Configuración del sitio"). Mientras esté vacía, el formulario
+ * avisa que no está configurado y ofrece escribir directo por mail.
+ */
+import sitio from '../data/sitio.json';
+
+interface Campo {
+  nombre: string;
+  etiqueta: string;
+  tipo?: 'text' | 'email' | 'tel' | 'textarea' | 'select';
+  requerido?: boolean;
+  opciones?: string[];
+  autocompletar?: string;
+}
+
+interface Props {
+  id: string;
+  asunto: string;
+  campos: Campo[];
+  boton?: string;
+}
+
+const { id, asunto, campos, boton = 'Enviar' } = Astro.props;
+const clave = sitio.formularios?.web3forms_key?.trim() ?? '';
+---
+<form class="formulario" id={id} data-clave={clave} data-email={sitio.email} novalidate>
+  <input type="hidden" name="subject" value={asunto} />
+  <input type="hidden" name="from_name" value="Web SomosMa" />
+  <input type="checkbox" name="botcheck" class="oculto" tabindex="-1" autocomplete="off" />
+
+  {campos.map((c) => (
+    <label>
+      {c.etiqueta}{c.requerido && <span aria-hidden="true"> *</span>}
+      {c.tipo === 'textarea' ? (
+        <textarea name={c.nombre} required={c.requerido}></textarea>
+      ) : c.tipo === 'select' ? (
+        <select name={c.nombre} required={c.requerido}>
+          <option value="">Elegí una opción</option>
+          {(c.opciones ?? []).map((o) => <option value={o}>{o}</option>)}
+        </select>
+      ) : (
+        <input type={c.tipo ?? 'text'} name={c.nombre} required={c.requerido} autocomplete={c.autocompletar} />
+      )}
+    </label>
+  ))}
+
+  <button class="boton" type="submit">{boton}</button>
+  <p class="formulario__estado" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.formulario').forEach((form) => {
+    if (form.dataset.listo) return;
+    form.dataset.listo = '1';
+    const estado = form.querySelector<HTMLElement>('.formulario__estado')!;
+    const boton = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const mostrar = (tipo: 'ok' | 'error' | '', texto: string) => {
+      estado.dataset.tipo = tipo;
+      estado.textContent = texto;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const clave = form.dataset.clave;
+      if (!clave) {
+        mostrar('error', `El formulario todavía no está configurado. Escribinos a ${form.dataset.email}.`);
+        return;
+      }
+      const datos = Object.fromEntries(new FormData(form).entries());
+      datos.access_key = clave;
+      boton.disabled = true;
+      mostrar('', 'Enviando…');
+      try {
+        const r = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(datos),
+        });
+        const res = await r.json();
+        if (!r.ok || !res.success) throw new Error(res.message || 'Error');
+        form.reset();
+        mostrar('ok', '¡Gracias! Recibimos tu mensaje y te vamos a responder a la brevedad.');
+      } catch {
+        mostrar('error', `No pudimos enviar el mensaje. Probá de nuevo o escribinos a ${form.dataset.email}.`);
+      } finally {
+        boton.disabled = false;
+      }
+    });
+  });
+</script>

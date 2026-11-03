@@ -1,0 +1,19 @@
+{
+  "imagen": "/uploads/2025/05/WhatsApp-Image-2025-04-02-at-18.24.34-edited.jpeg",
+  "titulo": "Sumate",
+  "voluntariado": {
+    "titulo": "Voluntariado",
+    "texto": "Sumate a nuestro equipo y contribuí con tu tiempo y habilidades:",
+    "areas": [
+      "Asesoría legal",
+      "Comunicación",
+      "Trabajo territorial",
+      "Investigación"
+    ]
+  },
+  "formulario": {
+    "titulo": "Quiero ser voluntaria",
+    "texto": "Completá tus datos y nos pondremos en contacto.",
+    "asunto_mail": "Nueva voluntaria desde la web"
+  }
+}

@@ -1,0 +1,18 @@
+---
+// En WordPress la página de noticias era /noticias-2/. Redirige a /noticias/ para no romper links viejos.
+import { url } from '../lib/url';
+const destino = url('/noticias/');
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Noticias y recursos – SomosMa</title>
+    <meta http-equiv="refresh" content={`0; url=${destino}`} />
+    <link rel="canonical" href={destino} />
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <p>Esta página se mudó a <a href={destino}>Noticias y recursos</a>.</p>
+  </body>
+</html>

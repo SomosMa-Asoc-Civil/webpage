@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import Formulario from '../components/Formulario.astro';
+import IconoRed from '../components/IconoRed.astro';
+import datos from '../data/contacto.json';
+import sitio from '../data/sitio.json';
+import { parrafos } from '../lib/url';
+
+const { faq, titulo, subtitulo, texto, formulario } = datos;
+---
+<Base titulo="Contacto" descripcion={texto}>
+  <section class="seccion encabezado">
+    <div class="contenedor grilla grilla-2">
+      <div>
+        <span class="antetitulo">Contacto | {sitio.nombre_completo}</span>
+        <h1>{titulo}</h1>
+        <p class="encabezado__sub">{subtitulo}</p>
+        {parrafos(texto).map((p) => <p>{p}</p>)}
+        <ul class="datos">
+          <li><a href={`mailto:${sitio.email}`}>{sitio.email}</a></li>
+          <li>{sitio.ubicacion}</li>
+          {sitio.redes.map((r) => (
+            <li>
+              <a class="datos__red" href={r.url} target="_blank" rel="noopener">
+                <IconoRed red={r.red} size={18} /> <span>{r.red === 'linkedin' ? 'LinkedIn' : 'Instagram'}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="tarjeta">
+        <h2>{formulario.titulo}</h2>
+        <Formulario
+          id="form-contacto"
+          asunto={formulario.asunto_mail}
+          campos={[
+            { nombre: 'nombre', etiqueta: 'Tu nombre', requerido: true, autocompletar: 'name' },
+            { nombre: 'email', etiqueta: 'Tu correo electrónico', tipo: 'email', requerido: true, autocompletar: 'email' },
+            { nombre: 'asunto', etiqueta: 'Asunto', requerido: true },
+            { nombre: 'mensaje', etiqueta: 'Tu mensaje (opcional)', tipo: 'textarea' },
+          ]}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--durazno">
+    <div class="contenedor-angosto">
+      <h2 class="centrado">{faq.titulo}</h2>
+      <div class="faq">
+        {faq.preguntas.map((q, i) => (
+          <details class="faq__item" open={i === 0}>
+            <summary>{q.pregunta}</summary>
+            {parrafos(q.respuesta).map((p) => <p>{p}</p>)}
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .encabezado { background: linear-gradient(180deg, var(--violeta-suave) 0%, var(--blanco) 100%); }
+  .encabezado h1 { color: var(--azul-noche); margin-bottom: 0.25rem; }
+  .encabezado__sub { font-family: var(--fuente-titulos); font-weight: 500; font-size: 1.2rem; color: var(--rosa); }
+  .datos { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; gap: 0.5rem; font-weight: 400; }
+  .datos__red { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .faq { display: grid; gap: 0.75rem; margin-top: 2rem; }
+  .faq__item { background: var(--blanco); border-radius: var(--radio); padding: 1rem 1.5rem; box-shadow: var(--sombra); }
+  .faq__item summary { cursor: pointer; font-family: var(--fuente-titulos); font-weight: 600; color: var(--azul-noche); }
+  .faq__item[open] summary { margin-bottom: 0.75rem; color: var(--violeta); }
+  .faq__item p:last-child { margin-bottom: 0; }
+</style>

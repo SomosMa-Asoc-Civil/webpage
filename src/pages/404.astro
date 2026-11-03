@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/url';
+---
+<Base titulo="Página no encontrada">
+  <section class="seccion">
+    <div class="contenedor-angosto centrado">
+      <h1>No encontramos esta página</h1>
+      <p>Puede que se haya movido o que el enlace tenga un error.</p>
+      <div class="botones">
+        <a class="boton" href={url('/')}>Ir al inicio</a>
+        <a class="boton boton--borde" href={url('/noticias/')}>Ver noticias</a>
+      </div>
+    </div>
+  </section>
+</Base>

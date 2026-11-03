@@ -1,0 +1,185 @@
+---
+import '../styles/global.css';
+import sitio from '../data/sitio.json';
+import IconoRed from '../components/IconoRed.astro';
+import { url } from '../lib/url';
+
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+  imagen?: string;
+  tipo?: 'website' | 'article';
+}
+
+const { titulo, descripcion = sitio.descripcion, imagen = sitio.imagen_compartir, tipo = 'website' } = Astro.props;
+const tituloCompleto = titulo ? `${titulo} – ${sitio.nombre}` : `${sitio.nombre} – ${sitio.nombre_completo}`;
+const canonica = new URL(Astro.url.pathname, Astro.site);
+const imagenAbsoluta = imagen ? new URL(url(imagen), Astro.site).href : undefined;
+
+const actual = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '') || '/';
+const esActual = (destino: string) =>
+  destino === '/' ? actual === '/' : actual.startsWith(destino.replace(/\/$/, ''));
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonica} />
+    <link rel="icon" href={url(sitio.favicon)} />
+    <link rel="apple-touch-icon" href={url(sitio.favicon)} />
+
+    <meta property="og:type" content={tipo} />
+    <meta property="og:site_name" content={sitio.nombre} />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content={titulo || sitio.lema} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={canonica} />
+    {imagenAbsoluta && <meta property="og:image" content={imagenAbsoluta} />}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="sr-only" href="#contenido">Saltar al contenido</a>
+
+    <header class="cabecera">
+      <div class="contenedor cabecera__barra">
+        <a class="cabecera__logo" href={url('/')} aria-label={`${sitio.nombre} – inicio`}>
+          <img src={url(sitio.logo)} alt={sitio.nombre} width="160" height="56" />
+        </a>
+        <button class="cabecera__toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
+          <span class="sr-only">Abrir menú</span>
+          <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+        </button>
+        <nav id="menu-principal" class="cabecera__menu" aria-label="Menú principal">
+          <ul>
+            {sitio.menu.map((item) => (
+              <li>
+                <a href={url(item.url)} aria-current={esActual(item.url) ? 'page' : undefined}>{item.texto}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    <footer class="pie">
+      <div class="contenedor pie__grilla">
+        <div>
+          <img class="pie__logo" src={url(sitio.logo)} alt={sitio.nombre} width="150" height="52" loading="lazy" />
+          <p class="pie__lema"><strong>{sitio.nombre_completo}.</strong> {sitio.lema}</p>
+        </div>
+        <div>
+          <h2 class="pie__titulo">Contacto</h2>
+          <p><a href={`mailto:${sitio.email}`}>{sitio.email}</a><br />{sitio.ubicacion}</p>
+          <div class="pie__redes">
+            {sitio.redes.map((r) => (
+              <a href={r.url} target="_blank" rel="noopener" aria-label={r.red}>
+                <IconoRed red={r.red} />
+              </a>
+            ))}
+          </div>
+        </div>
+        <nav aria-label="Menú del pie">
+          <h2 class="pie__titulo">Secciones</h2>
+          <ul>
+            {sitio.menu.map((item) => <li><a href={url(item.url)}>{item.texto}</a></li>)}
+          </ul>
+        </nav>
+      </div>
+      <div class="contenedor pie__legal">© {new Date().getFullYear()} {sitio.nombre} – {sitio.nombre_completo}</div>
+    </footer>
+
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.cabecera__toggle');
+      const menu = document.getElementById('menu-principal');
+      toggle?.addEventListener('click', () => {
+        const abierto = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!abierto));
+        menu?.classList.toggle('abierto', !abierto);
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  .cabecera {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 1px 0 var(--borde);
+  }
+  .cabecera__barra { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 76px; }
+  .cabecera__logo img { height: 52px; width: auto; }
+  .cabecera__menu ul { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0; }
+  .cabecera__menu a {
+    display: block;
+    padding: 0.5rem 0.8rem;
+    border-radius: 999px;
+    font-family: var(--fuente-titulos);
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--azul-noche);
+    text-decoration: none;
+  }
+  .cabecera__menu a:hover { color: var(--violeta); }
+  .cabecera__menu a[aria-current='page'] { background: var(--violeta-suave); color: var(--violeta); }
+  .cabecera__toggle { display: none; }
+
+  @media (max-width: 920px) {
+    .cabecera__toggle {
+      display: grid;
+      gap: 5px;
+      padding: 10px;
+      background: none;
+      border: 0;
+      cursor: pointer;
+    }
+    .cabecera__toggle span[aria-hidden] { width: 24px; height: 2px; background: var(--azul-noche); border-radius: 2px; }
+    .cabecera__menu {
+      position: absolute;
+      inset: 76px 0 auto 0;
+      background: var(--blanco);
+      box-shadow: var(--sombra);
+      display: none;
+    }
+    .cabecera__menu.abierto { display: block; }
+    .cabecera__menu ul { flex-direction: column; padding: 0.75rem 1.25rem 1.25rem; }
+    .cabecera__menu a { padding: 0.75rem 1rem; }
+  }
+
+  .pie { background: var(--azul-noche); color: rgba(255, 255, 255, 0.85); padding: 3.5rem 0 1.5rem; margin-top: 0; }
+  .pie a { color: var(--blanco); }
+  .pie__grilla { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+  .pie__logo { height: 64px; width: auto; background: var(--blanco); padding: 6px 12px; border-radius: 10px; margin-bottom: 1rem; }
+  .pie__lema { max-width: 32ch; }
+  .pie__titulo { font-size: 1rem; color: var(--durazno); margin-bottom: 0.75rem; }
+  .pie ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
+  .pie ul a { text-decoration: none; }
+  .pie ul a:hover { text-decoration: underline; }
+  .pie__redes { display: flex; gap: 0.75rem; }
+  .pie__redes a {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .pie__redes a:hover { background: var(--violeta); }
+  .pie__legal { border-top: 1px solid rgba(255, 255, 255, 0.15); margin-top: 2.5rem; padding-top: 1.25rem; font-size: 0.875rem; }
+</style>

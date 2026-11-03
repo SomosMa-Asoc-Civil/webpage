@@ -1,0 +1,30 @@
+{
+  "faq": {
+    "titulo": "Preguntas Frecuentes SomosMa",
+    "preguntas": [
+      {
+        "pregunta": "¿Qué es Monomarentales Argentina y cuál es su misión?",
+        "respuesta": "Somos una asociación civil que trabaja por los derechos de las familias monomarentales en Argentina. Buscamos visibilizar esta realidad a través de generar conocimientos sobre la problemática, recursos y redes de apoyo, así como promover cambios en las políticas públicas que garanticen mayor igualdad y equidad. Creemos que las respuestas para construir vidas dignas y libres de violencias incluye nuestra participación activa. Nada sobre nosotras, sin nosotras."
+      },
+      {
+        "pregunta": "¿A quiénes apoyamos y cómo lo hacemos?",
+        "respuesta": "Acompañamos a madres y mujeres cuidadoras que crían solas a sus hijas, hijos y personas con discapacidad. Brindamos información legal con perspectiva de género, recursos de sensibilización, redes de apoyo y articulamos con otras organizaciones en territorio para fortalecer sus derechos."
+      },
+      {
+        "pregunta": "¿Monomarentales Argentina ofrece asesoramiento legal o representación jurídica?",
+        "respuesta": "No brindamos asesoramiento legal personalizado ni representación jurídica. Sin embargo, ponemos a disposición guías prácticas, información sobre normativa vigente y contactos de redes especializadas en la materia."
+      },
+      {
+        "pregunta": "¿Cómo puedo sumarme o colaborar con la organización?",
+        "respuesta": "Podés participar difundiendo nuestra causa, sumándote a nuestras actividades o colaborando con donaciones. También trabajamos en alianzas estratégicas con ONG, redes y cooperativas para fortalecer el impacto en territorio."
+      }
+    ]
+  },
+  "titulo": "Hablemos",
+  "subtitulo": "¿Necesitas ayuda o querés ser parte?",
+  "texto": "Estamos acá para escucharte. Contactanos para recibir asesoramiento, acceder a recursos, sumarte a nuestra causa o colaborar con nosotras. Acompañamos a familias monomarentales en todo el país. Escribinos y conectemos juntas.",
+  "formulario": {
+    "titulo": "Estamos para ayudarte",
+    "asunto_mail": "Nuevo mensaje desde la web"
+  }
+}

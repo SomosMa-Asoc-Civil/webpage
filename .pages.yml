@@ -1,0 +1,331 @@
+# Configuración de Pages CMS (https://pagescms.org)
+# Define qué pueden editar las integrantes de SomosMa sin tocar código.
+
+media:
+  input: public/uploads
+  output: /uploads
+  rename: safe
+  categories: [image, document]
+
+content:
+  # ---------- Noticias ----------
+  - name: noticias
+    label: Noticias y recursos
+    type: collection
+    path: src/content/noticias
+    format: yaml-frontmatter
+    filename:
+      template: "{fields.title}.md"
+      field: create
+    view:
+      primary: title
+      fields: [title, date, author]
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Título
+        type: string
+        required: true
+      - name: date
+        label: Fecha de publicación
+        type: date
+        options:
+          format: yyyy-MM-dd
+        required: true
+      - name: author
+        label: Autora
+        type: string
+        default: SomosMa
+      - name: image
+        label: Imagen de portada
+        description: Se usa en el listado y cuando se comparte la nota por WhatsApp o redes.
+        type: image
+      - name: excerpt
+        label: Resumen
+        description: Una o dos oraciones que aparecen en el listado de noticias.
+        type: text
+      - name: categories
+        label: Categorías
+        type: select
+        options:
+          multiple: true
+          values: [Legislación, Incidencia, Testimonios, Investigaciones, Recursos]
+      - name: tags
+        label: Etiquetas
+        type: string
+        list: true
+        hidden: true
+      - name: draft
+        label: Borrador (no publicar todavía)
+        type: boolean
+        default: false
+      - name: body
+        label: Contenido
+        type: rich-text
+        options:
+          format: markdown
+
+  # ---------- Páginas ----------
+  - name: paginas
+    label: Páginas
+    type: group
+    items:
+      - name: inicio
+        label: Inicio
+        type: file
+        path: src/data/inicio.json
+        format: json
+        fields:
+          - name: hero
+            label: Portada
+            type: object
+            fields:
+              - { name: antetitulo, label: Antetítulo, type: string }
+              - { name: titulo, label: Título, type: string }
+              - { name: texto, label: Texto, type: text }
+              - { name: imagen, label: Imagen, type: image }
+              - name: botones
+                label: Botones
+                type: object
+                list: true
+                fields:
+                  - { name: texto, label: Texto del botón, type: string }
+                  - { name: url, label: Enlace, type: string }
+          - name: cifras
+            label: Cifras que importan
+            type: object
+            fields:
+              - { name: titulo, label: Título de la sección, type: string }
+              - name: items
+                label: Cifras
+                type: object
+                list: true
+                fields:
+                  - { name: dato, label: Dato destacado, type: string, description: "Ej.: 7 DE CADA 10" }
+                  - { name: texto, label: Texto, type: string }
+                  - { name: fuente, label: Fuente, type: string }
+              - name: destacado
+                label: Cifra destacada (tarjeta blanca)
+                type: object
+                fields:
+                  - { name: lugar, label: Lugar, type: string }
+                  - { name: dato, label: Dato, type: string }
+                  - { name: texto, label: Texto, type: string }
+                  - { name: fuente, label: Fuente, type: string }
+                  - { name: titulo, label: Pregunta, type: string }
+                  - { name: subtitulo, label: Subtítulo, type: string }
+                  - name: boton
+                    label: Botón
+                    type: object
+                    fields:
+                      - { name: texto, label: Texto, type: string }
+                      - { name: url, label: Enlace, type: string }
+          - name: alianzas
+            label: Alianzas que transforman
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: texto, label: Texto, type: text }
+              - name: boton
+                label: Botón
+                type: object
+                fields:
+                  - { name: texto, label: Texto, type: string }
+                  - { name: url, label: Enlace, type: string }
+          - name: instagram
+            label: Instagram
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: texto, label: Texto, type: string }
+              - { name: usuario, label: Usuario (sin @), type: string }
+
+      - name: nosotras
+        label: Nosotras
+        type: file
+        path: src/data/nosotras.json
+        format: json
+        fields:
+          - name: hero
+            label: Encabezado
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: antetitulo, label: Antetítulo, type: string }
+              - { name: texto, label: Texto, type: text }
+          - name: ser_monomarental
+            label: Ser mamá monomarental
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: parrafos, label: Párrafos, type: text, list: true }
+          - name: historia
+            label: Nuestra historia
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: texto, label: Texto (dejá una línea en blanco entre párrafos), type: text }
+          - name: equipo
+            label: El equipo
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: texto, label: Texto, type: string }
+              - name: integrantes
+                label: Integrantes
+                type: object
+                list: true
+                fields:
+                  - { name: nombre, label: Nombre, type: string }
+                  - { name: cargo, label: Cargo, type: string }
+                  - { name: foto, label: Foto, type: image }
+                  - { name: bio, label: Biografía, type: text }
+                  - name: redes
+                    label: Redes
+                    type: object
+                    list: true
+                    fields:
+                      - name: red
+                        label: Red
+                        type: select
+                        options:
+                          values: [instagram, linkedin, web]
+                      - { name: url, label: Enlace, type: string }
+          - name: cierre
+            label: Botón final
+            type: object
+            fields:
+              - { name: texto, label: Texto, type: string }
+              - { name: url, label: Enlace, type: string }
+
+      - name: que-hacemos
+        label: Qué hacemos
+        type: file
+        path: src/data/que-hacemos.json
+        format: json
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - { name: intro, label: Introducción, type: string, list: true }
+          - { name: areas_titulo, label: Título de las áreas, type: string }
+          - name: areas
+            label: Áreas de trabajo
+            type: object
+            list: true
+            fields:
+              - { name: titulo, label: Área, type: string }
+              - { name: items, label: Acciones, type: string, list: true }
+          - name: logros
+            label: Logros destacados
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: items, label: Logros, type: string, list: true }
+          - name: cta
+            label: Llamado final
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: texto, label: Texto, type: string }
+              - name: boton
+                label: Botón
+                type: object
+                fields:
+                  - { name: texto, label: Texto, type: string }
+                  - { name: url, label: Enlace, type: string }
+
+      - name: sumate
+        label: Sumate
+        type: file
+        path: src/data/sumate.json
+        format: json
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - { name: imagen, label: Imagen, type: image }
+          - name: voluntariado
+            label: Voluntariado
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: texto, label: Texto, type: text }
+              - { name: areas, label: Áreas para colaborar, type: string, list: true }
+          - name: formulario
+            label: Formulario
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: texto, label: Texto, type: string }
+              - { name: asunto_mail, label: Asunto del mail que llega, type: string }
+
+      - name: contacto
+        label: Contacto
+        type: file
+        path: src/data/contacto.json
+        format: json
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - { name: subtitulo, label: Subtítulo, type: string }
+          - { name: texto, label: Texto, type: text }
+          - name: formulario
+            label: Formulario
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: asunto_mail, label: Asunto del mail que llega, type: string }
+          - name: faq
+            label: Preguntas frecuentes
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - name: preguntas
+                label: Preguntas
+                type: object
+                list: true
+                fields:
+                  - { name: pregunta, label: Pregunta, type: string }
+                  - { name: respuesta, label: Respuesta, type: text }
+
+  # ---------- Configuración general ----------
+  - name: sitio
+    label: Configuración del sitio
+    type: file
+    path: src/data/sitio.json
+    format: json
+    fields:
+      - { name: nombre, label: Nombre corto, type: string }
+      - { name: nombre_completo, label: Nombre completo, type: string }
+      - { name: lema, label: Lema, type: string }
+      - { name: descripcion, label: Descripción para Google y redes, type: text }
+      - { name: logo, label: Logo, type: image }
+      - { name: favicon, label: Ícono de la pestaña, type: image }
+      - { name: imagen_compartir, label: Imagen al compartir el sitio, type: image }
+      - { name: email, label: Mail de contacto, type: string }
+      - { name: ubicacion, label: Ubicación, type: string }
+      - name: redes
+        label: Redes sociales
+        type: object
+        list: true
+        fields:
+          - name: red
+            label: Red
+            type: select
+            options:
+              values: [instagram, linkedin, web]
+          - { name: url, label: Enlace, type: string }
+      - name: menu
+        label: Menú
+        type: object
+        list: true
+        fields:
+          - { name: texto, label: Texto, type: string }
+          - { name: url, label: Enlace, type: string }
+      - name: formularios
+        label: Formularios
+        type: object
+        fields:
+          - name: web3forms_key
+            label: Clave de Web3Forms
+            description: Se genera gratis en web3forms.com con el mail donde deben llegar los mensajes.
+            type: string

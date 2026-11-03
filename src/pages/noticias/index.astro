@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import TarjetaNoticia from '../../components/TarjetaNoticia.astro';
+
+const noticias = (await getCollection('noticias', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const descripcion = 'Últimas noticias sobre derechos de familias monomarentales, cuota alimentaria y políticas públicas en Argentina.';
+---
+<Base titulo="Noticias y recursos" descripcion={descripcion}>
+  <section class="seccion encabezado">
+    <div class="contenedor-angosto centrado">
+      <h1>Noticias y recursos</h1>
+      <p class="encabezado__texto">{descripcion}</p>
+    </div>
+  </section>
+  <section class="seccion seccion--suave">
+    <div class="contenedor">
+      {noticias.length === 0 ? (
+        <p class="centrado">Todavía no hay noticias publicadas.</p>
+      ) : (
+        <div class="grilla grilla-3">{noticias.map((n) => <TarjetaNoticia noticia={n} />)}</div>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .encabezado { background: linear-gradient(180deg, var(--violeta-suave) 0%, var(--blanco) 100%); padding-bottom: 2rem; }
+  .encabezado h1 { color: var(--azul-noche); }
+  .encabezado__texto { font-size: 1.2rem; }
+</style>

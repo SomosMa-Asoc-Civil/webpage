@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { url, fecha } from '../lib/url';
+
+interface Props {
+  noticia: CollectionEntry<'noticias'>;
+}
+const { noticia } = Astro.props;
+const { title, date, author, image, excerpt, categories } = noticia.data;
+const href = url(`/${noticia.id}/`);
+---
+<article class="noticia">
+  <a class="noticia__imagen" href={href} tabindex="-1" aria-hidden="true">
+    {image ? <img src={url(image)} alt="" loading="lazy" /> : <span class="noticia__sin-imagen"></span>}
+  </a>
+  <div class="noticia__cuerpo">
+    {categories.length > 0 && <span class="etiqueta">{categories[0]}</span>}
+    <h3 class="noticia__titulo"><a href={href}>{title}</a></h3>
+    <p class="noticia__meta">{author} · <time datetime={date.toISOString().slice(0, 10)}>{fecha(date)}</time></p>
+    {excerpt && <p class="noticia__resumen">{excerpt}</p>}
+    <a class="noticia__mas" href={href}>Leer más <span aria-hidden="true">→</span></a>
+  </div>
+</article>
+
+<style>
+  .noticia {
+    display: flex;
+    flex-direction: column;
+    background: var(--blanco);
+    border-radius: var(--radio);
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    transition: transform 0.2s;
+  }
+  .noticia:hover { transform: translateY(-3px); }
+  .noticia__imagen { display: block; aspect-ratio: 16 / 10; background: var(--violeta-suave); }
+  .noticia__imagen img { width: 100%; height: 100%; object-fit: cover; }
+  .noticia__sin-imagen { display: block; height: 100%; background: linear-gradient(135deg, var(--violeta), var(--rosa)); }
+  .noticia__cuerpo { padding: 1.25rem 1.5rem 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+  .noticia__titulo { font-size: 1.15rem; margin: 0; color: var(--azul-noche); }
+  .noticia__titulo a { color: inherit; text-decoration: none; }
+  .noticia__titulo a:hover { color: var(--violeta); }
+  .noticia__meta { margin: 0; font-size: 0.875rem; color: var(--texto-suave); }
+  .noticia__resumen {
+    margin: 0;
+    font-size: 0.975rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .noticia__mas { margin-top: auto; padding-top: 0.5rem; font-family: var(--fuente-titulos); font-weight: 500; text-decoration: none; }
+</style>

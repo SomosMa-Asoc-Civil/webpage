@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import IconoRed from '../components/IconoRed.astro';
+import nosotras from '../data/nosotras.json';
+import { url, parrafos } from '../lib/url';
+
+const { hero, ser_monomarental, historia, equipo, cierre } = nosotras;
+---
+<Base titulo="Nosotras" descripcion={hero.texto}>
+  <section class="seccion encabezado">
+    <div class="contenedor-angosto centrado">
+      <span class="antetitulo">{hero.antetitulo}</span>
+      <h1>{hero.titulo}</h1>
+      <p class="encabezado__texto">{hero.texto}</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor-angosto">
+      <h2>{ser_monomarental.titulo}</h2>
+      {ser_monomarental.parrafos.map((p) => <p>{p}</p>)}
+    </div>
+  </section>
+
+  <section class="seccion seccion--violeta">
+    <div class="contenedor-angosto">
+      <h2>{historia.titulo}</h2>
+      {parrafos(historia.texto).map((p) => <p>{p}</p>)}
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="centrado equipo__encabezado">
+        <h2>{equipo.titulo}</h2>
+        <p>{equipo.texto}</p>
+      </div>
+      <div class="grilla grilla-3">
+        {equipo.integrantes.map((p) => (
+          <article class="persona">
+            {p.foto && <img class="persona__foto" src={url(p.foto)} alt={p.nombre} loading="lazy" width="320" height="320" />}
+            <h3 class="persona__nombre">{p.nombre}</h3>
+            <p class="persona__cargo">{p.cargo}</p>
+            {p.bio && (
+              <details class="persona__bio">
+                <summary>Conocé más</summary>
+                {parrafos(p.bio).map((t) => <p>{t}</p>)}
+              </details>
+            )}
+            {p.redes.length > 0 && (
+              <div class="persona__redes">
+                {p.redes.map((r) => (
+                  <a href={r.url} target="_blank" rel="noopener" aria-label={`${r.red} de ${p.nombre}`}>
+                    <IconoRed red={r.red} size={18} />
+                  </a>
+                ))}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+      <div class="botones" style="justify-content:center; margin-top:3rem">
+        <a class="boton boton--rosa" href={url(cierre.url)}>{cierre.texto}</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .encabezado { background: linear-gradient(180deg, var(--violeta-suave) 0%, var(--blanco) 100%); }
+  .encabezado h1 { color: var(--azul-noche); }
+  .encabezado__texto { font-size: 1.2rem; }
+  .equipo__encabezado { margin-bottom: 2.5rem; }
+
+  .persona {
+    background: var(--blanco);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .persona__foto { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 4px solid var(--violeta-suave); }
+  .persona__nombre { font-size: 1.2rem; color: var(--azul-noche); margin-bottom: 0.1rem; }
+  .persona__cargo { color: var(--violeta); font-family: var(--fuente-titulos); font-weight: 500; margin-bottom: 0.75rem; }
+  .persona__bio { text-align: left; width: 100%; font-size: 0.975rem; }
+  .persona__bio summary { cursor: pointer; text-align: center; font-family: var(--fuente-titulos); font-weight: 500; color: var(--rosa); margin-bottom: 0.5rem; }
+  .persona__redes { display: flex; gap: 0.5rem; margin-top: auto; padding-top: 1rem; }
+  .persona__redes a {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--violeta-suave);
+    color: var(--violeta);
+  }
+  .persona__redes a:hover { background: var(--violeta); color: var(--blanco); }
+</style>

@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import datos from '../data/que-hacemos.json';
+import { url } from '../lib/url';
+
+const { titulo, intro, areas_titulo, areas, logros, cta } = datos;
+---
+<Base titulo="Qué hacemos" descripcion={intro.join(' ')}>
+  <section class="seccion encabezado">
+    <div class="contenedor-angosto centrado">
+      <h1>{titulo}</h1>
+      {intro.map((p) => <p class="encabezado__texto">{p}</p>)}
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <h2 class="centrado">{areas_titulo}</h2>
+      <div class="grilla grilla-4 areas">
+        {areas.map((a, i) => (
+          <article class="tarjeta area" style={`--acento: var(${['--violeta', '--rosa', '--amarillo', '--azul-noche'][i % 4]})`}>
+            <span class="area__numero" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{a.titulo}</h3>
+            <ul>{a.items.map((it) => <li>{it}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--violeta">
+    <div class="contenedor-angosto centrado">
+      <h2>{logros.titulo}</h2>
+      <ul class="logros">{logros.items.map((l) => <li>{l}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor-angosto centrado">
+      <h2>{cta.titulo}</h2>
+      <p>{cta.texto}</p>
+      <div class="botones"><a class="boton boton--rosa" href={url(cta.boton.url)}>{cta.boton.texto}</a></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .encabezado { background: linear-gradient(180deg, var(--violeta-suave) 0%, var(--blanco) 100%); }
+  .encabezado h1 { color: var(--azul-noche); }
+  .encabezado__texto { font-size: 1.2rem; margin-bottom: 0.4rem; }
+  .areas { margin-top: 2rem; }
+  .area { border-top: 5px solid var(--acento); }
+  .area__numero { font-family: var(--fuente-titulos); font-weight: 700; font-size: 2rem; color: var(--acento); opacity: 0.35; }
+  .area h3 { font-size: 1.2rem; color: var(--azul-noche); margin-top: 0.25rem; }
+  .area ul { margin: 0; padding-left: 1.1rem; }
+  .area li { margin-bottom: 0.4rem; }
+  .logros { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; gap: 0.75rem; }
+  .logros li {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--fuente-titulos);
+    font-weight: 500;
+  }
+</style>

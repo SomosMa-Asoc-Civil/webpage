@@ -1,0 +1,125 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import TarjetaNoticia from '../components/TarjetaNoticia.astro';
+import IconoRed from '../components/IconoRed.astro';
+import inicio from '../data/inicio.json';
+import { url, parrafos } from '../lib/url';
+
+const { hero, cifras, instagram, alianzas } = inicio;
+const ultimas = (await getCollection('noticias', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+<Base>
+  <section class="seccion hero">
+    <div class="contenedor grilla grilla-2 alinear-centro">
+      <div>
+        <span class="antetitulo">{hero.antetitulo}</span>
+        <h1>{hero.titulo}</h1>
+        {parrafos(hero.texto).map((p) => <p>{p}</p>)}
+        <div class="botones">
+          {hero.botones.map((b, i) => (
+            <a class={i === 0 ? 'boton' : 'boton boton--borde'} href={url(b.url)}>{b.texto}</a>
+          ))}
+        </div>
+      </div>
+      {hero.imagen && (
+        <img class="hero__imagen" src={url(hero.imagen)} alt="Integrantes de Monomarentales Argentina" width="640" height="480" />
+      )}
+    </div>
+  </section>
+
+  <section class="seccion seccion--violeta">
+    <div class="contenedor">
+      <h2 class="centrado cifras__titulo">{cifras.titulo}</h2>
+      <div class="grilla grilla-3 cifras">
+        {cifras.items.map((c) => (
+          <div class="cifra">
+            <p class="cifra__dato">{c.dato}</p>
+            <p class="cifra__texto">{c.texto}</p>
+            {c.fuente && <p class="cifra__fuente">({c.fuente})</p>}
+          </div>
+        ))}
+        <div class="cifra cifra--destacada">
+          {cifras.destacado.lugar && <p class="cifra__lugar">{cifras.destacado.lugar}</p>}
+          <p class="cifra__dato">{cifras.destacado.dato}</p>
+          <p class="cifra__texto">{cifras.destacado.texto}</p>
+          {cifras.destacado.fuente && <p class="cifra__fuente">({cifras.destacado.fuente})</p>}
+        </div>
+      </div>
+      <div class="pregunta centrado">
+        <h3>{cifras.destacado.titulo}</h3>
+        <p class="pregunta__sub">{cifras.destacado.subtitulo}</p>
+        <div class="botones">
+          <a class="boton" href={url(cifras.destacado.boton.url)}>{cifras.destacado.boton.texto}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {ultimas.length > 0 && (
+    <section class="seccion seccion--suave">
+      <div class="contenedor">
+        <div class="encabezado-fila">
+          <h2>Últimas noticias</h2>
+          <a class="boton boton--borde" href={url('/noticias/')}>Ver todas</a>
+        </div>
+        <div class="grilla grilla-3">
+          {ultimas.map((n) => <TarjetaNoticia noticia={n} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="seccion">
+    <div class="contenedor-angosto centrado">
+      <h2>{alianzas.titulo}</h2>
+      {parrafos(alianzas.texto).map((p) => <p>{p}</p>)}
+      <div class="botones">
+        <a class="boton boton--rosa" href={url(alianzas.boton.url)}>{alianzas.boton.texto}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--noche">
+    <div class="contenedor-angosto centrado">
+      <h2>{instagram.titulo}</h2>
+      <p>{instagram.texto}</p>
+      <div class="botones">
+        <a class="boton" href={`https://www.instagram.com/${instagram.usuario}/`} target="_blank" rel="noopener">
+          <IconoRed red="instagram" /> @{instagram.usuario}
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { background: linear-gradient(180deg, var(--violeta-suave) 0%, var(--blanco) 100%); }
+  .hero h1 { color: var(--azul-noche); }
+  .hero__imagen { border-radius: 18px; box-shadow: var(--sombra); width: 100%; object-fit: cover; }
+
+  .cifras__titulo { text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2.5rem; }
+  .cifras { margin-bottom: 3rem; }
+  .cifra {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: var(--radio);
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  .cifra p { margin: 0; }
+  .cifra__dato { font-family: var(--fuente-titulos); font-weight: 700; font-size: clamp(1.8rem, 3.5vw, 2.4rem); line-height: 1.15; color: var(--durazno) !important; }
+  .cifra__texto { font-size: 1.1rem; margin-top: 0.5rem !important; }
+  .cifra__fuente { font-size: 0.85rem; font-style: italic; opacity: 0.8; margin-top: 0.75rem !important; }
+  .cifra__lugar { font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85rem; }
+  .cifra--destacada { background: var(--blanco); }
+  .cifra--destacada p { color: var(--azul-noche) !important; }
+  .cifra--destacada .cifra__dato { color: var(--rosa) !important; }
+  .pregunta h3 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 0.25rem; }
+  .pregunta__sub { font-family: var(--fuente-titulos); font-size: 1.25rem; font-weight: 500; }
+
+  .encabezado-fila { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+  .encabezado-fila h2 { margin: 0; }
+</style>

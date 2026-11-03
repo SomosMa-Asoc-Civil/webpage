@@ -1,0 +1,58 @@
+{
+  "titulo": "Programas y Acciones",
+  "intro": [
+    "Asesoramiento legal, acompañamiento y capacitación para madres que crían solas.",
+    "Investigación y promoción de políticas públicas."
+  ],
+  "areas_titulo": "Nuestras áreas de trabajo",
+  "areas": [
+    {
+      "titulo": "Acompañamiento y asesoría",
+      "items": [
+        "Asistencia legal para reclamos de cuota alimentaria",
+        "Apoyo psicosocial",
+        "Orientación en derechos"
+      ]
+    },
+    {
+      "titulo": "Investigación y datos",
+      "items": [
+        "Estudios sobre familias monomarentales",
+        "Relevamiento de casos",
+        "Construcción de estadísticas nacionales"
+      ]
+    },
+    {
+      "titulo": "Incidencia política",
+      "items": [
+        "Proyectos de ley",
+        "Campañas de concientización",
+        "Articulación con organismos públicos"
+      ]
+    },
+    {
+      "titulo": "Formación",
+      "items": [
+        "Capacitaciones",
+        "Talleres",
+        "Materiales educativos"
+      ]
+    }
+  ],
+  "logros": {
+    "titulo": "Logros destacados",
+    "items": [
+      "Ley de Inclusión Laboral (Santa Cruz)",
+      "Red Federal de Monomarentales",
+      "Visibilización en agenda pública"
+    ]
+  },
+  "cta": {
+    "titulo": "Sumate vos también",
+    "texto": "Te contamos todas las maneras en que podés sumarte y ser protagonista.",
+    "boton": {
+      "texto": "Quiero sumarme",
+      "url": "/sumate/"
+    }
+  }
+}

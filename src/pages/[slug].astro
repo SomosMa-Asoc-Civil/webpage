@@ -1,0 +1,66 @@
+---
+// Cada noticia se publica en la raíz, igual que en WordPress: /deudores-afuera/
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import TarjetaNoticia from '../components/TarjetaNoticia.astro';
+import { url, fecha } from '../lib/url';
+
+export async function getStaticPaths() {
+  const noticias = await getCollection('noticias', ({ data }) => !data.draft);
+  return noticias.map((noticia) => ({ params: { slug: noticia.id }, props: { noticia } }));
+}
+
+interface Props {
+  noticia: CollectionEntry<'noticias'>;
+}
+
+const { noticia } = Astro.props;
+const { title, date, author, image, excerpt, categories } = noticia.data;
+const { Content } = await render(noticia);
+
+const otras = (await getCollection('noticias', ({ data, id }) => !data.draft && id !== noticia.id))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+<Base titulo={title} descripcion={excerpt || title} imagen={image || undefined} tipo="article">
+  <article>
+    <header class="seccion nota__cabecera">
+      <div class="contenedor-angosto">
+        <a class="nota__volver" href={url('/noticias/')}>← Noticias y recursos</a>
+        {categories.length > 0 && (
+          <div class="nota__etiquetas">{categories.map((c) => <span class="etiqueta">{c}</span>)}</div>
+        )}
+        <h1>{title}</h1>
+        <p class="nota__meta">Escrito por {author} · <time datetime={date.toISOString().slice(0, 10)}>{fecha(date)}</time></p>
+      </div>
+    </header>
+    {image && (
+      <div class="contenedor-angosto">
+        <img class="nota__portada" src={url(image)} alt="" width="780" height="440" />
+      </div>
+    )}
+    <div class="contenedor-angosto prosa nota__cuerpo">
+      <Content />
+    </div>
+  </article>
+
+  {otras.length > 0 && (
+    <section class="seccion seccion--suave">
+      <div class="contenedor">
+        <h2>Seguí leyendo</h2>
+        <div class="grilla grilla-3">{otras.map((n) => <TarjetaNoticia noticia={n} />)}</div>
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .nota__cabecera { padding-bottom: 2rem; background: linear-gradient(180deg, var(--violeta-suave) 0%, var(--blanco) 100%); }
+  .nota__cabecera h1 { color: var(--azul-noche); font-size: clamp(1.8rem, 4vw, 2.6rem); }
+  .nota__volver { display: inline-block; margin-bottom: 1.25rem; font-family: var(--fuente-titulos); font-weight: 500; text-decoration: none; }
+  .nota__etiquetas { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+  .nota__meta { color: var(--texto-suave); margin: 0; }
+  .nota__portada { width: 100%; border-radius: 16px; box-shadow: var(--sombra); object-fit: cover; max-height: 520px; }
+  .nota__cuerpo { padding: 2.5rem 0 4rem; }
+</style>

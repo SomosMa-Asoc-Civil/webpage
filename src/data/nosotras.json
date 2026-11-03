@@ -1,0 +1,166 @@
+{
+  "hero": {
+    "titulo": "Conocé MA",
+    "antetitulo": "Monomarentales Argentina",
+    "texto": "Equipo interdisciplinario de profesionales trabajando por los derechos de las familias monomarentales desde 2020. Conocé nuestra historia y misión."
+  },
+  "ser_monomarental": {
+    "titulo": "Ser mamá monomarental, ¿elección o realidad impuesta?",
+    "parrafos": [
+      "Para nosotras, ser familia monomarental es asumir la crianza y el cuidado de niñas, niños y adolescentes (NNyA) así como de personas con discapacidad, de forma exclusiva y sin corresponsabilidad paterna. Este modo de sostener la vida es impuesto, no elegido, producto del ejercicio desigual o inexistente de la responsabilidad parental de los varones, tanto en el aspecto económico como de tiempo y rol de cuidados. No cumplir con la obligación alimentaria, derecho humano inalienable de los NNyA, es violencia.",
+      "La falta de reconocimiento legal de nuestras familias por parte del Estado y sus instituciones, se manifiesta en la ausencia de políticas públicas de discriminación positiva, en especial en el sistema judicial y previsional, cuya mirada sigue centrada en la familia tipo nuclear, totalmente anacrónica al momento actual. Esto repercute en violencia institucional, discriminación y exclusión.",
+      "Somos Madres que luchamos ante el empobrecimiento que nos genera esta desigualdad estructural, en un sistema judicial que resulta complaciente con los deudores alimentarios en lugar de responder a nuestra demanda de justicia y equidad, por nuestros hijos e hijas y por nosotras.",
+      "Queremos transformar esta realidad injusta. Necesitamos un Estado presente, garante y responsable para con la vida de las mujeres y los NNyA a cargo. Queremos una vida digna y libre de violencia. Luchamos por el reconocimiento y la visibilidad de nuestras familias."
+    ]
+  },
+  "historia": {
+    "titulo": "Nuestra historia",
+    "texto": "Durante la pandemia, en un contexto de aislamiento, crisis económica y sobrecarga en los cuidados, muchas madres que criamos solas nos encontramos a través de las redes sociales. La lucha por la cuota alimentaria y la distribución de los cuidados fueron nuestros ejes de trabajo, posibilitando la emergencia de grupos de debate que problematizaron una realidad históricamente invisibilizada: la crianza monomarental. La digitalización nos permitió transformar el espacio virtual en una plataforma de concientización sobre la violencia económica y la falta de corresponsabilidad parental. A lo largo de los años, establecimos alianzas estratégicas con redes feministas, periodistas, funcionarias y abogadas para impulsar la visibilización del incumplimiento alimentario y el abandono parental. En 2023, nos unimos al colectivo #NiUnaMenos con el lema “Maternar es político”, adoptando acciones como los Tendederos de Deudores Alimentarios, una iniciativa replicada de México para denunciar públicamente la negligencia del sistema judicial en el reconocimiento de derechos básicos para NNyA. A partir de esta experiencia, como red de madres e hijas de la monomarentalidad, nació la Red Federal de Familias Monomarentales. Pero con el crecimiento del movimiento y la adhesión de más activistas, en 2024 consolidamos nuestra identidad como Monomarentales Argentina, una asociación civil con el compromiso de transformar la realidad de millones de madres y sus hijas e hijos. Nuestra lucha tomó presencia en medios, redes sociales y espacios políticos, logrando que la problemática de las familias monomarentales sea parte de la agenda pública."
+  },
+  "equipo": {
+    "titulo": "El equipo",
+    "texto": "Todos nosotros formamos parte de MA",
+    "integrantes": [
+      {
+        "nombre": "Ma. Cecilia Bertolino",
+        "cargo": "Presidenta",
+        "foto": "/uploads/2025/03/presidenta-04-1.jpg",
+        "bio": "Cecilia es periodista feminista, mamá monomarental y activista por los derechos de las mujeres. Se especializó en Comunicación, Género y DDHH (Comunicar Igualdad, OEA, UNESCO) y es Licenciada en Periodismo (Univ. Siglo 21), con una tesis sobre violencia económica y medios. Integrante de RED PAR, ha impulsado leyes con perspectiva de género y participado en Congresos sobre violencias de género. Disertante, asesora legislativa y creadora de contenidos, recibió reconocimientos por su labor en comunicación y DDHH y por su voluntariado. Desde la pandemia, lidera el activismo contra el incumplimiento alimentario en Argentina, promoviendo redes de contención para mujeres que maternan solas.",
+        "redes": [
+          {
+            "red": "linkedin",
+            "url": "https://www.linkedin.com/in/mar%C3%ADa-cecilia-bertolino-300613110/"
+          },
+          {
+            "red": "instagram",
+            "url": "https://www.instagram.com/identidadfeminista/"
+          }
+        ]
+      },
+      {
+        "nombre": "Diana Deharbe",
+        "cargo": "Tesorera",
+        "foto": "/uploads/2025/04/diana-1.png",
+        "bio": "Diana Deharbe es Doctora y Licenciada en Comunicación Social, guionista e investigadora especializada en género y medios. En su tesis doctoral analizó las representaciones mediáticas del femicidio en telediarios. Vive en Paraná, Entre Ríos, y es mamá monomarental de Camila. Actualmente trabaja como docente y consultora independiente en comunicación y género. En 2024 estrenó en Canal Encuentro la docuficción Ahatay. El demonio blanco, sobre el chineo en el norte argentino. Es autora de capítulos de libros y artículos científicos. Integra Monomarentales Argentina con el firme compromiso de visibilizar la problemática desde la experiencia de quienes crían solas, reafirmando el lema: nada de nosotras sin nosotras, como principio para la construcción de conocimiento colectivo y transformador.",
+        "redes": [
+          {
+            "red": "instagram",
+            "url": "https://www.instagram.com/dianadeharbe/"
+          },
+          {
+            "red": "linkedin",
+            "url": "https://www.linkedin.com/in/dianadeharbe/"
+          }
+        ]
+      },
+      {
+        "nombre": "Paola Uquizo",
+        "cargo": "Secretaria",
+        "foto": "/uploads/2025/03/Mesa-de-trabajo-1-copia-03.jpg",
+        "bio": "Paola Urquizo es psicóloga clínica, docente y activista feminista. Se especializa en perinatalidad, discapacidad y políticas de cuidados con perspectiva de género (CLACSO, 2023). Fundó la iniciativa @familias.monomarentales durante la pandemia, como plataforma de visibilización de la violencia económica y la monomarentalidad en Argentina. Acompaña a mujeres en contextos de violencia de género, infancias y discapacidad, promoviendo redes de contención y herramientas de recuperación. Participó en congresos, conversatorios y colaboró en el primer informe oficial sobre incumplimiento alimentario. Integra Monomarentales Argentina convencida de que el activismo colectivo es clave para impulsar políticas públicas que reconozcan y fortalezcan los cuidados.",
+        "redes": [
+          {
+            "red": "instagram",
+            "url": "https://www.instagram.com/familias.monomarentales/"
+          },
+          {
+            "red": "linkedin",
+            "url": "https://www.linkedin.com/in/paola-urquizo-204427184/"
+          }
+        ]
+      },
+      {
+        "nombre": "Natalia Hradecki",
+        "cargo": "Vocal",
+        "foto": "/uploads/2025/04/natalia-1.png",
+        "bio": "Natalia es docente, promotora territorial en violencia por motivos de género y replicadora de la Ley Micaela. Es mamá monomarental de Male y Milo, con quienes vive en zona sur de la Provincia de Buenos Aires. Se formó en literatura, artes visuales, ESI y violencia de género, y actualmente cursa la Licenciatura en Comunicación. Acompaña procesos desde una mirada feminista y territorial, convencida de que la salida es colectiva. Integra Monomarentales Argentina para militar activamente por los derechos de las infancias, adolescencias y madres que crían solas, creando redes de apoyo y contención para transformar realidades. No están solxs.",
+        "redes": [
+          {
+            "red": "instagram",
+            "url": "https://www.instagram.com/mujeresenluchazonasur/"
+          }
+        ]
+      },
+      {
+        "nombre": "Virginia Natali Piertropaolo",
+        "cargo": "Vocal",
+        "foto": "/uploads/2025/04/virginia-5.png",
+        "bio": "Virginia Pietropaolo es mamá monomarental de Helena y vive en Reconquista, Santa Fe. Es acompañante comunitaria contra la violencia de género, estudiante de Lengua y Literatura, y fundadora de Red Madres Reconquista, un espacio de apoyo para mujeres que crían solas. Se formó en oratoria, asistencia jurídica, masculinidades y justicia con perspectiva de niñeces. Desde su experiencia personal, promueve la justicia social, la igualdad de género y el poder de la red entre madres. Integra Monomarentales Argentina con la convicción de que el acompañamiento colectivo puede transformar la vida de quienes enfrentan la crianza sin corresponsabilidad.",
+        "redes": [
+          {
+            "red": "instagram",
+            "url": "https://www.instagram.com/asociacioncivil.redmadres/"
+          }
+        ]
+      },
+      {
+        "nombre": "Laura Müller",
+        "cargo": "Comisión revisora de cuentas",
+        "foto": "/uploads/2025/04/Laura.png",
+        "bio": "",
+        "redes": [
+          {
+            "red": "instagram",
+            "url": "https://www.instagram.com/laum82/"
+          }
+        ]
+      },
+      {
+        "nombre": "Gabriela Figueredo",
+        "cargo": "Asociada voluntaria",
+        "foto": "/uploads/2025/03/Mesa-de-trabajo-1-copia-07.jpg",
+        "bio": "Gabriela Figueredo es mamá monomarental de Vitto, un niño con síndrome de Down y cardiopatía congénita. Vive en Rosario, Santa Fe, y se define como una mujer poderosa y determinada. Es docente, Técnica en Seguridad e Higiene, Licenciada en Seguridad y Salud Ocupacional y Coach Ontológica Profesional. Cree profundamente en la fuerza de lo colectivo y en el valor de la red para aliviar la carga que implica maternar sin corresponsabilidad paterna. Para ella, ser parte de Monomarentales Argentina es una sinergia transformadora que fortalece su lucha por los derechos de su hijo y de las infancias que acompañamos.",
+        "redes": [
+          {
+            "red": "instagram",
+            "url": "https://www.instagram.com/mamamonomarentalenred/"
+          }
+        ]
+      },
+      {
+        "nombre": "Claudia Hasanbegovic",
+        "cargo": "Asociada voluntaria",
+        "foto": "/uploads/2025/03/Mesa-de-trabajo-1-copia-08.jpg",
+        "bio": "Claudia Hasanbegovic es abogada feminista, mediadora e investigadora especializada en violencia de género como crimen internacional, capacitada por ONU Mujeres. Realizó estudios de doctorado en Políticas Sociales y formación de posgrado en Género en Gran Bretaña, Países Bajos y Alemania. Ejerce la abogacía y la docencia universitaria, y asesora a legisladoras e instituciones en políticas públicas con enfoque de género y derechos humanos. Fue Prosecretaria Letrada de la Corte Suprema de Justicia y coordinadora en la OVD. Integra redes nacionales e internacionales, y desde 2010 investiga sobre violencia económica. Es asesora voluntaria en Monomarentales Argentina.",
+        "redes": [
+          {
+            "red": "instagram",
+            "url": "https://www.instagram.com/fundacionequifem/"
+          },
+          {
+            "red": "linkedin",
+            "url": "https://www.linkedin.com/in/claudia-hasanbegovic-1b111016"
+          }
+        ]
+      },
+      {
+        "nombre": "Karina Herrera",
+        "cargo": "Asociada voluntaria",
+        "foto": "/uploads/2025/04/karina.jpg",
+        "bio": "Karina Herrera es mamá monomarental de Pablo, Santiago y Julián, y persona con discapacidad tras sobrevivir a la violencia de género. Comunicadora de formación, se graduó en Administración de Agencias de Viajes y Turismo y actualmente estudia Abogacía en la UNMa. Lucha por la equidad, la igualdad y los derechos de las mujeres que maternan solas. Cree en el poder de la organización colectiva y en el crecimiento de Monomarentales Argentina como un espacio de lucha, contención y transformación. Amante de la música y comprometida con la justicia social, milita para que nadie vuelva a quitarle derechos a nuestras familias.",
+        "redes": [
+          {
+            "red": "instagram",
+            "url": "https://www.instagram.com/karinaherrera.comunicadora/"
+          }
+        ]
+      },
+      {
+        "nombre": "Pia Puentedura",
+        "cargo": "Asociada voluntaria",
+        "foto": "/uploads/2025/04/pia-4.png",
+        "bio": "Pía es mamá monomarental y vive en Catamarca. Apasionada por el marketing digital, acompaña a mujeres—especialmente madres—a visibilizar sus proyectos en redes sociales. Forma parte del equipo de prensa de Monomarentales Argentina, donde transforma la lucha colectiva en contenido accesible y con impacto. Creadora de @pymesdepibas, impulsa la autonomía económica desde la comunicación digital con enfoque feminista. Además, es Licenciada en Turismo, formación que complementa con sensibilidad social y compromiso por los derechos de las mujeres que crían solas. Cree firmemente en el poder de las redes para construir comunidad, contención y visibilidad para todas las monomarentales.",
+        "redes": [
+          {
+            "red": "instagram",
+            "url": "https://www.instagram.com/pymesdepibas/"
+          }
+        ]
+      }
+    ]
+  },
+  "cierre": {
+    "texto": "Sumate vos también",
+    "url": "/sumate/"
+  }
+}
