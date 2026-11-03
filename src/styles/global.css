@@ -76,7 +76,7 @@ a:hover { color: var(--violeta-oscuro); }
 .titulo-pagina { font-weight: 500; font-size: clamp(2.3rem, 5vw, 3.2rem); line-height: 1.25; }
 .titulo-seccion { font-weight: 500; font-size: clamp(2.2rem, 5vw, 3rem); line-height: 1.2; }
 .bajada { font-family: var(--fuente-titulos); font-size: clamp(1.15rem, 2.4vw, 1.45rem); line-height: 1.6; }
-.texto-largo p { font-size: 1.15rem; line-height: 1.9; color: var(--texto-suave); }
+.texto-largo p { font-size: 1.15rem; line-height: 1.9; color: var(--texto); }
 .separador { width: 130px; margin: 2rem auto; border: 0; border-top: 2px solid var(--rojo); }
 
 .seccion { padding: clamp(3rem, 7vw, 5.5rem) 0; }

@@ -52,11 +52,12 @@ const tarjetas = [
   .areas__titulo { font-family: var(--fuente-titulos); font-weight: 600; font-size: clamp(1.15rem, 2.4vw, 1.4rem); text-transform: uppercase; margin: 2.5rem 0 0; }
 
   .areas { display: grid; gap: 1.75rem; margin-top: 2.5rem; }
+  /* Valores tomados del CSS de Kubio: radio 5px, sombra 0 19px 38px rgba(0,0,0,.16) */
   .area {
     background: var(--blanco);
-    border-radius: 4px;
-    box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.16);
-    padding: 2.5rem 1.5rem 2.25rem;
+    border-radius: 5px;
+    box-shadow: 0 19px 38px 0 rgba(0, 0, 0, 0.16);
+    padding: 30px 20px 26px;
     display: grid;
     justify-items: center;
     text-align: center;
@@ -75,22 +76,22 @@ const tarjetas = [
     transition: background-color 1s ease;
   }
   .area:hover .area__icono { background: var(--rojo); }
-  .area__titulo { color: var(--azul-noche); text-transform: uppercase; font-size: 1.375rem; font-weight: 600; margin: 2rem 0 0.75rem; }
-  .area ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; font-size: 1rem; line-height: 1.6; color: var(--texto-suave); }
+  /* Título h4 del tema (Poppins 600, 1.25em) y texto del tema (Roboto 300, 16px, #302f30) */
+  .area__titulo { color: var(--azul-noche); text-transform: uppercase; font-size: 1.25rem; line-height: 1.4; font-weight: 600; margin: 40px 0 10px; }
+  .area ul { list-style: none; margin: 0; padding: 0; font-family: var(--fuente-texto); font-weight: 300; font-size: 1rem; line-height: 1.6; color: var(--texto); }
 
   /* Escritorio: dos columnas, ícono a la izquierda (como en Kubio) */
   @media (min-width: 1024px) {
     .areas { grid-template-columns: repeat(2, 1fr); }
     .area { grid-template-columns: auto 1fr; justify-items: start; align-items: start; text-align: left; column-gap: 2.5rem; padding: 2rem 2rem 2.25rem; }
-    .area__titulo { font-size: 1.15rem; font-weight: 700; margin: 0.6rem 0 0.75rem; }
-    .area ul { font-size: 0.975rem; font-weight: 400; color: var(--texto); }
+    .area__titulo { margin: 0.6rem 0 10px; }
     .area--logros { grid-column: 1 / -1; justify-self: center; width: min(100%, 560px); }
   }
 
   .cta { display: grid; text-decoration: none; color: var(--blanco); }
   @media (min-width: 576px) { .cta { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 1024px) { .cta { grid-template-columns: 445px 445px; } }
-  .cta__bloque { display: grid; align-content: center; gap: 1rem; padding: 2.5rem 2rem; background: var(--violeta); transition: background 0.3s; }
+  .cta__bloque { display: grid; align-content: center; gap: 10px; min-height: 180px; padding: 12%; background: var(--violeta); transition: background 0.3s; }
   .cta:hover .cta__bloque { background: var(--violeta-oscuro); }
   .cta__titulo {
     display: flex;
