@@ -168,7 +168,7 @@ a:hover { color: var(--violeta-oscuro); }
    Tarjeta blanca con borde gris claro, radio 8 px y sombra suave; campos con borde violeta. */
 .formulario-tarjeta {
   width: 100%;
-  max-width: 675px;
+  max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
   background: var(--blanco);
