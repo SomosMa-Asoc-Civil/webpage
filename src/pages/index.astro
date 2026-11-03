@@ -3,11 +3,18 @@ import Base from '../layouts/Base.astro';
 import Icono from '../components/Icono.astro';
 import IconoRed from '../components/IconoRed.astro';
 import inicio from '../data/inicio.json';
+import feed from '../data/instagram.json';
 import { url, formato } from '../lib/url';
 
 const { hero, cifras, instagram, alianzas } = inicio;
 const iconosCifras = ['institucion', 'personas'];
-const publicaciones: { imagen: string; url: string }[] = instagram.publicaciones ?? [];
+// Publicaciones de Instagram: las que trae GitHub Actions todos los días;
+// si todavía no hay conexión, las que se carguen a mano en el CMS.
+type Publicacion = { imagen: string; url: string; texto?: string };
+const automaticas: Publicacion[] = (feed.publicaciones as Publicacion[]) ?? [];
+const manuales: Publicacion[] = (instagram.publicaciones as Publicacion[]) ?? [];
+const publicaciones = (automaticas.length ? automaticas : manuales).slice(0, feed.cantidad || 3);
+const usuarioIG = feed.usuario || instagram.usuario;
 ---
 <Base>
   <!-- Portada: imagen a la izquierda, texto a la derecha -->
@@ -65,19 +72,21 @@ const publicaciones: { imagen: string; url: string }[] = instagram.publicaciones
   <!-- Instagram -->
   <section class="seccion instagram">
     <div class="contenedor centrado">
-      <a class="instagram__cuenta" href={`https://www.instagram.com/${instagram.usuario}/`} target="_blank" rel="noopener">
+      <a class="instagram__cuenta" href={`https://www.instagram.com/${usuarioIG}/`} target="_blank" rel="noopener">
         <span class="instagram__icono"><IconoRed red="instagram" size={34} /></span>
-        <span class="instagram__usuario">@{instagram.usuario}</span>
+        <span class="instagram__usuario">@{usuarioIG}</span>
       </a>
       {publicaciones.length > 0 && (
         <div class="instagram__grilla">
           {publicaciones.map((p) => (
-            <a href={p.url} target="_blank" rel="noopener"><img src={url(p.imagen)} alt="" loading="lazy" width="300" height="300" /></a>
+            <a href={p.url} target="_blank" rel="noopener" aria-label={p.texto ? `Ver en Instagram: ${p.texto}` : 'Ver publicación en Instagram'}>
+              <img src={url(p.imagen)} alt="" loading="lazy" width="360" height="360" />
+            </a>
           ))}
         </div>
       )}
       <div class="botones botones--centro">
-        <a class="boton" href={`https://www.instagram.com/${instagram.usuario}/`} target="_blank" rel="noopener">Seguinos en Instagram</a>
+        <a class="boton" href={`https://www.instagram.com/${usuarioIG}/`} target="_blank" rel="noopener">Seguinos en Instagram</a>
       </div>
     </div>
   </section>
@@ -147,8 +156,13 @@ const publicaciones: { imagen: string; url: string }[] = instagram.publicaciones
     color: #d6249f;
   }
   .instagram__usuario { font-family: var(--fuente-titulos); font-size: clamp(1.3rem, 3vw, 1.9rem); }
-  .instagram__grilla { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); margin-top: 2rem; }
-  .instagram__grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; }
+  /* Como el feed de Spotlight: 3 columnas siempre, separación 16/12/8 px, esquinas redondeadas */
+  .instagram__grilla { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 2rem; }
+  @media (min-width: 768px) { .instagram__grilla { gap: 12px; } }
+  @media (min-width: 1024px) { .instagram__grilla { gap: 16px; } }
+  .instagram__grilla a { display: block; overflow: hidden; border-radius: 18%; }
+  .instagram__grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform 0.3s; }
+  .instagram__grilla a:hover img { transform: scale(1.05); }
 
   .alianzas__texto { width: min(620px, 100% - 2.5rem); margin-inline: auto; }
   .alianzas__texto h2 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.15; }

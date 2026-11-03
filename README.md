@@ -36,6 +36,27 @@ Pages CMS (editoras) ──commit──▶ este repo ──GitHub Actions──�
    - Para sumar editoras sin cuenta de GitHub: en Pages CMS, sección *Collaborators*, invitarlas por mail.
 5. **Formularios:** generar la clave en web3forms.com **con el mail de la asociación** y pegarla en *Configuración del sitio → Formularios*.
 
+## Instagram (publicaciones en la portada)
+
+Igual que el plugin Spotlight del WordPress viejo: el sitio **muestra** las últimas publicaciones de
+@monomarentalesargentina (no publica nada en Instagram).
+
+- `.github/workflows/instagram.yml` corre todos los días a las 7:37 (hora de Argentina).
+- `scripts/instagram/actualizar.mjs` trae las últimas publicaciones (por defecto 3; se cambia con `cantidad` en `src/data/instagram.json`), guarda las imágenes en `public/uploads/instagram/` y, si hay novedades, hace commit y vuelve a publicar el sitio.
+- Los lunes, `scripts/instagram/renovar-token.mjs` renueva el token (dura 60 días) y lo guarda solo.
+- Si no hay token o Instagram falla, el sitio sigue funcionando con lo último que tenía (o con las publicaciones cargadas a mano en el CMS).
+
+### Configuración (una sola vez)
+
+1. **Cuenta profesional.** En la app de Instagram: *Configuración → Tipo de cuenta y herramientas → Cambiar a cuenta profesional* (Creador o Empresa, gratis). La API no funciona con cuentas personales.
+2. **App de Meta.** En [developers.facebook.com](https://developers.facebook.com/apps) crear una app → caso de uso de **Instagram** (API con inicio de sesión de Instagram) → *Configuración de la API con inicio de sesión de Instagram* → *Generar tokens de acceso* → agregar la cuenta @monomarentalesargentina e iniciar sesión → copiar el token. Si la app está en modo desarrollo y lo pide, sumar la cuenta como *Tester de Instagram* (Roles de la app) y aceptar la invitación desde Instagram (*Configuración → Apps y sitios web*).
+3. **Secretos del repo** (*Settings → Secrets and variables → Actions → New repository secret*):
+   - `IG_TOKEN`: el token del paso 2.
+   - `IG_GH_PAT`: un token de GitHub *fine-grained* ([crear acá](https://github.com/settings/personal-access-tokens/new)) con acceso solo a este repo y permiso **Secrets: Read and write**. Sirve para guardar el token de Instagram renovado. Anotar cuándo vence para generarlo de nuevo.
+4. **Primera corrida.** *Actions → Actualizar Instagram → Run workflow*. En un par de minutos aparecen las publicaciones en la portada.
+
+> Al dar de baja el WordPress, quitar el acceso de Spotlight en Instagram (*Configuración → Apps y sitios web*): su token quedó dentro del export XML.
+
 ## Dominio somosma.com.ar (cuando se recupere el acceso)
 
 1. Delegar el dominio a Cloudflare (gratis) desde la cuenta de DonWeb, o pedir la transferencia a nombre de la asociación en NIC Argentina.
@@ -63,5 +84,5 @@ scripts/migracion/            script de migración desde WordPress y descarga de
 
 - Se migraron 8 noticias, 5 páginas y el equipo de Nosotras (10 integrantes) desde el export de WordPress del 03/11/2026.
 - `/noticias-2/` (dirección vieja) redirige a `/noticias/`.
-- El feed de Instagram (plugin Spotlight) se reemplazó por una sección con enlace a la cuenta.
+- El feed de Instagram (plugin Spotlight) se reemplazó por una sincronización diaria con GitHub Actions (ver sección Instagram).
 - En Nosotras hay dos nombres que parecen tener errores de tipeo en el original ("Paola Uquizo" / "Urquizo", "Piertropaolo" / "Pietropaolo"); se dejaron como estaban para que lo confirmen.

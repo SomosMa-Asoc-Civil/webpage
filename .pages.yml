@@ -80,6 +80,8 @@ content:
         type: file
         path: src/data/inicio.json
         format: json
+        operations:
+          delete: false
         fields:
           - name: hero
             label: Portada
@@ -157,6 +159,8 @@ content:
         type: file
         path: src/data/nosotras.json
         format: json
+        operations:
+          delete: false
         fields:
           - name: hero
             label: Encabezado
@@ -221,6 +225,8 @@ content:
         type: file
         path: src/data/que-hacemos.json
         format: json
+        operations:
+          delete: false
         fields:
           - { name: titulo, label: Título, type: string }
           - { name: intro, label: Introducción, type: string, list: true }
@@ -257,6 +263,8 @@ content:
         type: file
         path: src/data/sumate.json
         format: json
+        operations:
+          delete: false
         fields:
           - { name: titulo, label: Título, type: string }
           - { name: imagen, label: Imagen, type: image }
@@ -280,6 +288,8 @@ content:
         type: file
         path: src/data/contacto.json
         format: json
+        operations:
+          delete: false
         fields:
           - { name: titulo, label: Título, type: string }
           - { name: subtitulo, label: Subtítulo, type: string }
@@ -310,6 +320,8 @@ content:
     type: file
     path: src/data/sitio.json
     format: json
+    operations:
+      delete: false
     fields:
       - { name: nombre, label: Nombre corto, type: string }
       - { name: nombre_completo, label: Nombre completo, type: string }

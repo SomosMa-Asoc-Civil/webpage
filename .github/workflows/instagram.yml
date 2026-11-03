@@ -1,0 +1,57 @@
+name: Actualizar Instagram
+
+# Todos los días trae las últimas publicaciones de Instagram y, si hay nuevas,
+# las guarda en el repo y vuelve a publicar el sitio.
+# El token se renueva solo una vez por semana (vence a los 60 días).
+on:
+  schedule:
+    - cron: '37 10 * * *' # todos los días, 7:37 (hora de Argentina)
+    - cron: '7 11 * * 1' # lunes, renovación del token
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: instagram
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Renovar token (lunes o a mano)
+        if: github.event.schedule == '7 11 * * 1' || github.event_name == 'workflow_dispatch'
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          GH_TOKEN: ${{ secrets.IG_GH_PAT }}
+        run: node scripts/instagram/renovar-token.mjs
+
+      - name: Traer publicaciones
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: node scripts/instagram/actualizar.mjs
+
+      - name: Guardar cambios y publicar
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain src/data/instagram.json public/uploads/instagram)" ]; then
+            echo "Sin cambios."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/instagram.json public/uploads/instagram
+          git commit -m "Instagram: últimas publicaciones"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          # Los cambios que sube GitHub Actions no disparan otros workflows: se publica a mano
+          gh workflow run deploy.yml --ref main
