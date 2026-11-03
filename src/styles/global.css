@@ -164,30 +164,60 @@ a:hover { color: var(--violeta-oscuro); }
 .prosa table { width: 100%; border-collapse: collapse; }
 .prosa th, .prosa td { border: 1px solid var(--borde); padding: 0.5rem 0.75rem; text-align: left; }
 
-/* Formularios (mismo estilo que tenía Contact Form 7) */
-.formulario { display: grid; gap: 1.1rem; }
-.formulario__campo { display: grid; gap: 0.35rem; font-weight: 400; font-size: 0.95rem; border: 0; margin: 0; padding: 0; }
-.formulario__campo legend { padding: 0; margin-bottom: 0.35rem; }
+/* Formularios: misma estructura que tenían en Contact Form 7.
+   Tarjeta blanca con borde gris claro, radio 8 px y sombra suave; campos con borde violeta. */
+.formulario-tarjeta {
+  width: 100%;
+  max-width: 675px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--blanco);
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.formulario { display: grid; gap: 0; font-family: var(--fuente-texto); font-size: 16px; color: var(--texto); }
+.formulario__campo { display: block; margin: 0 0 1em; padding: 0; border: 0; font-weight: 500; line-height: 1.6; }
+.formulario__campo > span, .formulario__campo > legend { display: block; margin-bottom: 0.15rem; padding: 0; }
+/* En el original, los selectores y grupos de casillas no van dentro de <label>: texto liviano */
+.formulario__campo--grupo { font-weight: 300; }
 .formulario input:not([type='checkbox']),
 .formulario select,
 .formulario textarea {
+  display: block;
   width: 100%;
-  padding: 0.65rem 0.8rem;
+  margin-bottom: 1rem;
+  padding: 0.85rem 0.75rem;
   border: 1px solid var(--violeta);
   border-radius: 4px;
-  font: inherit;
+  font-family: 'Syne', var(--fuente-texto);
+  font-size: 16px;
   font-weight: 400;
+  line-height: 1.6;
   color: var(--texto);
   background: var(--blanco);
 }
+.formulario select { padding-block: 0.65rem; cursor: pointer; }
 .formulario input:focus,
 .formulario select:focus,
 .formulario textarea:focus { outline: none; box-shadow: 0 0 0 3px rgba(99, 99, 251, 0.2); }
-.formulario textarea { min-height: 150px; resize: vertical; }
-.formulario__opcion { display: flex; align-items: center; gap: 0.5rem; font-weight: 400; }
-.formulario__opcion input { width: 1rem; height: 1rem; accent-color: var(--violeta); }
-.formulario .boton { width: 100%; text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 0.95rem; }
-.formulario__estado { margin: 0; font-weight: 400; }
+.formulario textarea { min-height: 22.5rem; resize: vertical; }
+/* Casillas en línea, como las de Contact Form 7 */
+.formulario__opciones { display: flex; flex-wrap: wrap; gap: 0.35rem 0; margin: 0.15rem 0 1rem; }
+.formulario__opcion { display: inline-flex; align-items: center; gap: 0.4rem; margin-left: 1em; font-weight: 500; }
+.formulario__opcion input { width: 1rem; height: 1rem; margin: 0; accent-color: var(--violeta); }
+.formulario .boton {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-family: var(--fuente-texto);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.formulario__estado { margin: 1rem 0 0; font-weight: 400; }
 .formulario__estado:empty { display: none; }
 .formulario__estado[data-tipo='ok'] { color: #0f7b3e; }
 .formulario__estado[data-tipo='error'] { color: #b42318; }
