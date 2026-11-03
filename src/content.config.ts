@@ -7,7 +7,12 @@ const noticias = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/noticias' }),
   schema: z.object({
     title: z.string(),
-    date: z.coerce.date(),
+    // "2026-06-21T16:20" se guarda como hora local de la nota; se trata como UTC para que
+    // se muestre igual sin importar la zona horaria de la máquina que construye el sitio.
+    date: z.preprocess(
+      (v) => (typeof v === 'string' && v.includes('T') && !/(Z|[+-]\d\d:?\d\d)$/i.test(v) ? `${v}Z` : v),
+      z.coerce.date(),
+    ),
     author: z.string().default('SomosMa'),
     image: z.string().optional().default(''),
     excerpt: z.string().optional().default(''),
