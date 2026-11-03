@@ -1,0 +1,17 @@
+---
+// Video de YouTube (modo de privacidad mejorada, carga diferida).
+interface Props {
+  id: string;
+  titulo?: string;
+}
+const { id, titulo = 'Video de YouTube' } = Astro.props;
+---
+<div class="video">
+  <iframe
+    src={`https://www.youtube-nocookie.com/embed/${id}`}
+    title={titulo}
+    loading="lazy"
+    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+  ></iframe>
+</div>

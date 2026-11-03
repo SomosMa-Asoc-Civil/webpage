@@ -1,125 +1,128 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import TarjetaNoticia from '../components/TarjetaNoticia.astro';
+import Icono from '../components/Icono.astro';
 import IconoRed from '../components/IconoRed.astro';
 import inicio from '../data/inicio.json';
 import { url, parrafos } from '../lib/url';
 
 const { hero, cifras, instagram, alianzas } = inicio;
-const ultimas = (await getCollection('noticias', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+const [intro, ...resto] = parrafos(hero.texto);
+const iconosCifras = ['institucion', 'personas'];
 ---
 <Base>
-  <section class="seccion hero">
+  <!-- Portada: imagen a la izquierda, texto a la derecha -->
+  <section class="seccion">
     <div class="contenedor grilla grilla-2 alinear-centro">
+      {hero.imagen && (
+        <img class="hero__imagen" src={url(hero.imagen)} alt="Integrantes de Monomarentales Argentina" width="560" height="560" />
+      )}
       <div>
         <span class="antetitulo">{hero.antetitulo}</span>
-        <h1>{hero.titulo}</h1>
-        {parrafos(hero.texto).map((p) => <p>{p}</p>)}
+        <h1 class="hero__titulo">{hero.titulo}</h1>
+        {intro && <p class="hero__intro">{intro}</p>}
+        {resto.map((p) => <p class="hero__texto">{p}</p>)}
         <div class="botones">
-          {hero.botones.map((b, i) => (
-            <a class={i === 0 ? 'boton' : 'boton boton--borde'} href={url(b.url)}>{b.texto}</a>
-          ))}
+          {hero.botones.map((b) => <a class="boton" href={url(b.url)}>{b.texto}</a>)}
         </div>
       </div>
-      {hero.imagen && (
-        <img class="hero__imagen" src={url(hero.imagen)} alt="Integrantes de Monomarentales Argentina" width="640" height="480" />
-      )}
     </div>
   </section>
 
-  <section class="seccion seccion--violeta">
+  <!-- Cifras que importan -->
+  <section class="seccion cifras">
     <div class="contenedor">
       <h2 class="centrado cifras__titulo">{cifras.titulo}</h2>
-      <div class="grilla grilla-3 cifras">
-        {cifras.items.map((c) => (
+      <div class="cifras__grilla">
+        <div class="cifras__tarjeta">
+          {cifras.items.map((c, i) => (
+            <div class="cifra">
+              <span class="cifra__icono"><Icono nombre={iconosCifras[i % 2]} size={34} trazo={1.6} /></span>
+              <p class="cifra__dato">{c.dato}</p>
+              <p class="cifra__texto">{c.texto}</p>
+              {c.fuente && <p class="cifra__fuente">({c.fuente})</p>}
+            </div>
+          ))}
+        </div>
+
+        <div class="cifras__tarjeta cifras__tarjeta--roja">
+          <h3>{cifras.destacado.titulo}</h3>
+          <p class="cifras__pregunta">{cifras.destacado.subtitulo}</p>
+          <a class="boton boton--durazno" href={url(cifras.destacado.boton.url)}>{cifras.destacado.boton.texto}</a>
+        </div>
+
+        <div class="cifras__tarjeta">
           <div class="cifra">
-            <p class="cifra__dato">{c.dato}</p>
-            <p class="cifra__texto">{c.texto}</p>
-            {c.fuente && <p class="cifra__fuente">({c.fuente})</p>}
+            <span class="cifra__icono"><Icono nombre="maletin" size={34} trazo={1.6} /></span>
+            {cifras.destacado.lugar && <p class="cifra__lugar">{cifras.destacado.lugar}</p>}
+            <p class="cifra__dato">{cifras.destacado.dato}</p>
+            <p class="cifra__texto">{cifras.destacado.texto}</p>
+            {cifras.destacado.fuente && <p class="cifra__fuente">({cifras.destacado.fuente})</p>}
           </div>
-        ))}
-        <div class="cifra cifra--destacada">
-          {cifras.destacado.lugar && <p class="cifra__lugar">{cifras.destacado.lugar}</p>}
-          <p class="cifra__dato">{cifras.destacado.dato}</p>
-          <p class="cifra__texto">{cifras.destacado.texto}</p>
-          {cifras.destacado.fuente && <p class="cifra__fuente">({cifras.destacado.fuente})</p>}
-        </div>
-      </div>
-      <div class="pregunta centrado">
-        <h3>{cifras.destacado.titulo}</h3>
-        <p class="pregunta__sub">{cifras.destacado.subtitulo}</p>
-        <div class="botones">
-          <a class="boton" href={url(cifras.destacado.boton.url)}>{cifras.destacado.boton.texto}</a>
         </div>
       </div>
     </div>
   </section>
 
-  {ultimas.length > 0 && (
-    <section class="seccion seccion--suave">
-      <div class="contenedor">
-        <div class="encabezado-fila">
-          <h2>Últimas noticias</h2>
-          <a class="boton boton--borde" href={url('/noticias/')}>Ver todas</a>
-        </div>
-        <div class="grilla grilla-3">
-          {ultimas.map((n) => <TarjetaNoticia noticia={n} />)}
-        </div>
-      </div>
-    </section>
-  )}
-
+  <!-- Alianzas + Instagram -->
   <section class="seccion">
-    <div class="contenedor-angosto centrado">
-      <h2>{alianzas.titulo}</h2>
-      {parrafos(alianzas.texto).map((p) => <p>{p}</p>)}
-      <div class="botones">
-        <a class="boton boton--rosa" href={url(alianzas.boton.url)}>{alianzas.boton.texto}</a>
+    <div class="contenedor grilla grilla-2 alinear-centro">
+      <div>
+        <h2>{alianzas.titulo}</h2>
+        {parrafos(alianzas.texto).map((p) => <p>{p}</p>)}
       </div>
+      <a class="tarjeta instagram" href={`https://www.instagram.com/${instagram.usuario}/`} target="_blank" rel="noopener">
+        <span class="instagram__icono"><IconoRed red="instagram" size={44} /></span>
+        <span class="instagram__titulo">{instagram.titulo}</span>
+        <span class="instagram__usuario">@{instagram.usuario}</span>
+        <span class="instagram__texto">{instagram.texto}</span>
+      </a>
     </div>
-  </section>
-
-  <section class="seccion seccion--noche">
-    <div class="contenedor-angosto centrado">
-      <h2>{instagram.titulo}</h2>
-      <p>{instagram.texto}</p>
-      <div class="botones">
-        <a class="boton" href={`https://www.instagram.com/${instagram.usuario}/`} target="_blank" rel="noopener">
-          <IconoRed red="instagram" /> @{instagram.usuario}
-        </a>
-      </div>
+    <div class="botones botones--centro">
+      <a class="boton" href={url(alianzas.boton.url)}>{alianzas.boton.texto}</a>
     </div>
   </section>
 </Base>
 
 <style>
-  .hero { background: linear-gradient(180deg, var(--violeta-suave) 0%, var(--blanco) 100%); }
-  .hero h1 { color: var(--azul-noche); }
-  .hero__imagen { border-radius: 18px; box-shadow: var(--sombra); width: 100%; object-fit: cover; }
+  .hero__imagen { width: 100%; max-width: 560px; justify-self: center; border-radius: var(--radio); object-fit: cover; }
+  .hero__titulo { font-size: clamp(2rem, 4vw, 2.75rem); }
+  .hero__intro { font-family: var(--fuente-titulos); font-weight: 600; font-size: 0.95rem; }
+  .hero__texto { font-family: var(--fuente-titulos); font-size: 0.95rem; }
 
-  .cifras__titulo { text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2.5rem; }
-  .cifras { margin-bottom: 3rem; }
-  .cifra {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: var(--radio);
+  .cifras__titulo { text-transform: uppercase; margin-bottom: 2.5rem; }
+  .cifras__grilla { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+  .cifras__tarjeta {
+    background: var(--gris-tarjeta);
+    border-radius: 24px;
     padding: 2rem 1.5rem;
+    display: grid;
+    gap: 2.5rem;
+    align-content: center;
     text-align: center;
   }
-  .cifra p { margin: 0; }
-  .cifra__dato { font-family: var(--fuente-titulos); font-weight: 700; font-size: clamp(1.8rem, 3.5vw, 2.4rem); line-height: 1.15; color: var(--durazno) !important; }
-  .cifra__texto { font-size: 1.1rem; margin-top: 0.5rem !important; }
-  .cifra__fuente { font-size: 0.85rem; font-style: italic; opacity: 0.8; margin-top: 0.75rem !important; }
-  .cifra__lugar { font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85rem; }
-  .cifra--destacada { background: var(--blanco); }
-  .cifra--destacada p { color: var(--azul-noche) !important; }
-  .cifra--destacada .cifra__dato { color: var(--rosa) !important; }
-  .pregunta h3 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 0.25rem; }
-  .pregunta__sub { font-family: var(--fuente-titulos); font-size: 1.25rem; font-weight: 500; }
+  .cifras__tarjeta--roja { background: var(--rojo); color: var(--blanco); gap: 1.25rem; justify-items: center; }
+  .cifras__tarjeta--roja h3 { color: var(--blanco); font-weight: 700; font-size: clamp(1.6rem, 2.6vw, 2rem); margin: 0; }
+  .cifras__pregunta { font-family: var(--fuente-titulos); font-weight: 600; font-size: 1.15rem; margin: 0; }
+  .cifra p { margin: 0; font-family: var(--fuente-titulos); }
+  .cifra__icono { display: inline-flex; color: var(--rojo); margin-bottom: 0.75rem; }
+  .cifra__dato { font-weight: 700; font-size: clamp(1.6rem, 2.6vw, 2.1rem); line-height: 1.2; color: var(--texto); }
+  .cifra__texto { margin-top: 0.5rem !important; font-size: 0.95rem; }
+  .cifra__lugar { font-weight: 500; margin-bottom: 0.25rem !important; }
+  .cifra__fuente { font-family: var(--fuente-texto) !important; font-style: italic; font-size: 0.78rem; margin-top: 0.75rem !important; }
 
-  .encabezado-fila { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
-  .encabezado-fila h2 { margin: 0; }
+  .instagram {
+    display: grid;
+    justify-items: center;
+    gap: 0.4rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--texto);
+    padding: 3rem 2rem;
+    transition: transform 0.2s;
+  }
+  .instagram:hover { transform: translateY(-3px); color: var(--texto); }
+  .instagram__icono { color: var(--violeta); margin-bottom: 0.5rem; }
+  .instagram__titulo { font-family: var(--fuente-titulos); font-weight: 700; font-size: 1.4rem; }
+  .instagram__usuario { font-family: var(--fuente-titulos); color: var(--violeta); font-weight: 500; }
+  .instagram__texto { max-width: 34ch; }
 </style>

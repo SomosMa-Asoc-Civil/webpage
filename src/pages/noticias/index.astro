@@ -8,14 +8,12 @@ const noticias = (await getCollection('noticias', ({ data }) => !data.draft))
 const descripcion = 'Últimas noticias sobre derechos de familias monomarentales, cuota alimentaria y políticas públicas en Argentina.';
 ---
 <Base titulo="Noticias y recursos" descripcion={descripcion}>
-  <section class="seccion encabezado">
+  <section class="seccion">
     <div class="contenedor-angosto centrado">
-      <h1>Noticias y recursos</h1>
-      <p class="encabezado__texto">{descripcion}</p>
+      <h1 class="titulo">Noticias y recursos</h1>
+      <p class="bajada">{descripcion}</p>
     </div>
-  </section>
-  <section class="seccion seccion--suave">
-    <div class="contenedor">
+    <div class="contenedor listado">
       {noticias.length === 0 ? (
         <p class="centrado">Todavía no hay noticias publicadas.</p>
       ) : (
@@ -26,7 +24,8 @@ const descripcion = 'Últimas noticias sobre derechos de familias monomarentales
 </Base>
 
 <style>
-  .encabezado { background: linear-gradient(180deg, var(--violeta-suave) 0%, var(--blanco) 100%); padding-bottom: 2rem; }
-  .encabezado h1 { color: var(--azul-noche); }
-  .encabezado__texto { font-size: 1.2rem; }
+  .titulo { font-size: clamp(2.4rem, 6vw, 4.2rem); }
+  .bajada { font-size: 1.15rem; font-weight: 400; max-width: 46ch; margin-inline: auto; }
+  .listado { margin-top: 3.5rem; }
+  .listado .grilla { row-gap: 3.5rem; }
 </style>

@@ -162,6 +162,11 @@ content:
             fields:
               - { name: titulo, label: Título, type: string }
               - { name: parrafos, label: Párrafos, type: text, list: true }
+          - name: videos
+            label: Videos de YouTube
+            description: "Solo el código del video. Ej.: de youtube.com/watch?v=LOkjZ2wM6Cc va LOkjZ2wM6Cc"
+            type: string
+            list: true
           - name: historia
             label: Nuestra historia
             type: object
@@ -183,6 +188,7 @@ content:
                   - { name: cargo, label: Cargo, type: string }
                   - { name: foto, label: Foto, type: image }
                   - { name: bio, label: Biografía, type: text }
+                  - { name: video, label: "Video de YouTube (solo el código, opcional)", type: string }
                   - name: redes
                     label: Redes
                     type: object

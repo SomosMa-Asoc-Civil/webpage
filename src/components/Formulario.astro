@@ -7,12 +7,13 @@
  */
 import sitio from '../data/sitio.json';
 
-interface Campo {
+export interface Campo {
   nombre: string;
   etiqueta: string;
-  tipo?: 'text' | 'email' | 'tel' | 'textarea' | 'select';
+  tipo?: 'text' | 'email' | 'tel' | 'textarea' | 'select' | 'checkbox';
   requerido?: boolean;
   opciones?: string[];
+  placeholder?: string;
   autocompletar?: string;
 }
 
@@ -31,21 +32,32 @@ const clave = sitio.formularios?.web3forms_key?.trim() ?? '';
   <input type="hidden" name="from_name" value="Web SomosMa" />
   <input type="checkbox" name="botcheck" class="oculto" tabindex="-1" autocomplete="off" />
 
-  {campos.map((c) => (
-    <label>
-      {c.etiqueta}{c.requerido && <span aria-hidden="true"> *</span>}
-      {c.tipo === 'textarea' ? (
-        <textarea name={c.nombre} required={c.requerido}></textarea>
-      ) : c.tipo === 'select' ? (
-        <select name={c.nombre} required={c.requerido}>
-          <option value="">Elegí una opción</option>
-          {(c.opciones ?? []).map((o) => <option value={o}>{o}</option>)}
-        </select>
-      ) : (
-        <input type={c.tipo ?? 'text'} name={c.nombre} required={c.requerido} autocomplete={c.autocompletar} />
-      )}
-    </label>
-  ))}
+  {campos.map((c) =>
+    c.tipo === 'checkbox' ? (
+      <fieldset class="formulario__campo" data-requerido={c.requerido ? '1' : undefined} data-nombre={c.etiqueta}>
+        <legend>{c.etiqueta}{c.requerido && '*'}</legend>
+        {(c.opciones ?? []).map((o) => (
+          <label class="formulario__opcion">
+            <input type="checkbox" name={c.nombre} value={o} /> {o}
+          </label>
+        ))}
+      </fieldset>
+    ) : (
+      <label class="formulario__campo">
+        <span>{c.etiqueta}{c.requerido && '*'}</span>
+        {c.tipo === 'textarea' ? (
+          <textarea name={c.nombre} required={c.requerido}></textarea>
+        ) : c.tipo === 'select' ? (
+          <select name={c.nombre} required={c.requerido}>
+            <option value="">{c.placeholder ?? 'Seleccioná una opción'}</option>
+            {(c.opciones ?? []).map((o) => <option value={o}>{o}</option>)}
+          </select>
+        ) : (
+          <input type={c.tipo ?? 'text'} name={c.nombre} required={c.requerido} autocomplete={c.autocompletar} />
+        )}
+      </label>
+    )
+  )}
 
   <button class="boton" type="submit">{boton}</button>
   <p class="formulario__estado" role="status" aria-live="polite"></p>
@@ -68,12 +80,25 @@ const clave = sitio.formularios?.web3forms_key?.trim() ?? '';
         form.reportValidity();
         return;
       }
+      // Grupos de casillas obligatorios: al menos una marcada
+      for (const grupo of form.querySelectorAll<HTMLFieldSetElement>('fieldset[data-requerido]')) {
+        if (!grupo.querySelector('input:checked')) {
+          mostrar('error', `Elegí al menos una opción en "${grupo.dataset.nombre}".`);
+          grupo.querySelector('input')?.focus();
+          return;
+        }
+      }
       const clave = form.dataset.clave;
       if (!clave) {
         mostrar('error', `El formulario todavía no está configurado. Escribinos a ${form.dataset.email}.`);
         return;
       }
-      const datos = Object.fromEntries(new FormData(form).entries());
+      // Las casillas con el mismo nombre se envían juntas: "Mañana, Tarde"
+      const datos: Record<string, string> = {};
+      for (const [k, v] of new FormData(form).entries()) {
+        const valor = String(v);
+        datos[k] = datos[k] ? `${datos[k]}, ${valor}` : valor;
+      }
       datos.access_key = clave;
       boton.disabled = true;
       mostrar('', 'Enviando…');

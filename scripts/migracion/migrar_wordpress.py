@@ -64,6 +64,12 @@ def local_link(url: str) -> str:
     return url
 
 
+def youtube_id(url: str) -> str:
+    """https://www.youtube.com/watch?v=ABC&t=2s -> ABC"""
+    m = re.search(r"(?:v=|youtu\.be/|embed/)([A-Za-z0-9_-]{11})", url or "")
+    return m.group(1) if m else ""
+
+
 def fix_instagram(url: str) -> str:
     """Los links de login de Instagram (accounts/login/?next=/usuario/) -> perfil directo."""
     url = url.strip()
@@ -128,6 +134,8 @@ def parse_blocks(s: str) -> list[dict]:
             out.append(dict(section=section, type="social", text=((a.get("link") or {}).get("value") or "").strip()))
         if name in ("kubio/button", "kubio/link"):
             out.append(dict(section=section, type="href", text=(a.get("link") or {}).get("value", "")))
+        if name == "embed" and "youtube" in (a.get("url") or ""):
+            out.append(dict(section=section, type="video", text=a["url"]))
         if not selfc:
             stack.append((name, a))
     return out
@@ -220,10 +228,12 @@ def migrar_paginas(by_type, get):
         if x["section"] != "Team":
             break
         if x["type"] == "img":
-            actual = {"nombre": "", "cargo": "", "foto": local_upload(x["text"]), "bio": "", "redes": []}
+            actual = {"nombre": "", "cargo": "", "foto": local_upload(x["text"]), "bio": "", "video": "", "redes": []}
             equipo.append(actual)
         elif actual is None:
             continue
+        elif x["type"] == "video":
+            actual["video"] = youtube_id(x["text"])
         elif x["type"] == "heading":
             actual["nombre"] = prose(x["text"])
         elif x["type"] == "text":
@@ -249,6 +259,7 @@ def migrar_paginas(by_type, get):
             "titulo": prose(n[2]["text"]).rstrip("."),
             "parrafos": [prose(x["text"]) for x in n[3:i_hist] if x["type"] == "paragraph"],
         },
+        "videos": [youtube_id(x["text"]) for x in n[:i_hist] if x["type"] == "video"],
         "historia": {"titulo": prose(n[i_hist]["text"]), "texto": prose(n[i_hist + 1]["text"])},
         "equipo": {"titulo": prose(n[i_eq]["text"]), "texto": prose(n[i_eq + 1]["text"]), "integrantes": equipo},
         "cierre": {"texto": "Sumate vos también", "url": "/sumate/"},

@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import sitio from '../data/sitio.json';
 import IconoRed from '../components/IconoRed.astro';
+import Icono from '../components/Icono.astro';
 import { url } from '../lib/url';
 
 interface Props {
@@ -53,7 +54,7 @@ const esActual = (destino: string) =>
     <header class="cabecera">
       <div class="contenedor cabecera__barra">
         <a class="cabecera__logo" href={url('/')} aria-label={`${sitio.nombre} – inicio`}>
-          <img src={url(sitio.logo)} alt={sitio.nombre} width="160" height="56" />
+          <img src={url(sitio.logo)} alt={sitio.nombre} width="140" height="60" />
         </a>
         <button class="cabecera__toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
           <span class="sr-only">Abrir menú</span>
@@ -77,29 +78,19 @@ const esActual = (destino: string) =>
 
     <footer class="pie">
       <div class="contenedor pie__grilla">
-        <div>
-          <img class="pie__logo" src={url(sitio.logo)} alt={sitio.nombre} width="150" height="52" loading="lazy" />
-          <p class="pie__lema"><strong>{sitio.nombre_completo}.</strong> {sitio.lema}</p>
+        <div class="pie__redes">
+          {sitio.redes.map((r) => (
+            <a href={r.url} target="_blank" rel="noopener" aria-label={r.red}>
+              <IconoRed red={r.red} size={26} />
+            </a>
+          ))}
+          <a href={`mailto:${sitio.email}`} aria-label="Mail"><Icono nombre="mail" size={26} /></a>
         </div>
         <div>
-          <h2 class="pie__titulo">Contacto</h2>
-          <p><a href={`mailto:${sitio.email}`}>{sitio.email}</a><br />{sitio.ubicacion}</p>
-          <div class="pie__redes">
-            {sitio.redes.map((r) => (
-              <a href={r.url} target="_blank" rel="noopener" aria-label={r.red}>
-                <IconoRed red={r.red} />
-              </a>
-            ))}
-          </div>
+          <p class="pie__lema">{sitio.nombre_completo}. {sitio.lema}</p>
+          <p class="pie__legal">© {new Date().getFullYear()} {sitio.nombre}. <a href={`mailto:${sitio.email}`}>{sitio.email}</a></p>
         </div>
-        <nav aria-label="Menú del pie">
-          <h2 class="pie__titulo">Secciones</h2>
-          <ul>
-            {sitio.menu.map((item) => <li><a href={url(item.url)}>{item.texto}</a></li>)}
-          </ul>
-        </nav>
       </div>
-      <div class="contenedor pie__legal">© {new Date().getFullYear()} {sitio.nombre} – {sitio.nombre_completo}</div>
     </footer>
 
     <script>
@@ -115,32 +106,26 @@ const esActual = (destino: string) =>
 </html>
 
 <style>
-  .cabecera {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(255, 255, 255, 0.96);
-    backdrop-filter: blur(6px);
-    box-shadow: 0 1px 0 var(--borde);
-  }
-  .cabecera__barra { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 76px; }
-  .cabecera__logo img { height: 52px; width: auto; }
-  .cabecera__menu ul { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0; }
+  .cabecera { position: sticky; top: 0; z-index: 50; background: var(--violeta); }
+  .cabecera__barra { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 72px; }
+  .cabecera__logo img { max-height: 60px; width: auto; }
+  .cabecera__menu ul { display: flex; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
   .cabecera__menu a {
     display: block;
-    padding: 0.5rem 0.8rem;
-    border-radius: 999px;
+    padding: 0.4rem 0.75rem;
     font-family: var(--fuente-titulos);
-    font-weight: 500;
-    font-size: 0.95rem;
+    font-weight: 400;
+    font-size: 1rem;
+    letter-spacing: 0.06em;
     color: var(--azul-noche);
     text-decoration: none;
+    border-bottom: 3px solid transparent;
   }
-  .cabecera__menu a:hover { color: var(--violeta); }
-  .cabecera__menu a[aria-current='page'] { background: var(--violeta-suave); color: var(--violeta); }
+  .cabecera__menu a:hover { color: var(--blanco); }
+  .cabecera__menu a[aria-current='page'] { color: var(--blanco); border-bottom-color: var(--amarillo); }
   .cabecera__toggle { display: none; }
 
-  @media (max-width: 920px) {
+  @media (max-width: 960px) {
     .cabecera__toggle {
       display: grid;
       gap: 5px;
@@ -149,37 +134,26 @@ const esActual = (destino: string) =>
       border: 0;
       cursor: pointer;
     }
-    .cabecera__toggle span[aria-hidden] { width: 24px; height: 2px; background: var(--azul-noche); border-radius: 2px; }
+    .cabecera__toggle span[aria-hidden] { width: 26px; height: 2px; background: var(--blanco); border-radius: 2px; }
     .cabecera__menu {
       position: absolute;
-      inset: 76px 0 auto 0;
-      background: var(--blanco);
+      inset: 72px 0 auto 0;
+      background: var(--violeta);
       box-shadow: var(--sombra);
       display: none;
     }
     .cabecera__menu.abierto { display: block; }
-    .cabecera__menu ul { flex-direction: column; padding: 0.75rem 1.25rem 1.25rem; }
-    .cabecera__menu a { padding: 0.75rem 1rem; }
+    .cabecera__menu ul { flex-direction: column; padding: 0.5rem 1.25rem 1.25rem; gap: 0; }
+    .cabecera__menu a { padding: 0.75rem 0.5rem; border-bottom: 0; border-left: 3px solid transparent; }
+    .cabecera__menu a[aria-current='page'] { border-left-color: var(--amarillo); }
   }
 
-  .pie { background: var(--azul-noche); color: rgba(255, 255, 255, 0.85); padding: 3.5rem 0 1.5rem; margin-top: 0; }
-  .pie a { color: var(--blanco); }
-  .pie__grilla { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
-  .pie__logo { height: 64px; width: auto; background: var(--blanco); padding: 6px 12px; border-radius: 10px; margin-bottom: 1rem; }
-  .pie__lema { max-width: 32ch; }
-  .pie__titulo { font-size: 1rem; color: var(--durazno); margin-bottom: 0.75rem; }
-  .pie ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
-  .pie ul a { text-decoration: none; }
-  .pie ul a:hover { text-decoration: underline; }
-  .pie__redes { display: flex; gap: 0.75rem; }
-  .pie__redes a {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-  }
-  .pie__redes a:hover { background: var(--violeta); }
-  .pie__legal { border-top: 1px solid rgba(255, 255, 255, 0.15); margin-top: 2.5rem; padding-top: 1.25rem; font-size: 0.875rem; }
+  .pie { background: var(--amarillo); padding: 3.5rem 0; }
+  .pie__grilla { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem 5rem; }
+  .pie__redes { display: flex; gap: 1rem; }
+  .pie__redes a { color: var(--blanco); }
+  .pie__redes a:hover { color: var(--azul-noche); }
+  .pie__lema { font-family: var(--fuente-titulos); font-weight: 600; color: var(--blanco); margin: 0 0 0.4rem; font-size: 1.05rem; }
+  .pie__legal { margin: 0; font-size: 0.85rem; font-weight: 400; color: var(--texto); }
+  .pie__legal a { color: var(--violeta-oscuro); }
 </style>
