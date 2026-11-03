@@ -85,7 +85,7 @@ content:
             fields:
               - { name: antetitulo, label: Antetítulo, type: string }
               - { name: titulo, label: Título, type: string }
-              - { name: texto, label: Texto, type: text }
+              - { name: texto, label: Texto, type: text, description: "Usá **texto** para negrita y una línea en blanco para separar párrafos." }
               - { name: imagen, label: Imagen, type: image }
               - name: botones
                 label: Botones
@@ -104,8 +104,8 @@ content:
                 type: object
                 list: true
                 fields:
-                  - { name: dato, label: Dato destacado, type: string, description: "Ej.: 7 DE CADA 10" }
-                  - { name: texto, label: Texto, type: string }
+                  - { name: dato, label: Dato destacado, type: text, description: "Ej.: 7 DE CADA 10" }
+                  - { name: texto, label: Texto, type: text, description: "Usá **texto** para negrita." }
                   - { name: fuente, label: Fuente, type: string }
               - name: destacado
                 label: Cifra destacada (tarjeta blanca)
@@ -113,7 +113,7 @@ content:
                 fields:
                   - { name: lugar, label: Lugar, type: string }
                   - { name: dato, label: Dato, type: string }
-                  - { name: texto, label: Texto, type: string }
+                  - { name: texto, label: Texto, type: text, description: "Usá **texto** para negrita." }
                   - { name: fuente, label: Fuente, type: string }
                   - { name: titulo, label: Pregunta, type: string }
                   - { name: subtitulo, label: Subtítulo, type: string }
@@ -123,25 +123,32 @@ content:
                     fields:
                       - { name: texto, label: Texto, type: string }
                       - { name: url, label: Enlace, type: string }
+          - name: instagram
+            label: Instagram
+            type: object
+            fields:
+              - { name: usuario, label: Usuario (sin @), type: string }
+              - name: publicaciones
+                label: Publicaciones destacadas (opcional)
+                description: Si cargás imágenes acá, se muestran en grilla debajo de la cuenta.
+                type: object
+                list: true
+                fields:
+                  - { name: imagen, label: Imagen, type: image }
+                  - { name: url, label: Enlace a la publicación, type: string }
           - name: alianzas
             label: Alianzas que transforman
             type: object
             fields:
               - { name: titulo, label: Título, type: string }
-              - { name: texto, label: Texto, type: text }
+              - { name: texto, label: Texto, type: text, description: "Usá **texto** para negrita y una línea en blanco para separar párrafos." }
+              - { name: mapa, label: Enlace del mapa (Google My Maps, versión "embed"), type: string }
               - name: boton
                 label: Botón
                 type: object
                 fields:
                   - { name: texto, label: Texto, type: string }
                   - { name: url, label: Enlace, type: string }
-          - name: instagram
-            label: Instagram
-            type: object
-            fields:
-              - { name: titulo, label: Título, type: string }
-              - { name: texto, label: Texto, type: string }
-              - { name: usuario, label: Usuario (sin @), type: string }
 
       - name: nosotras
         label: Nosotras

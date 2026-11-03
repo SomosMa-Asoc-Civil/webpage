@@ -3,7 +3,7 @@
     "imagen": "/uploads/2025/04/Imagen-de-WhatsApp-2025-04-10-a-las-20.32.11_a107d95b.jpg",
     "antetitulo": "Monomarentales Argentina",
     "titulo": "Madres que sostienen, luchan y transforman",
-    "texto": "En la Asociación Civil Monomarentales Argentina, trabajamos para crear un mundo más equitativo.\n\nNuestra misión es garantizar que ser mujer y madre monomarental no sea sinónimo de empobrecimiento y exclusión social. Buscamos impulsar la transformación del sistema de cuidados, históricamente feminizado y su reconocimiento como derecho humano fundamental. Abogamos por un Estado que reconozca legalmente a nuestras familias, que impacten en el cambio cultural. Nuestro objetivo es visibilizar esta problemática y garantizar que las madres monomarentales a cargo de NNyA, reciban el apoyo que merecen, para que puedan vivir una vida digna y libre de violencias.",
+    "texto": "**En la Asociación Civil Monomarentales Argentina, trabajamos\npara crear un mundo más equitativo.**\n\nNuestra misión es garantizar que ser mujer y madre monomarental\nno sea sinónimo de empobrecimiento y exclusión social.\nBuscamos impulsar la transformación del sistema de cuidados, históricamente feminizado y su reconocimiento como derecho\nhumano fundamental.\nAbogamos por un Estado que reconozca legalmente a nuestras\nfamilias, que impacten en el cambio cultural. Nuestro objetivo es visibilizar esta problemática y garantizar que las madres monomarentales a cargo de NNyA, reciban el apoyo que merecen,\npara que puedan vivir una vida digna y libre de violencias.",
     "botones": [
       {
         "texto": "Contactanos",
@@ -20,12 +20,12 @@
     "items": [
       {
         "dato": "7 DE CADA 10",
-        "texto": "varones no cumple con la cuota alimentaria en Argentina",
+        "texto": "varones **no cumple**\ncon la cuota alimentaria en Argentina",
         "fuente": "Fuente: Informe 2022 del Ministerio Mujeres y Diversidad, PBA"
       },
       {
-        "dato": "80% DE HOGARES",
-        "texto": "monoparentales están a cargo de mujeres",
+        "dato": "80% DE\nHOGARES",
+        "texto": "monoparentales están\n**a cargo de mujeres**",
         "fuente": "Fuente: Indec, 2024"
       }
     ],
@@ -36,20 +36,20 @@
         "texto": "Conocer más",
         "url": "/nosotras/"
       },
-      "lugar": "En Argentina",
+      "lugar": "En **Argentina**",
       "dato": "1.600.000",
-      "texto": "mujeres a cargo de hogares monomarentales con más de 3.000.000 de niños/as y adolescentes.",
+      "texto": "**mujeres** a cargo de **hogares monomarentales**\ncon más de **3.000.000**\nde niños/as y adolescentes.",
       "fuente": "Fuente: EPH, Indec, 2022"
     }
   },
   "instagram": {
-    "titulo": "Seguinos en Instagram",
-    "texto": "Compartimos novedades, campañas y recursos todos los días.",
-    "usuario": "monomarentalesargentina"
+    "usuario": "monomarentalesargentina",
+    "publicaciones": []
   },
   "alianzas": {
     "titulo": "Alianzas que Transforman",
-    "texto": "En Monomarentales Argentina, creemos en la fuerza del trabajo colectivo. Construimos alianzas estratégicas con ONG, redes comunitarias, cooperativas y organizaciones sociales en todo el país, porque sabemos que la transformación es posible cuando trabajamos juntas. A través de estas redes, impulsamos acciones concretas para garantizar los derechos de las familias monomarentales, promoviendo la corresponsabilidad parental y el acceso equitativo a oportunidades. Si formás parte de una organización y querés sumarte a nuestra red de trabajo, contactanos. Juntas, podemos seguir construyendo un presente más justo y una sociedad libre de violencias.",
+    "texto": "En **Monomarentales Argentina**, creemos en la fuerza del trabajo colectivo. Construimos alianzas estratégicas con **ONG, redes comunitarias, cooperativas y organizaciones sociales** en todo el país, porque sabemos que la transformación es posible cuando trabajamos juntas.\nA través de estas redes, impulsamos acciones concretas para garantizar los derechos de las familias monomarentales, promoviendo la corresponsabilidad parental y el acceso equitativo a oportunidades.\nSi formás parte de una organización y querés sumarte a nuestra red de trabajo, **contactanos**. Juntas, podemos seguir construyendo un presente más justo y una sociedad libre de violencias.",
+    "mapa": "https://www.google.com/maps/d/embed?mid=17z2ka9lm0mBy-Hobijfw12mgxy77834&ehbc=2E312F",
     "boton": {
       "texto": "Escribinos y trabajemos en red",
       "url": "/contacto/"

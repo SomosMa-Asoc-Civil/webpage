@@ -3,11 +3,11 @@ import Base from '../layouts/Base.astro';
 import Icono from '../components/Icono.astro';
 import IconoRed from '../components/IconoRed.astro';
 import inicio from '../data/inicio.json';
-import { url, parrafos } from '../lib/url';
+import { url, formato } from '../lib/url';
 
 const { hero, cifras, instagram, alianzas } = inicio;
-const [intro, ...resto] = parrafos(hero.texto);
 const iconosCifras = ['institucion', 'personas'];
+const publicaciones: { imagen: string; url: string }[] = instagram.publicaciones ?? [];
 ---
 <Base>
   <!-- Portada: imagen a la izquierda, texto a la derecha -->
@@ -19,8 +19,7 @@ const iconosCifras = ['institucion', 'personas'];
       <div>
         <span class="antetitulo">{hero.antetitulo}</span>
         <h1 class="hero__titulo">{hero.titulo}</h1>
-        {intro && <p class="hero__intro">{intro}</p>}
-        {resto.map((p) => <p class="hero__texto">{p}</p>)}
+        {formato(hero.texto).map((p) => <p class="hero__texto" set:html={p} />)}
         <div class="botones">
           {hero.botones.map((b) => <a class="boton" href={url(b.url)}>{b.texto}</a>)}
         </div>
@@ -36,9 +35,9 @@ const iconosCifras = ['institucion', 'personas'];
         <div class="cifras__tarjeta">
           {cifras.items.map((c, i) => (
             <div class="cifra">
-              <span class="cifra__icono"><Icono nombre={iconosCifras[i % 2]} size={34} trazo={1.6} /></span>
-              <p class="cifra__dato">{c.dato}</p>
-              <p class="cifra__texto">{c.texto}</p>
+              <span class="cifra__icono"><Icono nombre={iconosCifras[i % 2]} size={44} trazo={1.5} /></span>
+              <p class="cifra__dato" set:html={formato(c.dato).join('<br />')} />
+              <p class="cifra__texto" set:html={formato(c.texto).join('<br />')} />
               {c.fuente && <p class="cifra__fuente">({c.fuente})</p>}
             </div>
           ))}
@@ -52,10 +51,10 @@ const iconosCifras = ['institucion', 'personas'];
 
         <div class="cifras__tarjeta">
           <div class="cifra">
-            <span class="cifra__icono"><Icono nombre="maletin" size={34} trazo={1.6} /></span>
-            {cifras.destacado.lugar && <p class="cifra__lugar">{cifras.destacado.lugar}</p>}
+            <span class="cifra__icono"><Icono nombre="maletin" size={44} trazo={1.5} /></span>
+            {cifras.destacado.lugar && <p class="cifra__lugar" set:html={formato(cifras.destacado.lugar).join('<br />')} />}
             <p class="cifra__dato">{cifras.destacado.dato}</p>
-            <p class="cifra__texto">{cifras.destacado.texto}</p>
+            <p class="cifra__texto" set:html={formato(cifras.destacado.texto).join('<br />')} />
             {cifras.destacado.fuente && <p class="cifra__fuente">({cifras.destacado.fuente})</p>}
           </div>
         </div>
@@ -63,20 +62,38 @@ const iconosCifras = ['institucion', 'personas'];
     </div>
   </section>
 
-  <!-- Alianzas + Instagram -->
-  <section class="seccion">
-    <div class="contenedor grilla grilla-2 alinear-centro">
-      <div>
-        <h2>{alianzas.titulo}</h2>
-        {parrafos(alianzas.texto).map((p) => <p>{p}</p>)}
-      </div>
-      <a class="tarjeta instagram" href={`https://www.instagram.com/${instagram.usuario}/`} target="_blank" rel="noopener">
-        <span class="instagram__icono"><IconoRed red="instagram" size={44} /></span>
-        <span class="instagram__titulo">{instagram.titulo}</span>
+  <!-- Instagram -->
+  <section class="seccion instagram">
+    <div class="contenedor centrado">
+      <a class="instagram__cuenta" href={`https://www.instagram.com/${instagram.usuario}/`} target="_blank" rel="noopener">
+        <span class="instagram__icono"><IconoRed red="instagram" size={34} /></span>
         <span class="instagram__usuario">@{instagram.usuario}</span>
-        <span class="instagram__texto">{instagram.texto}</span>
       </a>
+      {publicaciones.length > 0 && (
+        <div class="instagram__grilla">
+          {publicaciones.map((p) => (
+            <a href={p.url} target="_blank" rel="noopener"><img src={url(p.imagen)} alt="" loading="lazy" width="300" height="300" /></a>
+          ))}
+        </div>
+      )}
+      <div class="botones botones--centro">
+        <a class="boton" href={`https://www.instagram.com/${instagram.usuario}/`} target="_blank" rel="noopener">Seguinos en Instagram</a>
+      </div>
     </div>
+  </section>
+
+  <!-- Alianzas que transforman + mapa -->
+  <section class="seccion alianzas">
+    <div class="alianzas__texto">
+      <h2 class="centrado">{alianzas.titulo}</h2>
+      {formato(alianzas.texto).map((p) => <p set:html={p} />)}
+    </div>
+    {alianzas.mapa && (
+      <div class="contenedor alianzas__mapa">
+        <hr />
+        <iframe src={alianzas.mapa} title="Mapa de alianzas estratégicas" loading="lazy" allowfullscreen></iframe>
+      </div>
+    )}
     <div class="botones botones--centro">
       <a class="boton" href={url(alianzas.boton.url)}>{alianzas.boton.texto}</a>
     </div>
@@ -86,43 +103,58 @@ const iconosCifras = ['institucion', 'personas'];
 <style>
   .hero__imagen { width: 100%; max-width: 560px; justify-self: center; border-radius: var(--radio); object-fit: cover; }
   .hero__titulo { font-size: clamp(2rem, 4vw, 2.75rem); }
-  .hero__intro { font-family: var(--fuente-titulos); font-weight: 600; font-size: 0.95rem; }
   .hero__texto { font-family: var(--fuente-titulos); font-size: 0.95rem; }
 
-  .cifras__titulo { text-transform: uppercase; margin-bottom: 2.5rem; }
-  .cifras__grilla { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+  .cifras__titulo { text-transform: uppercase; font-size: clamp(2rem, 4.5vw, 3.2rem); margin-bottom: 3rem; }
+  .cifras__grilla { display: grid; gap: 1.75rem; grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 1023px) {
+    .cifras__grilla { grid-template-columns: 1fr; max-width: 680px; margin-inline: auto; }
+  }
   .cifras__tarjeta {
     background: var(--gris-tarjeta);
-    border-radius: 24px;
-    padding: 2rem 1.5rem;
+    border-radius: 32px;
+    padding: 2.5rem 2rem;
     display: grid;
-    gap: 2.5rem;
+    gap: 3rem;
     align-content: center;
     text-align: center;
   }
-  .cifras__tarjeta--roja { background: var(--rojo); color: var(--blanco); gap: 1.25rem; justify-items: center; }
-  .cifras__tarjeta--roja h3 { color: var(--blanco); font-weight: 700; font-size: clamp(1.6rem, 2.6vw, 2rem); margin: 0; }
-  .cifras__pregunta { font-family: var(--fuente-titulos); font-weight: 600; font-size: 1.15rem; margin: 0; }
+  .cifras__tarjeta--roja { background: var(--rojo); color: var(--blanco); gap: 1.75rem; justify-items: center; padding-block: 3.5rem; }
+  .cifras__tarjeta--roja h3 { color: var(--blanco); font-weight: 700; font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.15; margin: 0; }
+  .cifras__pregunta { font-family: var(--fuente-titulos); font-weight: 600; font-size: clamp(1.25rem, 2.6vw, 1.65rem); margin: 0; }
   .cifra p { margin: 0; font-family: var(--fuente-titulos); }
-  .cifra__icono { display: inline-flex; color: var(--rojo); margin-bottom: 0.75rem; }
-  .cifra__dato { font-weight: 700; font-size: clamp(1.6rem, 2.6vw, 2.1rem); line-height: 1.2; color: var(--texto); }
-  .cifra__texto { margin-top: 0.5rem !important; font-size: 0.95rem; }
-  .cifra__lugar { font-weight: 500; margin-bottom: 0.25rem !important; }
-  .cifra__fuente { font-family: var(--fuente-texto) !important; font-style: italic; font-size: 0.78rem; margin-top: 0.75rem !important; }
-
-  .instagram {
-    display: grid;
-    justify-items: center;
-    gap: 0.4rem;
-    text-align: center;
-    text-decoration: none;
-    color: var(--texto);
-    padding: 3rem 2rem;
-    transition: transform 0.2s;
+  .cifra__icono { display: inline-flex; color: var(--rojo); margin-bottom: 1rem; }
+  .cifra__dato { font-weight: 700; font-size: clamp(2.2rem, 4.5vw, 3rem); line-height: 1.2; color: var(--texto); }
+  .cifra__texto { margin-top: 1rem !important; font-size: clamp(1rem, 2vw, 1.3rem); line-height: 1.5; }
+  .cifra__lugar { font-size: 1.15rem; margin-bottom: 0.5rem !important; }
+  .cifra__fuente { font-family: var(--fuente-texto) !important; font-style: italic; font-size: 0.9rem; margin-top: 1rem !important; }
+  @media (min-width: 1024px) {
+    .cifra__dato { font-size: 2.1rem; }
+    .cifra__texto { font-size: 1rem; }
+    .cifras__tarjeta--roja h3 { font-size: 2.1rem; }
+    .cifras__pregunta { font-size: 1.2rem; }
   }
-  .instagram:hover { transform: translateY(-3px); color: var(--texto); }
-  .instagram__icono { color: var(--violeta); margin-bottom: 0.5rem; }
-  .instagram__titulo { font-family: var(--fuente-titulos); font-weight: 700; font-size: 1.4rem; }
-  .instagram__usuario { font-family: var(--fuente-titulos); color: var(--violeta); font-weight: 500; }
-  .instagram__texto { max-width: 34ch; }
+
+  .instagram { padding-top: 1rem; }
+  .instagram__cuenta { display: inline-grid; justify-items: center; gap: 0.75rem; color: var(--texto); text-decoration: none; }
+  .instagram__icono {
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    border: 2px solid var(--texto);
+    color: #d6249f;
+  }
+  .instagram__usuario { font-family: var(--fuente-titulos); font-size: clamp(1.3rem, 3vw, 1.9rem); }
+  .instagram__grilla { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); margin-top: 2rem; }
+  .instagram__grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; }
+
+  .alianzas__texto { width: min(620px, 100% - 2.5rem); margin-inline: auto; }
+  .alianzas__texto h2 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.15; }
+  .alianzas__texto p { font-size: 1.1rem; line-height: 1.85; }
+  .alianzas__mapa { max-width: 900px; margin-top: 2.5rem; }
+  .alianzas__mapa hr { width: 130px; margin: 0 auto 2rem; border: 0; border-top: 2px solid var(--texto-suave); }
+  .alianzas__mapa iframe { display: block; width: 100%; height: 480px; border: 0; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+  .alianzas .botones { margin-top: 3.5rem; }
 </style>

@@ -14,6 +14,22 @@ export function fecha(d: Date): string {
   return new Intl.DateTimeFormat('es-AR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(d);
 }
 
+/**
+ * Texto simple -> HTML seguro, por párrafos.
+ * - Línea en blanco: párrafo nuevo
+ * - Salto de línea: <br>
+ * - **texto**: negrita
+ */
+export function formato(texto?: string | null): string[] {
+  const escapar = (s: string) =>
+    s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  return parrafos(texto).map((p) =>
+    escapar(p)
+      .replace(/\*\*([\s\S]+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br />'),
+  );
+}
+
 /** Separa un texto en párrafos (doble salto de línea). */
 export function parrafos(texto?: string | null): string[] {
   return (texto || '').split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);

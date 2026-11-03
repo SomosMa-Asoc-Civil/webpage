@@ -98,6 +98,21 @@ def clean(t: str) -> str:
     return re.sub(r"\n{3,}", "\n\n", t).strip()
 
 
+def rich(h: str) -> str:
+    """HTML de Kubio -> texto con **negritas** y saltos de línea (los muestra src/lib/url.ts -> formato)."""
+    def bold(m):
+        inner = m.group(2)
+        if not re.sub(r"<[^>]+>|&nbsp;|\s", "", inner):
+            return inner
+        lead = re.match(r"^(\s|&nbsp;)*", inner).group(0)
+        trail = re.search(r"(\s|&nbsp;)*$", inner).group(0)
+        return f"{lead}**{inner.strip()}**{trail}"
+    h = re.sub(r"<(strong|b)\b[^>]*>(.*?)</\1>", bold, h, flags=re.S)
+    t = clean(h)
+    t = re.sub(r"\*\*(\s*)\*\*", r"\1", t)          # **a** **b** pegados -> uno solo
+    return t
+
+
 def prose(t: str) -> str:
     """Une los saltos de línea manuales de Kubio dentro de cada párrafo."""
     paras = [re.sub(r"\s*\n\s*", " ", p).strip() for p in t.split("\n\n")]
@@ -120,7 +135,7 @@ def parse_blocks(s: str) -> list[dict]:
                 if n in TEXTY:
                     t = clean(between)
                     if t:
-                        out.append(dict(section=section, type=n.split("/")[-1], text=t))
+                        out.append(dict(section=section, type=n.split("/")[-1], text=t, html=between))
             continue
         try:
             a = json.loads(attrs) if attrs else {}
@@ -180,12 +195,15 @@ def migrar_paginas(by_type, get):
     # Inicio (página 24)
     n = page_blocks(by_type, get, "24")
     t = [x["text"] for x in n]
+    r = [rich(x.get("html", "")) if x.get("html") else x["text"] for x in n]
+    raw24 = next(get(it, "content:encoded") for it in by_type["page"] if get(it, "wp:post_id") == "24")
+    mapa = re.search(r'<iframe[^>]+src="([^"]*google\.com/maps[^"]*)"', raw24)
     write_json("inicio", {
         "hero": {
             "imagen": local_upload(t[0]),
             "antetitulo": t[1],
             "titulo": t[2],
-            "texto": prose(t[3]),
+            "texto": r[3],
             "botones": [
                 {"texto": "Contactanos", "url": "/contacto/"},
                 {"texto": "Sumate", "url": "/sumate/"},
@@ -194,27 +212,27 @@ def migrar_paginas(by_type, get):
         "cifras": {
             "titulo": "Cifras que importan",
             "items": [
-                {"dato": prose(t[9]), "texto": prose(t[10]), "fuente": prose(t[11]).strip("()")},
-                {"dato": prose(t[12]), "texto": prose(t[13]), "fuente": prose(t[14]).strip("()")},
+                {"dato": t[9], "texto": r[10], "fuente": prose(t[11]).strip("()")},
+                {"dato": t[12], "texto": r[13], "fuente": prose(t[14]).strip("()")},
             ],
             "destacado": {
                 "titulo": prose(t[15]),
                 "subtitulo": prose(t[16]),
                 "boton": {"texto": "Conocer más", "url": "/nosotras/"},
-                "lugar": prose(t[19]),
+                "lugar": r[19],
                 "dato": prose(t[20]),
-                "texto": prose(t[21]),
+                "texto": r[21],
                 "fuente": prose(t[22]).strip("()"),
             },
         },
         "instagram": {
-            "titulo": "Seguinos en Instagram",
-            "texto": "Compartimos novedades, campañas y recursos todos los días.",
             "usuario": "monomarentalesargentina",
+            "publicaciones": [],
         },
         "alianzas": {
             "titulo": prose(t[23]),
-            "texto": prose(t[24]),
+            "texto": r[24],
+            "mapa": html.unescape(mapa.group(1)) if mapa else "",
             "boton": {"texto": "Escribinos y trabajemos en red", "url": "/contacto/"},
         },
     })
