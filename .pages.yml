@@ -328,6 +328,7 @@ content:
             options:
               values: [instagram, linkedin, web]
           - { name: url, label: Enlace, type: string }
+          - { name: en_pie, label: Mostrar en el pie de página, type: boolean }
       - name: menu
         label: Menú
         type: object

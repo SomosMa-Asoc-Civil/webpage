@@ -84,19 +84,23 @@ const esActual = (destino: string) =>
 
     <footer class="pie">
       <div class="contenedor pie__contenido">
-        <a href={url('/')} aria-label={sitio.nombre}>
-          <img class="pie__logo" src={url(sitio.logo)} alt={sitio.nombre} width="120" height="120" loading="lazy" />
-        </a>
-        <div class="pie__redes">
-          {sitio.redes.map((r) => (
-            <a href={r.url} target="_blank" rel="noopener" aria-label={r.red}>
-              <IconoRed red={r.red} size={34} />
-            </a>
-          ))}
-          <a href={`mailto:${sitio.email}`} aria-label="Mail"><Icono nombre="mail" size={34} /></a>
+        <div class="pie__marca">
+          <a href={url('/')} aria-label={sitio.nombre}>
+            <img class="pie__logo" src={url(sitio.logo)} alt={sitio.nombre} width="115" height="100" loading="lazy" />
+          </a>
+          <div class="pie__redes">
+            {sitio.redes.filter((r) => r.en_pie).map((r) => (
+              <a href={r.url} target="_blank" rel="noopener" aria-label={r.red}>
+                <IconoRed red={r.red} size={26} />
+              </a>
+            ))}
+            <a href={url(sitio.pie?.enlace_mail || `mailto:${sitio.email}`)} aria-label="Contacto"><IconoRed red="mail" size={26} /></a>
+          </div>
         </div>
-        <p class="pie__lema">{sitio.nombre_completo}. {sitio.lema}</p>
-        <p class="pie__legal">© {new Date().getFullYear()} {sitio.nombre}. <a href={`mailto:${sitio.email}`}>{sitio.email}</a></p>
+        <div class="pie__textos">
+          <p class="pie__lema">{sitio.nombre_completo}. {sitio.lema}</p>
+          <p class="pie__legal">© {new Date().getFullYear()} {sitio.nombre}.</p>
+        </div>
       </div>
     </footer>
 
@@ -239,13 +243,22 @@ const esActual = (destino: string) =>
     .cabecera__menu.abierto ~ .panel__fondo { opacity: 1; pointer-events: auto; }
   }
 
-  .pie { background: var(--amarillo); padding: 3.5rem 0 3rem; }
-  .pie__contenido { display: grid; justify-items: center; text-align: center; gap: 1.25rem; }
-  .pie__logo { max-height: 130px; width: auto; }
-  .pie__redes { display: flex; gap: 1rem; }
-  .pie__redes a { color: var(--blanco); }
-  .pie__redes a:hover { color: var(--azul-noche); }
-  .pie__lema { font-family: var(--fuente-titulos); font-weight: 700; color: var(--blanco); margin: 0; font-size: clamp(1.1rem, 2.4vw, 1.4rem); max-width: 34ch; }
-  .pie__legal { margin: 0; font-size: 0.95rem; font-weight: 400; color: var(--texto); }
-  .pie__legal a { color: var(--violeta-oscuro); }
+  /* Valores del pie de Kubio: fondo #f5b73c, 30 px arriba/abajo, logo 70 px, íconos 26 px */
+  .pie { background: var(--amarillo); padding: 30px 0; }
+  .pie__contenido { display: grid; justify-items: center; text-align: center; gap: 30px; }
+  .pie__marca { display: grid; justify-items: center; gap: 30px; padding-top: 30px; }
+  .pie__logo { height: 100px; width: auto; }
+  .pie__redes { display: flex; gap: 15px; }
+  .pie__redes a { color: var(--blanco); display: inline-flex; transition: color 1s; }
+  .pie__redes a:hover { color: var(--rojo); }
+  .pie__textos { display: grid; gap: 14px; padding-bottom: 30px; }
+  .pie__textos p { margin: 0; }
+  .pie__lema { font-family: var(--fuente-titulos); font-weight: 700; font-size: 16px; line-height: 1.6; color: var(--blanco); }
+  .pie__legal { font-size: 14px; font-weight: 300; color: var(--texto); }
+
+  /* Escritorio: logo e íconos a la izquierda, textos a la derecha */
+  @media (min-width: 1024px) {
+    .pie__contenido { grid-template-columns: auto 1fr; justify-items: start; align-items: center; text-align: left; column-gap: 60px; }
+    .pie__marca { grid-auto-flow: column; align-items: center; }
+  }
 </style>

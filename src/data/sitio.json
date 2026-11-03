@@ -9,18 +9,47 @@
   "email": "monomarentalesarg@gmail.com",
   "ubicacion": "Argentina",
   "redes": [
-    { "red": "instagram", "url": "https://www.instagram.com/monomarentalesargentina/" },
-    { "red": "linkedin", "url": "https://www.linkedin.com/in/monomarentalesargentina/" }
+    {
+      "red": "instagram",
+      "url": "https://www.instagram.com/monomarentalesargentina/",
+      "en_pie": true
+    },
+    {
+      "red": "linkedin",
+      "url": "https://www.linkedin.com/in/monomarentalesargentina/",
+      "en_pie": false
+    }
   ],
   "menu": [
-    { "texto": "Inicio", "url": "/" },
-    { "texto": "Nosotras", "url": "/nosotras/" },
-    { "texto": "Qué hacemos?", "url": "/que-hacemos/" },
-    { "texto": "Noticias y Recursos", "url": "/noticias/" },
-    { "texto": "Sumate", "url": "/sumate/" },
-    { "texto": "Contacto", "url": "/contacto/" }
+    {
+      "texto": "Inicio",
+      "url": "/"
+    },
+    {
+      "texto": "Nosotras",
+      "url": "/nosotras/"
+    },
+    {
+      "texto": "Qué hacemos?",
+      "url": "/que-hacemos/"
+    },
+    {
+      "texto": "Noticias y Recursos",
+      "url": "/noticias/"
+    },
+    {
+      "texto": "Sumate",
+      "url": "/sumate/"
+    },
+    {
+      "texto": "Contacto",
+      "url": "/contacto/"
+    }
   ],
   "formularios": {
     "web3forms_key": ""
+  },
+  "pie": {
+    "enlace_mail": "/contacto/"
   }
 }
