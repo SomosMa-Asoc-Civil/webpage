@@ -1,6 +1,6 @@
 ---
 title: "Nuevas leyes en PBA contra el incumplimiento alimentario"
-date: "2025-04-28"
+date: "2025-04-28T17:32"
 author: "SomosMa"
 image: "/uploads/2025/04/tapa.jpeg"
 excerpt: "El gobernador Axel Kicillof y la Ministra Estela Díaz promulgaron dos leyes que reforman los códigos para acelerar los procesos de demandas por incumplimiento alimentario y agregan sanciones a los deudores morosos. Estas políticas surgen luego de saber que 7 de cada 10 varones no cumplen con la cuota."

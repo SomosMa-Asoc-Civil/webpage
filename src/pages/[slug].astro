@@ -4,7 +4,7 @@ import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import TarjetaNoticia from '../components/TarjetaNoticia.astro';
-import { url, fecha } from '../lib/url';
+import { url } from '../lib/url';
 
 export async function getStaticPaths() {
   const noticias = await getCollection('noticias', ({ data }) => !data.draft);
@@ -19,36 +19,50 @@ const { noticia } = Astro.props;
 const { title, date, author, image, excerpt, categories } = noticia.data;
 const { Content } = await render(noticia);
 
+// Meta como en WordPress: ADMIN | 21 JUNIO 2026 | 4:20 PM
+const zona = { timeZone: 'UTC' } as const;
+const dia = new Intl.DateTimeFormat('es-AR', { day: 'numeric', month: 'long', year: 'numeric', ...zona })
+  .format(date)
+  .replace(/ de /g, ' ');
+const tieneHora = date.getUTCHours() + date.getUTCMinutes() > 0;
+const hora = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, ...zona }).format(date);
+
 const otras = (await getCollection('noticias', ({ data, id }) => !data.draft && id !== noticia.id))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 ---
 <Base titulo={title} descripcion={excerpt || title} imagen={image || undefined} tipo="article">
-  <article>
-    <header class="seccion nota__cabecera">
-      <div class="contenedor-angosto">
-        <a class="nota__volver" href={url('/noticias/')}>← Noticias y recursos</a>
+  <article class="seccion nota">
+    <div class="nota__columna">
+      <header class="nota__cabecera">
+        <h1 class="nota__titulo">{title}</h1>
         {categories.length > 0 && (
-          <div class="nota__etiquetas">{categories.map((c) => <span class="etiqueta">{c}</span>)}</div>
+          <p class="nota__categorias">{categories.map((c) => <span>{c}</span>)}</p>
         )}
-        <h1>{title}</h1>
-        <p class="nota__meta">Escrito por {author} · <time datetime={date.toISOString().slice(0, 10)}>{fecha(date)}</time></p>
+        {image && <img class="nota__portada" src={url(image)} alt="" width="640" height="360" />}
+        <p class="nota__meta">
+          <span>{author}</span>
+          <span class="nota__sep" aria-hidden="true">|</span>
+          <time datetime={date.toISOString()}>{dia}</time>
+          {tieneHora && (
+            <>
+              <span class="nota__sep" aria-hidden="true">|</span>
+              <span>{hora}</span>
+            </>
+          )}
+        </p>
+      </header>
+
+      <div class="prosa">
+        <Content />
       </div>
-    </header>
-    {image && (
-      <div class="contenedor-angosto">
-        <img class="nota__portada" src={url(image)} alt="" width="780" height="440" />
-      </div>
-    )}
-    <div class="contenedor-angosto prosa nota__cuerpo">
-      <Content />
     </div>
   </article>
 
   {otras.length > 0 && (
-    <section class="seccion seccion--suave">
+    <section class="seccion relacionadas">
       <div class="contenedor">
-        <h2>Seguí leyendo</h2>
+        <h2 class="titulo-seccion centrado">Seguí leyendo</h2>
         <div class="grilla grilla-3">{otras.map((n) => <TarjetaNoticia noticia={n} />)}</div>
       </div>
     </section>
@@ -56,22 +70,29 @@ const otras = (await getCollection('noticias', ({ data, id }) => !data.draft && 
 </Base>
 
 <style>
-  .nota__cabecera { padding-bottom: 2rem; }
-  .nota__cabecera h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
-  .nota__volver { display: inline-block; margin-bottom: 1.25rem; font-family: var(--fuente-titulos); font-weight: 500; text-decoration: none; }
-  .nota__etiquetas { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
-  .etiqueta {
-    display: inline-block;
-    padding: 0.2rem 0.7rem;
-    border-radius: 999px;
-    background: var(--violeta-suave);
-    color: var(--violeta-oscuro);
-    font-family: var(--fuente-titulos);
-    font-size: 0.75rem;
-    font-weight: 500;
+  /* Columna de lectura del tema: ~640 px, centrada */
+  .nota__columna { width: 100%; max-width: 640px; margin-inline: auto; padding-inline: 15px; }
+
+  /* Título: h3 del tema con peso 600 y letter-spacing 2px */
+  .nota__titulo { font-size: clamp(1.75rem, 4.5vw, 2.25rem); font-weight: 600; line-height: 1.35; letter-spacing: 1px; margin: 0 0 1rem; }
+  .nota__categorias { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 30px; margin: 0 0 1.5rem; font-family: var(--fuente-titulos); font-size: 17px; line-height: 1.7; color: var(--rojo); }
+
+  /* Imagen destacada: 16:9, recortada, sin bordes redondeados */
+  .nota__portada { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--violeta-claro); }
+
+  /* Meta: 12 px, mayúsculas, gris al 50 %, separadas por "|" */
+  .nota__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 60px 0 60px;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: rgba(48, 47, 48, 0.5);
   }
-  .nota__meta { margin: 0; font-weight: 400; }
-  .nota__portada { width: 100%; border-radius: 24px 24px 24px 0; object-fit: cover; max-height: 520px; }
-  .nota__cuerpo { padding: 2.5rem 0 4rem; }
-  .seccion--suave { background: var(--violeta-suave); }
+  .nota__sep { padding-inline: 5px; }
+
+  .relacionadas { background: var(--violeta-suave); }
 </style>

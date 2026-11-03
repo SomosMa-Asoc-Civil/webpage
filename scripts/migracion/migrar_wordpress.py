@@ -11,6 +11,7 @@ Genera:
     scripts/migracion/imagenes.txt -> URLs de las imágenes a descargar
 
 Requiere: beautifulsoup4, lxml, markdownify (pip install beautifulsoup4 lxml markdownify)
+y Node con `marked` (npm i -D marked, o MARKED_PATH=ruta/a/marked.esm.js) para verificar el Markdown.
 Se corrió una sola vez; queda en el repo como registro de cómo se hizo la migración.
 """
 import html
@@ -344,6 +345,39 @@ def migrar_paginas(by_type, get):
     })
 
 
+def a_markdown(body_html: str, crudos: list[str]) -> str:
+    """
+    Convierte bloque por bloque. Si un bloque no se puede expresar bien en Markdown
+    (negritas/cursivas pegadas a comillas o guiones), se deja ese bloque como HTML.
+    La verificación se hace renderizando con `marked` (Node), que sigue CommonMark como Astro.
+    """
+    from bs4 import BeautifulSoup
+    import subprocess, tempfile
+    restaurar = lambda t: re.sub(r"XCRUDO(\d+)X", lambda m: crudos[int(m.group(1))], t.replace("XMARKAX", "<mark>").replace("XMARKCX", "</mark>"))
+    soup = BeautifulSoup(f"<div id='raiz'>{body_html}</div>", "html.parser")
+    raiz = soup.find(id="raiz")
+    bloques = []
+    for el in raiz.children:
+        if isinstance(el, str):
+            if el.strip():
+                bloques.append((md(el), el))
+            continue
+        for a in el.find_all(True):
+            for k in [k for k in a.attrs if k not in ("href", "src", "alt", "width", "target", "rel")]:
+                del a.attrs[k]
+        h = str(el)
+        bloques.append((md(h, heading_style="ATX", bullets="-", strip=["span", "div"]).strip(), h))
+    bloques = [(m_, h) for m_, h in bloques if m_ or "XCRUDO" in h]
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as f:
+        json.dump([m_ for m_, _ in bloques], f)
+    verif = Path(__file__).with_name("verificar_markdown.mjs")
+    malos = set(json.loads(subprocess.run(["node", str(verif), f.name], capture_output=True, text=True, check=True).stdout))
+    salida = []
+    for i, (m_, h) in enumerate(bloques):
+        salida.append(restaurar(h if i in malos else m_))
+    return "\n\n".join(salida)
+
+
 def migrar_noticias(by_type, attachments, get):
     out_dir = ROOT / "src/content/noticias"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -372,7 +406,29 @@ def migrar_noticias(by_type, attachments, get):
         body_html = re.sub(r"<p>\s*(&nbsp;)?\s*</p>", "", body_html)
         body_html = UPLOADS_RE.sub(lambda m: local_upload(m.group(0)), body_html)
         body_html = re.sub(r'href="https?://(?:www\.)?somosma\.com\.ar/?', 'href="/', body_html)
-        body = md(body_html, heading_style="ATX", bullets="-", strip=["span", "div"])
+        # Etiquetas iguales pegadas (<strong>a</strong><strong>b</strong>) -> una sola
+        for t in ("strong", "em", "b", "i"):
+            body_html = re.sub(rf"</{t}>(\s*)<{t}>", r"\1", body_html)
+        # Partes que Markdown no representa: se guardan como HTML dentro del .md
+        crudos = []
+        def guardar(html_crudo):
+            crudos.append(html_crudo)
+            return f"XCRUDO{len(crudos) - 1}X"
+        # Imágenes con ancho definido en WordPress (bloque "imagen" redimensionada)
+        def img_con_ancho(m):
+            fig = m.group(0)
+            src = re.search(r'src="([^"]+)"', fig)
+            ancho = re.search(r"width:\s*(\d+)px", fig)
+            if not src:
+                return ""
+            if not ancho:
+                return f'<p><img src="{src.group(1)}" alt=""></p>'
+            return "<p>" + guardar(f'<img src="{src.group(1)}" alt="" width="{ancho.group(1)}" loading="lazy" />') + "</p>"
+        body_html = re.sub(r"<figure[^>]*wp-block-image[^>]*>.*?</figure>", img_con_ancho, body_html, flags=re.S)
+        # Resaltados (fondo amarillo del tema)
+        body_html = re.sub(r"<mark\b[^>]*>", "XMARKAX", body_html)
+        body_html = body_html.replace("</mark>", "XMARKCX")
+        body = a_markdown(body_html, crudos)
         # Imagen reducida con link a la original -> directamente la original
         body = re.sub(r"\[!\[([^\]]*)\]\([^)]+\)\]\((/uploads/[^)]+)\)", r"![\1](\2)", body)
         body = re.sub(r"\n{3,}", "\n\n", body).strip() + "\n"
@@ -382,7 +438,7 @@ def migrar_noticias(by_type, attachments, get):
             excerpt = (text[:200].rsplit(" ", 1)[0] + "…") if len(text) > 200 else text
         fm = {
             "title": html.unescape(it.findtext("title") or "").strip(),
-            "date": get(it, "wp:post_date")[:10],
+            "date": get(it, "wp:post_date")[:16].replace(" ", "T"),
             "author": AUTORES.get(get(it, "dc:creator"), "SomosMa"),
             "image": local_upload(attachments.get(meta.get("_thumbnail_id", ""), "")),
             "excerpt": excerpt,

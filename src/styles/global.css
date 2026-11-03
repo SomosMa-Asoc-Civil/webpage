@@ -133,26 +133,39 @@ a:hover { color: var(--violeta-oscuro); }
   padding: 2rem;
 }
 
-/* Contenido de noticias (Markdown) */
-.prosa { font-size: 1.05rem; line-height: 1.75; }
-.prosa h2 { font-size: 1.6rem; margin-top: 2rem; }
-.prosa h3 { font-size: 1.3rem; margin-top: 1.75rem; }
-.prosa h4 { font-size: 1.15rem; font-weight: 500; }
-.prosa img { border-radius: 16px; margin: 1.5rem auto 0.5rem; }
-.prosa p > em:only-child { display: block; font-size: 0.95rem; color: var(--texto-suave); text-align: center; }
-.prosa blockquote {
-  margin: 2rem 0;
-  padding: 1rem 1.5rem;
-  border-left: 4px solid var(--violeta);
-  background: var(--violeta-suave);
-  border-radius: 0 var(--radio) var(--radio) 0;
-  font-size: 1.1rem;
+/* Contenido de noticias (Markdown). Reglas globales del tema Kubio:
+   p Roboto 300 16px/1.6 · h2 Poppins 600 2.625em/1.143 · h4 Poppins 600 1.25em/1.4
+   a Poppins 400 sin subrayado, violeta · mark fondo amarillo (#ffb82a) · imágenes sin redondear */
+.prosa { font-size: 16px; line-height: 1.6; color: var(--texto); }
+.prosa > * { margin: 0 0 1.5em; }
+.prosa p { font-weight: 300; }
+.prosa h2 { font-weight: 600; font-size: 2.625em; line-height: 1.143; color: var(--texto); margin-top: 1.25em; margin-bottom: 0.6em; }
+.prosa h3 { font-weight: 500; font-size: 2.25em; line-height: 1.25; color: var(--texto); margin-top: 1.25em; margin-bottom: 0.6em; }
+.prosa h4 { font-weight: 600; font-size: 1.25em; line-height: 1.4; color: var(--texto); }
+.prosa h5, .prosa h6 { font-weight: 500; font-size: 1.125em; line-height: 1.55; color: var(--texto); }
+@media (max-width: 767px) {
+  .prosa h2 { font-size: 2.2em; }
+  .prosa h3 { font-size: 1.9em; }
 }
+.prosa strong, .prosa b { font-weight: 700; }
+.prosa a {
+  font-family: var(--fuente-titulos);
+  font-weight: 400;
+  text-decoration: none;
+  color: var(--violeta);
+  word-break: break-word;
+  transition: color 0.3s;
+}
+.prosa a:hover { color: var(--violeta-oscuro); }
+.prosa mark { background: #ffb82a; color: inherit; padding: 0.05em 0; }
+.prosa img { display: block; max-width: 100%; height: auto; margin: 0; border-radius: 0; }
+.prosa p:has(> img:only-child) { margin-bottom: 1.5em; }
+.prosa p > em:only-child { display: block; font-size: 0.95em; color: var(--texto-suave); }
+.prosa blockquote { margin: 2em 0; padding: 0 0 0 1.25em; border-left: 4px solid var(--violeta); font-size: 1.1em; }
 .prosa blockquote p:last-child { margin-bottom: 0; }
-.prosa ul, .prosa ol { padding-left: 1.4rem; }
-.prosa li { margin-bottom: 0.4rem; }
-.prosa a { word-break: break-word; }
-.prosa table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+.prosa ul, .prosa ol { padding-left: 1.4em; }
+.prosa li { margin-bottom: 0.4em; }
+.prosa table { width: 100%; border-collapse: collapse; }
 .prosa th, .prosa td { border: 1px solid var(--borde); padding: 0.5rem 0.75rem; text-align: left; }
 
 /* Formularios (mismo estilo que tenía Contact Form 7) */

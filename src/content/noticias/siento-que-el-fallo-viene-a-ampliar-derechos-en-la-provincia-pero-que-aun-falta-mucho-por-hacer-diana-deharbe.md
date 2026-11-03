@@ -1,6 +1,6 @@
 ---
 title: "“Siento que el fallo viene a ampliar derechos en la provincia pero que aún falta mucho por hacer.” - Diana Deharbe"
-date: "2025-10-23"
+date: "2025-10-23T16:56"
 author: "Ceci Bertolino"
 image: "/uploads/2025/10/1001006083.jpg"
 excerpt: "Fallo inédito en Entre Ríos Se establece el total del Índice de crianza para la cuota de una niña de 10 años ante el incumplimiento alimentario del progenitor y reconoce a los abuelos paternos como…"
@@ -94,7 +94,7 @@ Que tejan redes de cuidado, con la familia, las amigas y los amigos, los compañ
 
 **Ver:** [cazzu y las MA](https://www.instagram.com/reel/DP9WyhnjhqS/?igsh=bnl1bGp3ZmN4aDdn)
 
-- ***¿Querés dejar un mensaje******para el poder judicial y la sociedad ?***
+- ***¿Querés dejar un mensaje para el poder judicial y la sociedad ?***
 
 El poder judicial, abogadas y abogados, necesitan mayor capacitación con perspectiva de género para dejar de considerar al **proceso de alimentos** como un conflicto de partes, algo privado y empezar a verlo por lo que es, un **problema social de orden público** donde el Estado tiene que intervenir para velar por los derechos de las infancias, principalmente. Necesitamos una justicia realmente restaurativa para las mujeres que estamos en esta situación, sentencias que consideren y condenen la **violencia de género y la violencia vicaria**, que la incorporen al marco legal vigente, violencia que está totalmente invisibilizada.
 

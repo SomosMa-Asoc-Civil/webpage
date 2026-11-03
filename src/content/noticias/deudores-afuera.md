@@ -1,6 +1,6 @@
 ---
 title: "Deudores Afuera"
-date: "2025-03-25"
+date: "2025-03-25T17:38"
 author: "SomosMa"
 image: "/uploads/2025/04/Deudores-afuera.jpeg"
 excerpt: "A partir de ahora los deudores alimentarios morosos no podrán entrar a la cancha en los partidos de Caba. La medida comenzó a implementarse en el partido entre Argentina y Brasil y se detectaron los primeros. ¿Es útil como medida sancionatoria? ¿Alcanza ante la gran problemática de incumplimiento alimentario? ¿Cómo es el proceso de inscribirlos en el Registro? ¿Qué pasa en el resto de las provincias?"
@@ -23,7 +23,7 @@ Esta violencia de género logró estar en la agenda mediática, pública y polí
 
 Lo que determina la nueva ley son una serie de sanciones, a quienes estén inscriptos en el Registro, que tienen que ver con restringirles el acceso a actividades recreativas, y puntualmente a los partidos de fútbol que se desarrollen en el ámbito de la ciudad, que actualmente son 18 estadios.
 
-***“Si tenés 480.000 pesos para pagar una platea San Martín o Belgrano media es una immoralidad no pasar alimentos a tus hijos. Esta ley, que aprobamos en la Legislatura en diciembre, es un ACTO DE JUSTICIA”*****-** dice [en su cuenta de X](https://x.com/facundodelgaiso/status/1904513189103952112?s=48)  el legislador Del Gaiso, autor de la normativa.
+***“Si tenés 480.000 pesos para pagar una platea San Martín o Belgrano media es una immoralidad no pasar alimentos a tus hijos. Esta ley, que aprobamos en la Legislatura en diciembre, es un ACTO DE JUSTICIA”*-** dice [en su cuenta de X](https://x.com/facundodelgaiso/status/1904513189103952112?s=48)  el legislador Del Gaiso, autor de la normativa.
 
 La nueva sanción comenzó entonces a aplicarse en el partido de las eliminatorias sudamericanas, entre Argentina y Brasil, ocurrido en el estadio de River el domingo 16 de marzo. El protocolo indicaba el control de los documentos de identidad, de los hinchas, en las puertas de acceso a la cancha, por parte del personal de los Ministerios de Justicia y Seguridad, que luego de unos minutos pudieron detectar los primeros deudores alimentarios, prohibirles el ingreso y labrar un acta que determina que solo podrá levantarse esta medida cuando la deuda alimentaria sea saldada.
 

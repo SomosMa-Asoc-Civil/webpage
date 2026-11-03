@@ -30,10 +30,11 @@ content:
         type: string
         required: true
       - name: date
-        label: Fecha de publicación
+        label: Fecha y hora de publicación
         type: date
         options:
-          format: yyyy-MM-dd
+          time: true
+          format: "yyyy-MM-dd'T'HH:mm"
         required: true
       - name: author
         label: Autora
@@ -64,6 +65,7 @@ content:
         default: false
       - name: body
         label: Contenido
+        description: "Para resaltar en amarillo como en las notas originales, usá la vista Código y envolvé el texto con <mark>…</mark>."
         type: rich-text
         options:
           format: markdown

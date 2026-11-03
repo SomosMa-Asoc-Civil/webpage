@@ -1,6 +1,6 @@
 ---
 title: "Día del Padre, mundial y deuda alimentaria"
-date: "2026-06-21"
+date: "2026-06-21T16:20"
 author: "SomosMa"
 image: "/uploads/2026/06/WhatsApp-Image-2026-06-21-at-11.56.27.jpeg"
 excerpt: "La noticia de prohibirles el ingreso a los partidos del mundial 2026 a 13 mil inscriptos como deudores alimentarios genera preguntas. ¿Cuántos son en proporción al total de incumplidores? ¿Es útil…"
@@ -19,9 +19,9 @@ La medida funciona en la ciudad de Buenos Aires hace ya un año y esta vez se in
 
 Ver noticia: [si no cumplis con tus hijos tampoco entras a la cancha - Infobae](https://www.infobae.com/video/infobae-en-vivo-a-las-nueve/si-no-cumplis-con-tus-hijos-tampoco-entras-a-la-cancha/yeuCqkwn/)
 
-Según datos que revela Infobae en [esta nota](https://www.infobae.com/sociedad/2026/05/26/los-argentinos-deudores-alimentarios-que-viajen-al-mundial-2026-no-podran-entrar-a-los-estadios/)   “Desde el inicio de los operativos en CABA, en marzo de 2025, se realizaron 187 operativos en total, con 162 deudores detectados. La tendencia se aceleró en lo que va de 2026: en ese período se ejecutaron 91 operativos, en los que se impidió el acceso a 87 **infractores****.”**
+Según datos que revela Infobae en [esta nota](https://www.infobae.com/sociedad/2026/05/26/los-argentinos-deudores-alimentarios-que-viajen-al-mundial-2026-no-podran-entrar-a-los-estadios/)   “Desde el inicio de los operativos en CABA, en marzo de 2025, se realizaron 187 operativos en total, con 162 deudores detectados. La tendencia se aceleró en lo que va de 2026: en ese período se ejecutaron 91 operativos, en los que se impidió el acceso a 87 **infractores.”**
 
-![](/uploads/2026/06/WhatsApp-Image-2026-06-21-at-13.08.58.jpeg)
+<img src="/uploads/2026/06/WhatsApp-Image-2026-06-21-at-13.08.58-1024x1024.jpeg" alt="" width="405" loading="lazy" />
 
 Si bien la noticia resulta esperanzadora desde el punto de vista de la sociabilización de la problemática, es decir la mediatización de un tema que refleja un problema estructural de la cultura patriarcal, que azota al país y se extiende por toda Latinoamérica y otros países del mundo, el análisis de esta cuestión debe profundizarse porque  la cifra que sale a la luz en esta oportunidad es de **13 mil deudores alimentarios** que, en caso de viajar al mundial, verán restringido su ingreso a los partidos.
 
@@ -35,7 +35,7 @@ Por otro lado, desde los movimientos feministas de Argentina y otros países pio
 
 ## ¿Qué dicen las cifras?
 
-**Los 13 mil deudores del mundial son menos del 0,7 % del total de Deudores que existen en Argentina.**
+**<mark>Los 13 mil deudores del mundial son menos del 0,7 % del total de Deudores que existen en Argentina.</mark>**
 
 El análisis de la problemática requiere inevitablemente cuestionar la cifra, no tanto la medida, aunque es una medida de final de proceso. Tomando en cuenta las cifras oficiales y de organizaciones  civiles que investigan la problemática en particular, **son entre 1.6 millones y más de 2 millones los hogares a cargo de mujeres solas.**
 
@@ -47,7 +47,7 @@ El análisis de la problemática requiere inevitablemente cuestionar la cifra, n
 
 [Fundamind](https://www.fundamind.org.ar/2025/10/18/madres-e-hijos-en-riesgo-pobreza-precariedad-y-violencia/) y otros equipos de investigación Feminista como [Equifem](https://www.facebook.com/fundacionequifem/) publican el número de hogares monomarentales en Argentina entorno a 2 millones y 1.8 millones, respectivamente.
 
-Entonces, si tomamos en cuenta la cifra de  **2 millones de madres** en situación de criar y sostener solas a sus hijos e hijas, y lo cruzamos  con el dato oficial que se desprende del Informe 2022 sobre Incumplimiento de la Obligación alimentaria de provincia de Buenos Aires que revela que **7 de cada 10 padres no cumplen** o lo hacen esporádicamente con la cuota alimentaria, lo que queda en evidencia es que **13 mil deudores** alimentarios que no podrían entrar al mundial representan **menos del 0, 7 % de los progenitores que no cumplen** con sus obligaciones de alimentar y cuidar a sus hijos e hijas en Argentina.
+<mark>Entonces, si tomamos en cuenta la cifra de  **2 millones de madres** en situación de criar y sostener solas a sus hijos e hijas, y lo cruzamos  con el dato oficial que se desprende del Informe 2022 sobre Incumplimiento de la Obligación alimentaria de provincia de Buenos Aires que revela que **7 de cada 10 padres no cumplen** o lo hacen esporádicamente con la cuota alimentaria, lo que queda en evidencia es que **13 mil deudores** alimentarios que no podrían entrar al mundial representan **menos del 0, 7 % de los progenitores que no cumplen** con sus obligaciones de alimentar y cuidar a sus hijos e hijas en Argentina.</mark>
 
 Ver: [Informe 2022 sobre Incumplimiento de la Obligación alimentaria de PBA](https://ministeriodelasmujeres.gba.gob.ar/gestor/uploads/OBLIGACI%C3%93N%20ALIMENTARIA%2021.6.pdf)
 
@@ -57,7 +57,7 @@ Esto genera más preguntas que respuestas. ¿Sirve realmente como medida sancion
 
 Los Registros de Deudores Alimentarios Morosos (RDAM) en su mayoría son plataformas de inscripción provincial, es decir cada provincia cuenta con el suyo y los requisitos legales para llegar a inscribir un deudor varían. En su mayoría tienen que adeudar 3 cuotas consecutivas o 5 alternadas para ser inscriptos, lo que dificulta la cobrabilidad de las cuotas y muestra la baja efectividad de la medida en sí, ya que los deudores utilizan ese artilugio para pagar algunos meses del año solamente. Para las madres que reclaman judicialmente la cuota alimentaria, termina siendo una ruta crítica la cobrabilidad estable y se enfrentan a jueces y juezas reticentes a la hora de inscribirlos en los RDAM, además de que el proceso legal es costoso en tiempo y dinero para las víctimas, lo que explica el bajo porcentaje de inscriptos versus la realidad.
 
- El “libre Deuda” del RDAM es solicitado actualmente en algunas provincias y dependencias municipales, por ejemplo, para ciertos trámites, lo que puede verse como una herramienta de “sanción” en caso de estar inscripto como deudor. Por ejemplo, del mismo modo que no pueden entrar a los partidos de fútbol, en algunos municipios no pueden trabajar como proveedores si adeudan alimentos, en otros no pueden ejercer cargos públicos, etc. Son todas medidas aisladas, no unificadas bajo un mismo criterio y de poca efectividad para la resolución del problema de base.
+El “libre Deuda” del RDAM es solicitado actualmente en algunas provincias y dependencias municipales, por ejemplo, para ciertos trámites, lo que puede verse como una herramienta de “sanción” en caso de estar inscripto como deudor. Por ejemplo, del mismo modo que no pueden entrar a los partidos de fútbol, en algunos municipios no pueden trabajar como proveedores si adeudan alimentos, en otros no pueden ejercer cargos públicos, etc. Son todas medidas aisladas, no unificadas bajo un mismo criterio y de poca efectividad para la resolución del problema de base.
 
 En cuanto a la centralización de los datos, **no existe actualmente un Registro Nacional de Deudores Alimentarios Mororos**, aunque fue un proyecto que obtuvo media sanción en la Cámara de Diputados en el año 2022 pero no se avanzó.
 
@@ -69,13 +69,13 @@ Ver PBA: [RDAM provincia buenos aires](https://www.gba.gob.ar/justicia_y_ddhh/de
 
 El Ministerio de las Mujeres, Género y Diversidad de la Provincia de Buenos Aires es, actualmente, el único Ministerio en pie del país luego de que el gobierno de Javier Milei desmantelara todas las políticas públicas entorno a las violencias de género, con quita de presupuestos además del ataque constante y explícito al feminismo y la negación de la desigualdad de género, como plataforma reactiva explícita de la ultra derecha internacional al movimiento social más fuerte de las últimas décadas.
 
-![](/uploads/2026/06/WhatsApp-Image-2026-06-21-at-13.05.20.jpeg)
+<img src="/uploads/2026/06/WhatsApp-Image-2026-06-21-at-13.05.20-1024x683.jpeg" alt="" width="446" loading="lazy" />
 
 La **abogada Sabrina Cartabia** es Subsecretaria del Ministerio y trabaja desde hace años dedicada a la problemática. Consultada para esta nota explica que **los inscriptos en el Registro de Deudores alimentarios de la provincia aumentaron de manera exponencial en el último año, porque cambiaron los requisitos para inscribirlos gracias a la Ley  15.520 promulgada en abril de 2025 que simplificó el proceso, por ejemplo, entre otras cosas, se los puede inscribir luego del primer mes de incumplimiento y en alimentos provisorios, no sólo con sentencia definitiva.**
 
 **En 2024 eran 1831 deudores inscriptos, en 2025 subió a 3659 y ahora en 2026 (hasta marzo) son 8510. 98% varones**
 
-**“***Igual sigue siendo bajo de acuerdo al total de deudores que sabemos que existen de facto. Si bien sabemos que está bien que no los dejen entrar al estadio, esto se debe a nivel nacional, que para ser deudor alimentario en la  mayoría de las provincias, menos en CABA y en PBA, jueces y juezas exigen que haya una sentencia definitiva y que después haya 3 incumplimientos consecutivos o 5 alternados, que encima algunos juzgados interpretan que deben ser en el mismo año, lo que les permite incumplir 4 cuotas por año sin ningún tipo de sanción.”-* Analiza Cartabia y agrega : “***Esto es un problema de la justicia porque sabemos que las mamás están tan saturadas y endeudadas, que no pueden pagar servicios de justicia para poder acceder a tribunales, tener una sentencia y después denunciar además el incumplimiento para que se libre la orden de inscribirlos en los Registros. Por eso es tan baja la inscripción. No puedo decir que sea una política ineficiente pero tiene una exigencia muy grande. Por eso nosotros en la provincia ahora los inscribimos desde el primer mes de incumplimiento de los alimentos provisorios y así subió el número pero sabemos que sigue sin reflejar la realidad.***
+<p><strong>“</strong><em>Igual sigue siendo bajo de acuerdo al total de deudores que sabemos que existen de facto. Si bien sabemos que está bien que no los dejen entrar al estadio, esto se debe a nivel nacional, que para ser deudor alimentario en la  mayoría de las provincias, menos en CABA y en PBA, jueces y juezas exigen que haya una sentencia definitiva y que después haya 3 incumplimientos consecutivos o 5 alternados, que encima algunos juzgados interpretan que deben ser en el mismo año, lo que les permite incumplir 4 cuotas por año sin ningún tipo de sanción.”- </em>Analiza Cartabia y agrega : <mark>“<strong><em>Esto es un problema de la justicia porque sabemos que las mamás están tan saturadas y endeudadas, que no pueden pagar servicios de justicia para poder acceder a tribunales, tener una sentencia y después denunciar además el incumplimiento para que se libre la orden de inscribirlos en los Registros. Por eso es tan baja la inscripción. No puedo decir que sea una política ineficiente pero tiene una exigencia muy grande. Por eso nosotros en la provincia ahora los inscribimos desde el primer mes de incumplimiento de los alimentos provisorios y así subió el número pero sabemos que sigue sin reflejar la realidad.</em></strong></mark></p>
 
 Otra voz, en este caso del **periodismo**, que tomó la agenda del incumplimiento alimentario en Argentina entre sus prioridades es la de **Mariana Carbajal,** quien ya en el año 2022 se preguntaba si la creación del Registro Nacional de Deudores Alimentarios servía y para qué. Con cifras que demuestran el bajo porcentaje de inscriptos y menos aún de altas del registro, lo que significa que son pocos los que luego de figurar en el registro, saldan sus deudas alimentarias.
 
@@ -83,21 +83,21 @@ Ver nota: <https://www.pagina12.com.ar/498706-un-registro-nacional-de-deudores-a
 
 Una profesional con camino recorrido y experiencia en esto es **Paola Urquizo** a quien le preguntamos su opinión sobre el tema. Urquizo es Psicóloga especializada en Políticas de Cuidado, miembro de la Comisión Directiva de MA (Monomarentales Argentina) y fundadora de @familias.monomarentales
 
-![](/uploads/2026/06/WhatsApp-Image-2026-06-20-at-20.50.37.jpeg)
+<img src="/uploads/2026/06/WhatsApp-Image-2026-06-20-at-20.50.37-476x1024.jpeg" alt="" width="283" loading="lazy" />
 
-“***Me parece una medida efectista y elitista. Primero ¿por qué los dejan salir del país? El dinero del viaje de ida y vuelta es dinero de la cuota alimentaria que no se recupera. Segundo, representa una milésima parte de la cantidad de deudores alimentarios y tercero, me pregunto si realmente una medida coercitiva alguna vez produjo un cambio de posición subjetiva en un varón machista y negligente en los cuidados. Creo que este tipo de medidas les permiten, a quienes deben impartir justicia y generar políticas de protección de ddhh, dormir en paz y pensar que hacen bien su trabajo, pero quienes sostenemos durante décadas las vidas de nuestros hijos e hijas sabemos que mañana al supermercado lo volvemos a pagar nosotras.”***
+<p><mark>“<strong><em>Me parece una medida efectista y elitista. Primero ¿por qué los dejan salir del país? El dinero del viaje de ida y vuelta es dinero de la cuota alimentaria que no se recupera. Segundo, representa una milésima parte de la cantidad de deudores alimentarios y tercero, me pregunto si realmente una medida coercitiva alguna vez produjo un cambio de posición subjetiva en un varón machista y negligente en los cuidados. Creo que este tipo de medidas les permiten, a quienes deben impartir justicia y generar políticas de protección de ddhh, dormir en paz y pensar que hacen bien su trabajo, pero quienes sostenemos durante décadas las vidas de nuestros hijos e hijas sabemos que mañana al supermercado lo volvemos a pagar nosotras.”</em></strong></mark></p>
 
 **Deby Magallanes** también es integrante de Monomarentales Argentina, es comediante y comunicadora:
 
-![](/uploads/2026/06/WhatsApp-Image-2026-06-20-at-20.03.20.jpeg)
+<img src="/uploads/2026/06/WhatsApp-Image-2026-06-20-at-20.03.20-691x1024.jpeg" alt="" width="332" loading="lazy" />
 
-***“Yo siempre pienso primero en los chicos. El mundial es un ilusión enorme para cualquiera pero imagino que para muchos chicos la verdadera ilusión es contar con un papá presente. Son las 19:25 y mi hija aún está esperando que el padre la pase a buscar para festejar su día ( no va a pasar  ). ¿De qué me sirve haberlo registrado en el RDAM? Si el papá sentadito en el sillón está mirando algún partido. LA noticia de los 13 mil que no pudieron entrar al partido deja un mensaje claro: los derechos de los niños tienen que estar por encima de cualquier espectáculo.”***
+***<mark>“Yo siempre pienso primero en los chicos. El mundial es un ilusión enorme para cualquiera pero imagino que para muchos chicos la verdadera ilusión es contar con un papá presente. Son las 19:25 y mi hija aún está esperando que el padre la pase a buscar para festejar su día ( no va a pasar  ). ¿De qué me sirve haberlo registrado en el RDAM? Si el papá sentadito en el sillón está mirando algún partido. LA noticia de los 13 mil que no pudieron entrar al partido deja un mensaje claro: los derechos de los niños tienen que estar por encima de cualquier espectáculo.”</mark>***
 
 **Pietropaolo Virginia**, integrante de la comisión Directiva de MA, fundadora de red M.A.D.R.E.S Reconquista (Santa Fe) y acompañante comunitaria contra la violencia de género:
 
-![](/uploads/2026/06/WhatsApp-Image-2026-06-20-at-20.02.04.jpeg)
+<img src="/uploads/2026/06/WhatsApp-Image-2026-06-20-at-20.02.04-682x1024.jpeg" alt="" width="343" loading="lazy" />
 
-***“La decisión de impedir que los deudores alimentarios viajen al Mundial pone sobre la mesa una verdad que durante mucho tiempo fue invisibilizada: el derecho de niñas, niños y adolescentes a recibir alimentos está por encima de cualquier privilegio personal. No se trata de castigar por castigar. Se trata de recordar que detrás de cada cuota incumplida hay infancias que ven afectada su calidad de vida, madres que sostienen solas lo que debería ser una responsabilidad compartida y derechos que no pueden seguir esperando. En este Día del Padre, quizás la mejor reflexión sea que ser padre no es un título: es un compromiso cotidiano. Y el primer partido que hay que jugar y cumplir se juega en casa. Las sanciones son necesarias, pero siguen siendo insuficientes mientras la sociedad continúe naturalizando que sean las mujeres quienes carguen, casi en soledad, con el peso material y emocional de la crianza.”***
+***<mark>“La decisión de impedir que los deudores alimentarios viajen al Mundial pone sobre la mesa una verdad que durante mucho tiempo fue invisibilizada: el derecho de niñas, niños y adolescentes a recibir alimentos está por encima de cualquier privilegio personal. No se trata de castigar por castigar. Se trata de recordar que detrás de cada cuota incumplida hay infancias que ven afectada su calidad de vida, madres que sostienen solas lo que debería ser una responsabilidad compartida y derechos que no pueden seguir esperando. En este Día del Padre, quizás la mejor reflexión sea que ser padre no es un título: es un compromiso cotidiano. Y el primer partido que hay que jugar y cumplir se juega en casa. Las sanciones son necesarias, pero siguen siendo insuficientes mientras la sociedad continúe naturalizando que sean las mujeres quienes carguen, casi en soledad, con el peso material y emocional de la crianza.”</mark>***
 
 ## Mensaje desde la presidencia de MA
 

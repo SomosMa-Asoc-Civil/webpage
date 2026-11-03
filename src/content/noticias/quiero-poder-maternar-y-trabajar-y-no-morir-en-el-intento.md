@@ -1,6 +1,6 @@
 ---
 title: "“Quiero poder maternar y trabajar y no morir en el intento”"
-date: "2025-12-19"
+date: "2025-12-19T14:34"
 author: "Diana Deharbe"
 image: "/uploads/2025/12/WhatsApp-Image-2025-12-18-at-10.06.38.jpeg"
 excerpt: "Mariángeles, mejor conocida como Mamá Pulpo, tiene una meta: garantizarle a su hija sus 4 comidas diarias. Para ello, emprende, changuea, la rema, en medio de una crisis económica que, todos los días, arroja a madres e infancias a la extrema pobreza y profundiza las condiciones de vida de un sector históricamente vulnerable, las mamás que crían solas. Esta es su historia."
@@ -25,7 +25,7 @@ Su prioridad hoy es que  “A”  pueda comer sus 4 comidas diarias, hace más
 
 Mamá Pulpo [@mamapulpo.ar](https://www.instagram.com/mamapulpo.ar/), como la conocen en las redes, dialogó con MA sobre los desafíos que enfrentan, diariamente, las mujeres que crían solas.
 
-![](/uploads/2025/12/WhatsApp-Image-2025-12-18-at-10.14.31-1.jpeg)
+![](/uploads/2025/12/WhatsApp-Image-2025-12-18-at-10.14.31-1-1024x684.jpeg)
 
 **Monomarentales Argentina (en adelante, M.A.): ¿elegiste criar sola?**
 

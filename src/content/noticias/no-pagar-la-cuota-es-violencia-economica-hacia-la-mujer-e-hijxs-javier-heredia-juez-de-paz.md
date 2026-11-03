@@ -1,6 +1,6 @@
 ---
 title: "“No pagar la cuota es violencia económica hacia la mujer e hijxs.”-  Javier Heredia, Juez de Paz"
-date: "2025-02-13"
+date: "2025-02-13T17:43"
 author: "SomosMa"
 image: "/uploads/2025/04/Tapa-juez-heredia.jpeg"
 excerpt: "Dos Juzgados en provincia de Buenos Aires usan el Índice de Crianza para cuotas provisorias desde que se publicó. Además implementan medidas como la inscripción al Veraz y otras sanciones contra los deudores alimentarios. Charlamos con el Juez a cargo, sobre el estado del sistema judicial, algunas medidas innovadoras, la importancia de la Ley Micaela, de la perspectiva de género y las demandas por alimentos como uno de los principales reclamos que llegan a diario."
@@ -19,11 +19,11 @@ Al ser multi- fueros estos juzgados, convergen en ellos materias y competencias
 
 Si bien el nuevo Código Civil y Comercial de la Nación desde 2015 (en su art. 706 inciso b) exige la especialidad para los operadores judiciales de Familia, lo cierto es que en la realidad esto no se cumple porque aquellos que ingresaron antes de ésa reforma no tenían el requisito exigible. Eso no significa que no deban actuar o proceder conforme. El apoyo multidisciplinario de los equipos técnicos también es importante pero termina siendo simbólico porque incluso muchos Juzgados no tienen equipos técnicos asignados, algunos están en ese proceso pero lo cierto es que hoy no es un sistema completo y esto representa un problema para los temas de Familia.
 
-“*Hay proyectos legislativos recientes donde se intenta ampliar a muchas temáticas más, al contrario de cómo va la evolución del Derecho que es hacia la especialidad, para ir dedicándonos más profundamente hacia un tema. La Especialidad requiere capacitaciones varias. Pero hay un límite porque no podemos ser juez de todo y de todos los temas, el único organismo comparable a esto es la Corte provincial y no tenemos sus recursos ni cerca.”-*explica Javier Heredia.
+<p>“<em>Hay proyectos legislativos recientes donde se intenta ampliar a muchas temáticas más, al contrario de cómo va la evolución del Derecho que es hacia la especialidad, para ir dedicándonos más profundamente hacia un tema. La Especialidad requiere capacitaciones varias. Pero hay un límite porque no podemos ser juez de todo y de todos los temas, el único organismo comparable a esto es la Corte provincial y no tenemos sus recursos ni cerca.”- </em>explica Javier Heredia.</p>
 
 Javier se recibió de Abogado en el 2003, comenzó ejerciendo en el ámbito privado, en 2011 queda vacante el juzgado de Paz de Daireaux  y se presenta. Se formó en mediación y la ejerció cuando surgió la mediación obligatoria en la provincia de Buenos Aires y esa base le dio herramientas para el ejercicio de la profesión y el rol que ejerce hoy en ambos Juzgados, Daireaux y La Madrid.
 
-**─*****Los juzgados de Paz atienden todos los temas y se ven desbordados, es por ello que algunos jueces y juezas dicen no poder ahondar o especializarse y aplicar buenas medidas por ejemplo en los casos de violencias. ¿Esto es justificativo?***
+<p><strong>─</strong><em><strong>Los juzgados de Paz atienden todos los temas y se ven desbordados, es por ello que algunos jueces y juezas dicen no poder ahondar o especializarse y aplicar buenas medidas por ejemplo en los casos de violencias. ¿Esto es justificativo?</strong></em></p>
 
 Es cierto que tenemos a los operadores resolviendo una sucesión, a los diez minutos un tema de violencia de género, luego un amparo electoral y en 20 minutos un cobro ejecutivo. Es complejo, sobre todo si tenés poco personal, sin especialidades y Secretarías. Hay que ponerse la capa de Juez de cada tema, pero no es excusa ni obstáculo para repensar nuestras prácticas, en aras de buscar la tutela judicial efectiva, en aras de darnos cuenta y ser autocríticos con lo que venimos haciendo a diario repetitivamente, para poder re pensar otras estrategias ante los mismos problemas que no dan resultados. Lo que tenemos que buscar son otras estrategias para que nuestras resoluciones se cumplan, con todo lo complejo que eso significa.
 
@@ -49,7 +49,7 @@ Claro. Por ello se vuelve imprescindible la Ley Micaela.
 
 ***─¿Cuánto es el porcentaje de demandas por incumplimiento de la obligación alimentaria?***
 
-En Daireaux**,** una población de 20 mil habitantes, recibimos promedio una demanda por día. Todos los días hay demandas.
+<p>En Daireaux<strong>, </strong> una población de 20 mil habitantes, recibimos promedio una demanda por día. Todos los días hay demandas.</p>
 
 ***─¿Se ve la cuestión de género?***
 
@@ -71,7 +71,7 @@ Cada caso es distinto y debe evaluarse pero lo que es importante decir es que es
 
 Hay que hablar de la historia y del porqué nace ésto. Todos los problemas acá se tratan  de las “pruebas”.  Es decir, antes debías probar cuánto gastas en alimentos, luz, gas, actividades extraescolares, patín, arte, fútbol, etc. Al no tener información básica estandarizada de todo eso, generaba un sinfín de problemas probatorios. Ahora tenemos la ventaja del índice de Crianza. Yo, antes de este índice usaba la canasta básica total. Ahora arranco con este piso mínimo que le agrega las horas de cuidado.  Y sabemos que no alcanza porque es un piso mínimo pero tenemos de dónde empezar, sin necesidad de tanta prueba probatoria.
 
-**─*****El índice se quedó corto con lxs adolescentes  ¿Cómo estipula, en su juzgado,  de los 12 años para arriba?***
+<p><strong>─</strong><em><strong>El índice se quedó corto con lxs adolescentes  ¿Cómo estipula, en su juzgado,  de los 12 años para arriba?</strong></em></p>
 
 Uso la canasta básica como piso mínimo. Si  tengo un bebé, uso el índice de crianza y si pasa los 12 años, uso la canasta pero como pisos mínimos porque debajo de eso hablamos de indigencia. Luego hay que ir para arriba.
 
