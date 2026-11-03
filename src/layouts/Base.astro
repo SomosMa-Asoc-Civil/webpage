@@ -145,51 +145,81 @@ const esActual = (destino: string) =>
 </html>
 
 <style>
+  /* Encabezado. Valores del menú de Kubio:
+     arriba: fondo violeta, ítems #171948, hover y activo en blanco, subrayado amarillo de 5 px;
+     al bajar: fondo blanco con sombra, ítems #302f30, hover violeta, activo #171948, subrayado rojo. */
   .cabecera {
     position: sticky;
     top: 0;
     z-index: 50;
     --fondo: var(--violeta);
+    --menu-texto: var(--azul-noche);
+    --menu-hover: var(--blanco);
+    --menu-actual: var(--blanco);
+    --menu-subrayado: var(--amarillo);
     background: var(--fondo);
     transition: background 0.35s ease, box-shadow 0.35s ease;
-    --menu-activo: var(--amarillo);
-    --menu-texto: var(--azul-noche);
-    --menu-texto-activo: var(--blanco);
   }
-  /* Al bajar, la barra pasa a blanca con sombra (igual que el menú fijo de Kubio) */
   .cabecera.fija {
     --fondo: var(--blanco);
-    box-shadow: 0 0 10px rgba(23, 25, 39, 0.1);
-    --menu-activo: var(--rojo);
     --menu-texto: var(--texto);
-    --menu-texto-activo: var(--texto);
+    --menu-hover: var(--violeta);
+    --menu-actual: var(--azul-noche);
+    --menu-subrayado: var(--rojo);
+    box-shadow: 0 0 10px rgba(23, 25, 39, 0.1);
   }
   .cabecera__barra {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    min-height: 144px;
-    transition: min-height 0.35s ease;
+    padding-block: 10px;
+    min-height: 90px;
+    transition: min-height 0.35s ease, padding 0.35s ease;
   }
-  .cabecera__logo img { height: 80px; width: auto; transition: height 0.35s ease; }
-  /* Versión compacta al bajar */
-  .cabecera.fija .cabecera__barra { min-height: 72px; }
+  .cabecera__logo { display: block; flex: none; }
+  .cabecera__logo img { height: 70px; width: auto; transition: height 0.35s ease; }
+  .cabecera.fija .cabecera__barra { padding-block: 0; min-height: 72px; }
   .cabecera.fija .cabecera__logo img { height: 52px; }
-  .cabecera__menu ul { display: flex; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
+
+  .cabecera__menu ul { display: flex; gap: 33px; list-style: none; margin: 0; padding: 0; }
   .cabecera__menu a {
+    position: relative;
     display: block;
-    padding: 0.4rem 0.75rem;
+    padding: 10px 0;
     font-family: var(--fuente-titulos);
     font-weight: 400;
-    font-size: 1rem;
-    letter-spacing: 0.06em;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: 1px;
     color: var(--menu-texto);
     text-decoration: none;
-    border-bottom: 3px solid transparent;
+    transition: color 0.3s;
   }
-  .cabecera__menu a:hover { color: var(--menu-texto-activo); }
-  .cabecera__menu a[aria-current='page'] { color: var(--menu-texto-activo); border-bottom-color: var(--menu-activo); }
+  /* Subrayado: en la página actual siempre visible; en hover crece desde el centro */
+  .cabecera__menu a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 5px;
+    background: var(--menu-subrayado);
+    opacity: 0;
+    transition: all 0.3s;
+  }
+  .cabecera__menu a:hover { color: var(--menu-hover); }
+  .cabecera__menu a:hover::after,
+  .cabecera__menu a[aria-current='page']::after { left: 0; width: 100%; opacity: 1; }
+  .cabecera__menu a[aria-current='page'] { color: var(--menu-actual); }
+
+  /* Escritorio: logo de 110 px como en Kubio */
+  @media (min-width: 1024px) {
+    .cabecera__barra { min-height: 130px; }
+    .cabecera__logo img { height: 110px; }
+    .cabecera.fija .cabecera__logo img { height: 80px; }
+    .cabecera.fija .cabecera__barra { min-height: 90px; }
+  }
   .cabecera__toggle { display: none; }
 
   .panel__cabecera, .panel__pie, .panel__fondo { display: none; }
@@ -245,6 +275,7 @@ const esActual = (destino: string) =>
       letter-spacing: 0;
       transition: background-color 0.3s;
     }
+    .cabecera__menu a::after { display: none; }
     .cabecera__menu a:hover,
     .cabecera__menu a[aria-current='page'] { color: var(--blanco); background: var(--violeta); border: 0; }
 
