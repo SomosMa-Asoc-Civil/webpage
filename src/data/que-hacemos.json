@@ -50,6 +50,7 @@
   "cta": {
     "titulo": "Sumate vos también",
     "texto": "Te contamos todas las maneras en que podés sumarte y ser protagonista.",
+    "imagen": "/uploads/2025/03/Mockup_posters_2-1.png",
     "boton": {
       "texto": "Quiero sumarme",
       "url": "/sumate/"

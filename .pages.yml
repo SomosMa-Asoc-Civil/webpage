@@ -242,6 +242,7 @@ content:
             fields:
               - { name: titulo, label: Título, type: string }
               - { name: texto, label: Texto, type: string }
+              - { name: imagen, label: Imagen al costado, type: image }
               - name: boton
                 label: Botón
                 type: object

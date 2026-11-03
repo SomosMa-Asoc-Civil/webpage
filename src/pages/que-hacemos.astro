@@ -6,77 +6,89 @@ import { url } from '../lib/url';
 
 const { titulo, intro, areas_titulo, areas, logros, cta } = datos;
 const iconos = ['personas', 'codigo', 'balanza', 'editar'];
+const tarjetas = [
+  ...areas.map((a, i) => ({ ...a, icono: iconos[i % iconos.length] })),
+  { titulo: logros.titulo, items: logros.items, icono: 'check', logros: true },
+];
 ---
 <Base titulo="Qué hacemos" descripcion={intro.join(' ')}>
   <section class="seccion">
     <div class="contenedor-angosto centrado">
       <h1 class="titulo">{titulo}</h1>
-      {intro.map((p) => <p class="intro">{p}</p>)}
+      <div class="intro">{intro.map((p) => <p>{p}</p>)}</div>
       <p class="areas__titulo">{areas_titulo}</p>
     </div>
 
     <div class="contenedor areas">
-      {areas.map((a, i) => (
-        <article class="tarjeta area">
-          <span class="area__icono"><Icono nombre={iconos[i % iconos.length]} size={28} /></span>
+      {tarjetas.map((a) => (
+        <article class:list={['area', { 'area--logros': a.logros }]}>
+          <span class="area__icono"><Icono nombre={a.icono} size={36} trazo={2.2} /></span>
           <div>
-            <h3>{a.titulo}</h3>
+            <h3 class="area__titulo">{a.titulo}</h3>
             <ul>{a.items.map((it) => <li>{it}</li>)}</ul>
           </div>
         </article>
       ))}
-      <article class="tarjeta area area--logros">
-        <span class="area__icono"><Icono nombre="check" size={28} /></span>
-        <div>
-          <h3>{logros.titulo}</h3>
-          <ul>{logros.items.map((l) => <li>{l}</li>)}</ul>
-        </div>
-      </article>
     </div>
   </section>
 
   <section class="seccion" style="padding-top:0">
     <div class="contenedor">
       <a class="cta" href={url(cta.boton.url)}>
-        <span class="cta__titulo">{cta.titulo} <Icono nombre="flecha" size={30} trazo={1.5} /></span>
-        <span class="cta__texto">{cta.texto}</span>
+        <span class="cta__bloque">
+          <span class="cta__titulo">{cta.titulo} <Icono nombre="flecha" size={30} trazo={1.5} /></span>
+          <span class="cta__texto">{cta.texto}</span>
+        </span>
+        {cta.imagen && <img class="cta__imagen" src={url(cta.imagen)} alt="" loading="lazy" width="460" height="460" />}
       </a>
     </div>
   </section>
 </Base>
 
 <style>
-  .titulo { font-size: clamp(2rem, 4vw, 2.6rem); }
-  .intro { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.25rem; }
-  .areas__titulo { font-family: var(--fuente-titulos); font-weight: 600; text-transform: uppercase; margin: 2rem 0 0; }
+  .titulo { font-weight: 700; font-size: clamp(2.6rem, 6vw, 3.4rem); line-height: 1.2; margin-bottom: 1.25rem; }
+  .intro p { font-size: clamp(1.15rem, 2.4vw, 1.4rem); font-weight: 400; line-height: 1.55; margin: 0; }
+  .areas__titulo { font-family: var(--fuente-titulos); font-weight: 600; font-size: clamp(1.15rem, 2.4vw, 1.4rem); text-transform: uppercase; margin: 2.5rem 0 0; }
 
-  .areas { display: grid; gap: 1.75rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); margin-top: 2.5rem; }
-  .area { display: flex; gap: 2rem; align-items: flex-start; }
-  .area--logros { grid-column: 1 / -1; justify-self: center; width: min(100%, 560px); }
+  .areas { display: grid; gap: 1.75rem; margin-top: 2.5rem; }
+  .area {
+    background: var(--blanco);
+    border-radius: 4px;
+    box-shadow: 0 15px 35px -10px rgba(23, 25, 72, 0.18);
+    padding: 2.5rem 1.75rem 2.75rem;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 1.25rem;
+  }
   .area__icono {
-    flex: none;
     display: grid;
     place-items: center;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background: var(--amarillo);
     color: var(--blanco);
   }
-  .area h3 { color: var(--azul-noche); text-transform: uppercase; font-size: 1.15rem; font-weight: 700; margin: 0.6rem 0 0.75rem; }
-  .area ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; font-weight: 400; font-size: 0.975rem; }
+  .area__titulo { color: var(--azul-noche); text-transform: uppercase; font-size: clamp(1.25rem, 2.8vw, 1.6rem); font-weight: 600; margin: 1.5rem 0 1rem; }
+  .area ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; font-size: 1.15rem; color: var(--texto-suave); }
 
-  .cta {
-    display: grid;
-    gap: 1rem;
-    max-width: 445px;
-    padding: 3.5rem 3rem;
-    background: var(--violeta);
-    color: var(--blanco);
-    text-decoration: none;
-    transition: background 0.2s;
+  /* Escritorio: dos columnas, ícono a la izquierda (como en Kubio) */
+  @media (min-width: 1024px) {
+    .areas { grid-template-columns: repeat(2, 1fr); }
+    .area { grid-template-columns: auto 1fr; justify-items: start; align-items: start; text-align: left; gap: 2.5rem; padding: 2rem 2rem 2.25rem; }
+    .area__icono { width: 60px; height: 60px; }
+    .area__icono :global(svg) { width: 28px; height: 28px; }
+    .area__titulo { font-size: 1.15rem; font-weight: 700; margin: 0.6rem 0 0.75rem; }
+    .area ul { font-size: 0.975rem; font-weight: 400; color: var(--texto); }
+    .area--logros { grid-column: 1 / -1; justify-self: center; width: min(100%, 560px); }
   }
-  .cta:hover { background: var(--violeta-oscuro); color: var(--blanco); }
+
+  .cta { display: grid; text-decoration: none; color: var(--blanco); }
+  @media (min-width: 576px) { .cta { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .cta { grid-template-columns: 445px 445px; } }
+  .cta__bloque { display: grid; align-content: center; gap: 1.25rem; padding: 3rem 2.5rem; background: var(--violeta); transition: background 0.2s; }
+  .cta:hover .cta__bloque { background: var(--violeta-oscuro); }
   .cta__titulo {
     display: flex;
     align-items: center;
@@ -84,9 +96,10 @@ const iconos = ['personas', 'codigo', 'balanza', 'editar'];
     gap: 1rem;
     font-family: var(--fuente-titulos);
     font-weight: 700;
-    font-size: 1.9rem;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
     line-height: 1.3;
     text-transform: uppercase;
   }
-  .cta__texto { font-weight: 400; }
+  .cta__texto { font-size: 1.15rem; font-weight: 400; line-height: 1.6; }
+  .cta__imagen { width: 100%; height: 100%; min-height: 260px; object-fit: cover; }
 </style>

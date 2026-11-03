@@ -294,6 +294,8 @@ def migrar_paginas(by_type, get):
 
     # Qué hacemos (página 27)
     n = page_blocks(by_type, get, "27")
+    raw27 = next(get(it, "content:encoded") for it in by_type["page"] if get(it, "wp:post_id") == "27")
+    imagen_cta = UPLOADS_RE.search(raw27)
     t = [x["text"] for x in n]
     intro = lines(t[1])
     areas = []
@@ -305,7 +307,12 @@ def migrar_paginas(by_type, get):
         "areas_titulo": "Nuestras áreas de trabajo",
         "areas": areas,
         "logros": {"titulo": "Logros destacados", "items": lines(t[11])},
-        "cta": {"titulo": "Sumate vos también", "texto": prose(t[14]), "boton": {"texto": "Quiero sumarme", "url": "/sumate/"}},
+        "cta": {
+            "titulo": "Sumate vos también",
+            "texto": prose(t[14]),
+            "imagen": local_upload(imagen_cta.group(0)) if imagen_cta else "",
+            "boton": {"texto": "Quiero sumarme", "url": "/sumate/"},
+        },
     })
 
     # Sumate (página 32)
