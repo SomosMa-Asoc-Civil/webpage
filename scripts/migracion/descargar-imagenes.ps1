@@ -1,4 +1,4 @@
-# Descarga las imágenes del WordPress viejo a public/uploads, respetando las carpetas año/mes.
+﻿# Descarga las imágenes del WordPress viejo a public/uploads, respetando las carpetas año/mes.
 # Uso (desde la raíz del repo, en PowerShell):
 #   powershell -ExecutionPolicy Bypass -File scripts/migracion/descargar-imagenes.ps1
 # Se puede correr varias veces: saltea las que ya están descargadas.

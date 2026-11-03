@@ -1,4 +1,4 @@
-# Usa el zip de Simply Static para:
+﻿# Usa el zip de Simply Static para:
 #   1) copiar a public/uploads SOLO las imágenes que usa el sitio (las de imagenes.txt)
 #   2) armar un zip chico con el HTML y CSS de las páginas, como referencia de diseño
 #
