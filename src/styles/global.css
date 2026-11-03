@@ -194,3 +194,6 @@ a.sr-only:focus {
   width: auto; height: auto; margin: 0; clip: auto;
   padding: 0.6rem 1rem; border-radius: 8px; background: var(--azul-noche); color: var(--blanco);
 }
+
+/* Evita que la página se desplace detrás del menú lateral abierto */
+body.menu-abierto { overflow: hidden; }
