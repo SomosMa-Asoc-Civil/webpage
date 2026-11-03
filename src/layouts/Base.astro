@@ -63,7 +63,7 @@ const esActual = (destino: string) =>
         <nav id="menu-principal" class="cabecera__menu" aria-label="Menú principal">
           <div class="panel__cabecera">
             <span class="panel__titulo">{sitio.nombre}</span>
-            <button class="panel__cerrar" type="button" aria-label="Cerrar menú">×</button>
+            <button class="panel__cerrar sr-only" type="button">Cerrar menú</button>
           </div>
           <ul>
             {sitio.menu.map((item) => (
@@ -206,16 +206,19 @@ const esActual = (destino: string) =>
     .cabecera__toggle span[aria-hidden] { width: 34px; height: 2px; background: var(--azul-noche); border-radius: 2px; }
     .cabecera.fija .cabecera__toggle span[aria-hidden] { background: var(--texto); }
 
+    /* Panel del tema: 300 px, fondo #302f30, ítems 14 px con 20/40 px de relleno,
+       hover y página actual en violeta */
     .cabecera__menu {
       position: fixed;
       top: 0;
       right: 0;
       z-index: 102;
       height: 100dvh;
-      width: min(400px, 85vw);
+      width: 300px;
+      max-width: 100vw;
       display: flex;
       flex-direction: column;
-      background: #2f2f2f;
+      background: #302f30;
       overflow-y: auto;
       transform: translateX(100%);
       visibility: hidden;
@@ -223,31 +226,32 @@ const esActual = (destino: string) =>
     }
     .cabecera__menu.abierto { transform: none; visibility: visible; transition: transform 0.35s ease; }
 
-    .panel__cabecera { display: flex; align-items: center; justify-content: space-between; padding: 3rem 2.5rem 2rem 3.25rem; }
-    .panel__titulo { font-family: var(--fuente-titulos); font-weight: 700; font-size: 2rem; color: var(--blanco); }
-    .panel__cerrar { background: none; border: 0; color: rgba(255, 255, 255, 0.7); font-size: 2.2rem; line-height: 1; cursor: pointer; }
-    .panel__cerrar:hover { color: var(--blanco); }
+    .panel__cabecera { display: block; padding: 40px 25px 30px; }
+    .panel__titulo { display: inline-block; padding: 10px; font-family: var(--fuente-titulos); font-weight: 700; font-size: 24px; line-height: 1.2; color: var(--blanco); }
 
     .cabecera__menu ul { flex-direction: column; gap: 0; padding: 0; }
     .cabecera__menu a {
-      padding: 1.6rem 3.25rem;
+      padding: 20px 20px 20px 40px;
       border: 0;
       color: var(--blanco);
+      font-family: var(--fuente-titulos);
       font-weight: 500;
-      font-size: 1.15rem;
+      font-size: 14px;
+      line-height: 1.5;
       letter-spacing: 0;
+      transition: background-color 0.3s;
     }
-    .cabecera__menu a:hover { color: var(--blanco); background: rgba(255, 255, 255, 0.06); }
-    .cabecera__menu a[aria-current='page'] { color: var(--blanco); background: var(--violeta); }
+    .cabecera__menu a:hover,
+    .cabecera__menu a[aria-current='page'] { color: var(--blanco); background: var(--violeta); border: 0; }
 
-    .panel__pie { display: block; margin: auto 0 0; padding: 2rem 2.5rem; color: #9b9b9b; font-size: 1.1rem; }
+    .panel__pie { display: block; margin: auto 0 0; padding: 30px 35px; color: rgba(255, 255, 255, 0.45); font-size: 16px; font-weight: 300; }
 
     .panel__fondo {
       display: block;
       position: fixed;
       inset: 0;
       z-index: 101;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0, 0, 0, 0.5);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.35s ease;
