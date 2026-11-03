@@ -344,3 +344,10 @@ content:
             label: Clave de Web3Forms
             description: Se genera gratis en web3forms.com con el mail donde deben llegar los mensajes.
             type: string
+      - name: credito
+        label: Crédito en el pie
+        description: Texto chico al lado del copyright. Dejalo vacío para no mostrarlo.
+        type: object
+        fields:
+          - { name: texto, label: Texto, type: string }
+          - { name: url, label: Enlace (opcional), type: string }
