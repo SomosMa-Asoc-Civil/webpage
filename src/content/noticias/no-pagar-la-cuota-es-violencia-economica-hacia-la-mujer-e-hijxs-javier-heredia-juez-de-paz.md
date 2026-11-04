@@ -95,8 +95,8 @@ Es complejo pero exige reuniones con áreas de gobierno y sociedad civil, que se
 
 Que no aflojen, sigan peleando por todo.
 
-*Seguilo en su IG: [juez JAVIER HEREDIA](https://www.instagram.com/javierpheredia?igsh=MTkxZDJvdG5tcnN0dQ)*
+<pre class="wp-block-preformatted">Seguilo en su IG: <a href="https://www.instagram.com/javierpheredia?igsh=MTkxZDJvdG5tcnN0dQ">juez JAVIER HEREDIA</a></pre>
 
-*\*Ley 13.944 vigente desde el año 1950: [INCUMPLIMIENTO DE LOS DEBERES DE ASISTENCIA FAMILIAR](http://servicios.infoleg.gob.ar/infolegInternet/verNorma.do;jsessionid=93CF899C871524F6274615A519114CF7?id=129755)*
+<pre class="wp-block-preformatted">*Ley 13.944 vigente desde el año 1950: <a href="http://servicios.infoleg.gob.ar/infolegInternet/verNorma.do;jsessionid=93CF899C871524F6274615A519114CF7?id=129755">INCUMPLIMIENTO DE LOS DEBERES DE ASISTENCIA FAMILIAR</a></pre>
 
-*<https://www.argentina.gob.ar/normativa/nacional/ley-13944-129755>*
+<pre class="wp-block-preformatted"><a href="https://www.argentina.gob.ar/normativa/nacional/ley-13944-129755">https://www.argentina.gob.ar/normativa/nacional/ley-13944-129755</a></pre>

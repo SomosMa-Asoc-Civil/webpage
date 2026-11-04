@@ -70,8 +70,13 @@ const otras = (await getCollection('noticias', ({ data, id }) => !data.draft && 
 </Base>
 
 <style>
-  /* Columna de lectura del tema: ~640 px, centrada */
-  .nota__columna { width: 100%; max-width: 640px; margin-inline: auto; padding-inline: 15px; }
+  /* Columna de la nota como en el tema: 896 px de texto en escritorio, 688 en notebooks chicas,
+     490 en tablets chicas y el ancho de la pantalla menos 25 px por lado en celulares */
+  .nota__columna { width: 100%; margin-inline: auto; padding-inline: 25px; }
+  @media (min-width: 576px) { .nota__columna { max-width: 540px; } }
+  @media (min-width: 768px) { .nota__columna { max-width: 720px; } }
+  @media (min-width: 992px) { .nota__columna { max-width: 738px; } }
+  @media (min-width: 1200px) { .nota__columna { max-width: 946px; } }
 
   /* Título: h3 del tema con peso 600 y letter-spacing 2px */
   .nota__titulo { font-size: clamp(1.75rem, 4.5vw, 2.25rem); font-weight: 600; line-height: 1.35; letter-spacing: 1px; margin: 0 0 1rem; }

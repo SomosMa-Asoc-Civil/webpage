@@ -65,7 +65,7 @@ content:
         default: false
       - name: body
         label: Contenido
-        description: "Para resaltar en amarillo como en las notas originales, usá la vista Código y envolvé el texto con <mark>…</mark>."
+        description: "Para resaltar en amarillo como en las notas originales, usá la vista Código y envolvé el texto con <mark>…</mark>. Las notas que vienen de WordPress conservan bloques en HTML (citas destacadas, epígrafes, texto centrado, espacios): para corregirlas usá la vista Código, así no se pierde ese formato."
         type: rich-text
         options:
           format: markdown

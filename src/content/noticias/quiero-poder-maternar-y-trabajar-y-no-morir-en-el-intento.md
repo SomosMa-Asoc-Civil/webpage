@@ -11,6 +11,8 @@ draft: false
 
 ##### *Mariángeles, mejor conocida como Mamá Pulpo, tiene una meta: garantizarle a su hija sus 4 comidas diarias. Para ello, emprende, changuea, la rema, en medio de una crisis económica que, todos los días, arroja a madres e infancias a la extrema pobreza y profundiza las condiciones de vida de un sector históricamente vulnerable, las mamás que crían solas. Esta es su historia.*
 
+<div class="espaciador" aria-hidden="true"></div>
+
 Martes, 4 am. Mariágeles se despierta sobresaltada, le duele el pecho. Algo le aprisiona el esternón, ¿será la mano de “A” (su hija), el gato o el perro, durmiendo sobre su pecho? Observa por el entrecejo, no hay nadie más en la habitación. Le sudan las manos, los pies, cada recoveco de la piel, ¿tendrá fiebre? Busca en la oscuridad el origen de la sensación de ahogo y sofoco, pero no encuentra nada que la origine. Se sienta sobre la cama, en silencio y mira por la ventana, aún no amanece, la ciudad aún está dormida. Vuelve a apoyar la cabeza en la almohada y trata de volver a dormir un ratito más, antes de que suene la alarma a las 6 am pero no puede; la sensación de asfixia aparece de nuevo y es insoportable.
 
 Abre los ojos, se refriega la cara, busca consuelo entre las sábanas vacías, la panza duele del hambre, ayer no comió, no había suficiente para dos. La angustia la está consumiendo, ya no tiene dinero para afrontar los gastos corrientes, no le quedan ahorros y en la desesperación piensa que, si no puede comerse las paredes, para qué las quiere. “Voy a vender mi único bien, mi techo, mi refugio, mi departamento”, se dice a sí misma.
@@ -25,7 +27,11 @@ Su prioridad hoy es que  “A”  pueda comer sus 4 comidas diarias, hace más
 
 Mamá Pulpo [@mamapulpo.ar](https://www.instagram.com/mamapulpo.ar/), como la conocen en las redes, dialogó con MA sobre los desafíos que enfrentan, diariamente, las mujeres que crían solas.
 
+<div class="espaciador" aria-hidden="true"></div>
+
 ![](/uploads/2025/12/WhatsApp-Image-2025-12-18-at-10.14.31-1-1024x684.jpeg)
+
+<div class="espaciador" aria-hidden="true"></div>
 
 **Monomarentales Argentina (en adelante, M.A.): ¿elegiste criar sola?**
 
@@ -49,9 +55,13 @@ M.A: Sí, son migajas, dádivas que el progenitor te da y la justicia avala y as
 
 Hay momentos en lo que me pongo a pensar qué voy a hacer hasta que mi hija cumpla 18 años y me angustio mucho, porque criar así es vivir limitada todo el tiempo, es no poder acceder a un trabajo de calidad, es no tener una vida propia, es estar en función de un otro, todo el tiempo y completamente sola.
 
-> "No creo conocer familia monomarental que no haya tenido conflicto legal por cuota alimentaria, cuidados o régimen de comunicación. Por eso, creo que hay un momento donde las familias monomarentales nos cuestionamos si iniciar o no la vía judicial, todas pasamos por el momento de pensar si las batallas legales valen la pena, principalmente, por el costo económico, psicológico y emocional del litigio"
->
-> Maríangeles
+<div class="espaciador" aria-hidden="true"></div>
+
+<blockquote class="wp-block-quote has-kubio-color-1-color has-medium-font-size">
+<p class="has-kubio-color-1-color has-large-font-size">«No creo conocer familia monomarental que no haya tenido conflicto legal por cuota alimentaria, cuidados o régimen de comunicación. Por eso, creo que hay un momento donde las familias monomarentales nos cuestionamos si iniciar o no la vía judicial, todas pasamos por el momento de pensar si las batallas legales valen la pena, principalmente, por el costo económico, psicológico y emocional del litigio»</p>
+<cite>Maríangeles</cite></blockquote>
+
+<div class="espaciador" aria-hidden="true"></div>
 
 **M.A. Y hoy, ¿qué es lo que estás pudiendo hacer?**
 
@@ -75,6 +85,12 @@ M.P: Algunas veces, al ver lo poco que tengo, me da culpa comer. Priorizo la ali
 
 M.P: Con rifas, trueques, limpio casas, paseo perros, hago mandados, lo que sea, lo que salga. El mes pasado comí gracias a una rifa, esta semana mi hija comió fruta porque un vecino me trajo unas bananas. Mientras tanto, vendo empanadas por encargo y ahorro en todo, en lo que se puede. De todos modos, ya me comí los pocos ahorros que tenía, ya no tengo de dónde sacar. Estoy pensando en vender cosas de mi casa, algunos cuadros que tengo, una flauta traversa, es decir, lo que sienta imprescindible y que puede hacer dinero rápido. Es todo un mientras tanto… Yo solo quisiera poder maternar y trabajar y no morir en el intento.
 
+<div class="espaciador" aria-hidden="true"></div>
+
 La historia de Mariángeles es la de muchas, al menos 7 de cada 10 mujeres en provincia de Buenos Aires crían y cuidan en estas condiciones: empobrecidas, endeudadas, violentadas, estigmatizadas, olvidadas. Sus sueños y anhelos así como sus penas y angustias, dan cuenta de una sociedad que, en gran parte, aún no puede desandar las trampas de la complicidad machista y que empuja a las mujeres madres a un futuro poco esperanzador.
 
 **Consciente de que la salida es colectiva, desde MA! te invitamos a sumar tu historia de monomarentalidad a este muro polifónico, mezcla de catarsis, palabra empática y grito colectivo para visibilizar nuestra problemática. Escribinos a [monomarentalesarg@gmail.com](mailto:monomarentalesarg@gmail.com), asunto: Historias MA.**
+
+<div class="espaciador" aria-hidden="true"></div>
+
+Diana vive en Paraná, Entre Ríos y es mamá monomarental de Camila. Es Doctora en Comunicación Social, guionista audiovisual y docente, todo gracias a la universidad y educación pública. Se define como activista feminista por los derechos de las mujeres y las infancias.

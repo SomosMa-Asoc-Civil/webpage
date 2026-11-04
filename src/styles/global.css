@@ -140,16 +140,20 @@ a:hover { color: var(--violeta-oscuro); }
   padding: 2rem;
 }
 
-/* Contenido de noticias (Markdown). Reglas globales del tema Kubio:
-   p Roboto 300 16px/1.6 · h2 Poppins 600 2.625em/1.143 · h4 Poppins 600 1.25em/1.4
-   a Poppins 400 sin subrayado, violeta · mark fondo amarillo (#ffb82a) · imágenes sin redondear */
+/* Contenido de noticias. Valores medidos en las notas publicadas en WordPress (Kubio, base 16 px):
+   p Roboto 300 16px/1.6 con 16 px entre bloques · h2 Poppins 600 42px · h4 Poppins 600 20px · h5 Poppins 500 18px
+   a Poppins 400 violeta sin subrayado · mark fondo amarillo (#ffb82a).
+   Las notas viejas conservan los bloques que usó cada autora (cita destacada, verso, preformateado,
+   texto centrado, espaciadores), con las clases de WordPress. */
 .prosa { font-size: 16px; line-height: 1.6; color: var(--texto); }
-.prosa > * { margin: 0 0 1.5em; }
+.prosa > * { margin: 0 0 16px; }
+.prosa > :last-child { margin-bottom: 0; }
 .prosa p { font-weight: 300; }
-.prosa h2 { font-weight: 600; font-size: var(--h2); line-height: 1.143; color: var(--texto); margin-top: 1.25em; margin-bottom: 0.6em; }
-.prosa h3 { font-weight: 500; font-size: var(--h3); line-height: 1.25; color: var(--texto); margin-top: 1.25em; margin-bottom: 0.6em; }
-.prosa h4 { font-weight: 600; font-size: var(--h4); line-height: 1.4; color: var(--texto); }
-.prosa h5, .prosa h6 { font-weight: 500; font-size: 1.125em; line-height: 1.55; color: var(--texto); }
+.prosa h2 { font-weight: 600; font-size: 2.625em; line-height: 1.143; color: var(--texto); margin-top: 0.5em; }
+.prosa h3 { font-weight: 600; font-size: 1.75em; line-height: 1.25; color: var(--texto); margin-top: 0.5em; }
+.prosa h4 { font-weight: 600; font-size: 1.25em; line-height: 1.4; color: var(--texto); margin-top: 16px; }
+.prosa h5, .prosa h6 { font-weight: 500; font-size: 1.125em; line-height: 1.4; color: var(--texto); margin-top: 16px; }
+.prosa > :first-child { margin-top: 0; }
 .prosa strong, .prosa b { font-weight: 700; }
 .prosa a {
   font-family: var(--fuente-titulos);
@@ -161,15 +165,48 @@ a:hover { color: var(--violeta-oscuro); }
 }
 .prosa a:hover { color: var(--violeta-oscuro); }
 .prosa mark { background: #ffb82a; color: #000; padding: 0.05em 0; }
+/* Imágenes: las de tamaño libre van centradas (bloque imagen de Kubio);
+   las que se achicaron en WordPress quedan con ese ancho y alineadas a la izquierda */
 .prosa img { display: block; max-width: 100%; height: auto; margin: 0; border-radius: 0; }
-.prosa p:has(> img:only-child) { margin-bottom: 1.5em; }
-.prosa p > em:only-child { display: block; font-size: 0.95em; color: var(--texto-suave); }
-.prosa blockquote { margin: 2em 0; padding: 0 0 0 1.25em; border-left: 4px solid var(--violeta); font-size: 1.1em; }
-.prosa blockquote p:last-child { margin-bottom: 0; }
-.prosa ul, .prosa ol { padding-left: 1.4em; }
-.prosa li { margin-bottom: 0.4em; }
+.prosa p > img:not([width]) { margin-inline: auto; }
+.prosa ul, .prosa ol { padding-left: 40px; }
+.prosa li { margin: 0; }
 .prosa table { width: 100%; border-collapse: collapse; }
 .prosa th, .prosa td { border: 1px solid var(--borde); padding: 0.5rem 0.75rem; text-align: left; }
+
+/* Cita: en el tema se veía como texto común (sin borde ni sangría) */
+.prosa blockquote { margin-inline: 0; padding: 0; border: 0; }
+.prosa blockquote > * { margin: 0; }
+.prosa blockquote > * + * { margin-top: 24px; }
+.prosa blockquote blockquote { margin: 0 40px; }
+.prosa blockquote cite { display: block; font-style: italic; }
+.prosa blockquote.has-medium-font-size > * + * { margin-top: 0; }
+
+/* Cita destacada: centrada, con 4em de aire arriba y abajo */
+.prosa .wp-block-pullquote { padding: 4em 0; font-size: 1.5em; text-align: center; overflow-wrap: break-word; }
+.prosa .wp-block-pullquote blockquote { margin: 0; }
+.prosa .wp-block-pullquote blockquote > * + * { margin-top: 0; }
+.prosa .wp-block-pullquote p { font-size: 16px; margin: 0 0 16px; }
+.prosa .wp-block-pullquote p:last-child { margin-bottom: 0; }
+
+/* Verso y preformateado (usados como epígrafes): letra monoespaciada de 14 px, respeta los saltos de línea */
+.prosa pre {
+  font-family: Monaco, Consolas, 'Andale Mono', 'DejaVu Sans Mono', monospace;
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow: auto;
+}
+.prosa pre.wp-block-verse { word-break: break-word; }
+
+/* Alineación, colores y tamaños elegidos en el editor de WordPress */
+.prosa .has-text-align-center { text-align: center; }
+.prosa .has-text-align-right { text-align: right; }
+.prosa .has-kubio-color-1-color { color: var(--violeta); }
+.prosa .has-medium-font-size { font-size: 0.888em; }
+.prosa .has-large-font-size { font-size: 2em; }
+.prosa .espaciador { height: 50px; }
 
 /* Formularios: misma estructura que tenían en Contact Form 7.
    Tarjeta blanca con borde gris claro, radio 8 px y sombra suave; campos con borde violeta. */

@@ -55,7 +55,7 @@ Los últimos dos meses de embarazo, Jackeline no tenía para comer así que pr�
 
 Por esos días tenía una sola amiga que la visitaba un rato, al menos para charlar, porque no podía ni salir afuera por su estado de riesgo, apenas ir al baño y volver a la cama. Su familia la menospreciaba, la ninguneaba y le pedía que se fuera de la casa. Su madre también había criado sola. Una cadena de mujeres criando solas. Una cadena de abandonos paternos y de culpabilidad y sobrecarga materna. Vulnerabilidades que no vienen por gusto ni elección, sino porque hay un sistema de abandono familiar y social, de Estado, que perpetúa estas situaciones.
 
-**“Yo no la culpo a mi madre, porque entiendo todo pero sí digo que le faltó cariño emocional, porque siempre estaba preocupada por lo material pero no nos daba ni un beso ni un abrazo, tampoco iba a actos de la Escuela. Y nunca nos quiso decir quién es nuestro padre, no sabemos quién es. Con mi hermano le pedimos que nos diga la verdad para poder buscarlo, conocerlo.”**
+<pre class="wp-block-verse"><em>“Yo no la culpo a mi madre, porque entiendo todo pero sí digo que le faltó cariño emocional, porque siempre estaba preocupada por lo material pero no nos daba ni un beso ni un abrazo, tampoco iba a actos de la Escuela. Y nunca nos quiso decir quién es nuestro padre, no sabemos quién es. Con mi hermano le pedimos que nos diga la verdad para poder buscarlo, conocerlo.”</em></pre>
 
 #### **Las consecuencias del abandono**
 
@@ -117,4 +117,4 @@ En Reconquista, como en todas las localidades del país donde MA, a través de l
 
 ![](/uploads/2025/04/foto-nota-cierre.jpeg)
 
-*Seguilas en sus redes: [Red Madres Reconquista](https://www.instagram.com/redmadres.reconquista?igsh=dGEweDBvMHViODZp)*
+<pre class="wp-block-preformatted">Seguilas en sus redes: <a href="https://www.instagram.com/redmadres.reconquista?igsh=dGEweDBvMHViODZp">Red Madres Reconquista</a></pre>

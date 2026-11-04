@@ -3,7 +3,7 @@
 Migración única del export de WordPress (Kubio) de SomosMa al sitio en Astro.
 
 Uso:
-    python3 scripts/migracion/migrar_wordpress.py ruta/al/export.xml
+    python3 scripts/migracion/migrar_wordpress.py ruta/al/export.xml [--solo-noticias]
 
 Genera:
     src/content/noticias/*.md   -> noticias con frontmatter (editables desde Pages CMS)
@@ -39,6 +39,19 @@ AUTORES = {
     "CeciSomosMa": "Ceci Bertolino",
     "DianaSomosMa": "Diana Deharbe",
     "Poli_studio": "SomosMa",
+}
+# Bloque "biografía del autor" de Kubio: WordPress lo completaba con la bio del usuario,
+# que no viene en el export (se copió de la nota publicada).
+BIOS = {
+    "DianaSomosMa": "Diana vive en Paraná, Entre Ríos y es mamá monomarental de Camila. Es Doctora en Comunicación "
+                    "Social, guionista audiovisual y docente, todo gracias a la universidad y educación pública. "
+                    "Se define como activista feminista por los derechos de las mujeres y las infancias.",
+}
+# Clases de WordPress que se conservan en los bloques que quedan como HTML (tienen estilo en global.css)
+CLASES_WP = {
+    "wp-block-pullquote", "wp-block-quote", "wp-block-verse", "wp-block-preformatted",
+    "has-text-align-center", "has-text-align-right", "has-kubio-color-1-color",
+    "has-medium-font-size", "has-large-font-size",
 }
 
 imagenes: set[str] = set()
@@ -378,6 +391,49 @@ def a_markdown(body_html: str, crudos: list[str]) -> str:
     return "\n\n".join(salida)
 
 
+def conservar_bloques(body_html: str, guardar) -> str:
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup(f"<div id='raiz'>{body_html}</div>", "html.parser")
+    raiz = soup.find(id="raiz")
+
+    def clases(el):
+        return set(el.get("class") or [])
+
+    def especial(el) -> bool:
+        if el.name == "div" and el.has_attr("data-espaciador"):
+            return True
+        if el.name == "pre" or (el.name == "figure" and "wp-block-pullquote" in clases(el)):
+            return True
+        if el.name == "p" and clases(el) & {"has-text-align-center", "has-text-align-right"}:
+            return True
+        if el.name == "blockquote":
+            return bool(clases(el) - {"wp-block-quote"}) or el.find(["blockquote", "cite"]) is not None \
+                or any(clases(p) & {"has-text-align-center", "has-text-align-right"} for p in el.find_all("p"))
+        return False
+
+    def limpiar(el) -> str:
+        if el.name == "div":
+            return '<div class="espaciador" aria-hidden="true"></div>'
+        for t in [el, *el.find_all(True)]:
+            cls = [c for c in (t.get("class") or []) if c in CLASES_WP]
+            for k in [k for k in t.attrs if k not in ("href", "src", "alt", "width", "target", "rel")]:
+                del t.attrs[k]
+            if cls:
+                t["class"] = cls
+        # Comillas rectas -> « », como las mostraba WordPress en español (wptexturize)
+        for s in el.find_all(string=True):
+            if '"' in s:
+                s.replace_with(re.sub(r'(^|[\s(\[])"', r"\1«", str(s)).replace('"', "»"))
+        h = str(el)
+        # Dentro de un bloque HTML de Markdown no puede haber líneas en blanco
+        return h if el.name == "pre" else re.sub(r"\n\s*\n", "\n", h)
+
+    for el in list(raiz.children):
+        if getattr(el, "name", None) and especial(el):
+            el.replace_with(soup.new_string("\n\n" + guardar(limpiar(el)) + "\n\n"))
+    return raiz.decode_contents()
+
+
 def migrar_noticias(by_type, attachments, get):
     out_dir = ROOT / "src/content/noticias"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -399,9 +455,11 @@ def migrar_noticias(by_type, attachments, get):
                 url = ""
             return f'<p><img src="{url}" alt=""></p>' if url else ""
         body_html = re.sub(r"<!-- wp:kubio/image (\{.*?\}) /-->", kubio_img, body_html, flags=re.S)
-        # Epígrafes cargados como "verso"/"preformateado" -> párrafo en cursiva
-        body_html = re.sub(r'<pre class="wp-block-(?:verse|preformatted)">(.*?)</pre>',
-                           r"<p><em>\1</em></p>", body_html, flags=re.S)
+        # Espaciadores de Kubio (50 px) y biografía de la autora, como en la nota publicada
+        body_html = re.sub(r"<!-- wp:kubio/spacer .*? /-->", "\n<div data-espaciador></div>\n", body_html)
+        bio = BIOS.get(get(it, "dc:creator"), "")
+        body_html = re.sub(r"<!-- wp:kubio/post-author-bio .*? /-->", f"\n<p>{html.escape(bio)}</p>\n" if bio else "", body_html)
+        body_html = re.sub(r"<!-- wp:kubio/post-author-avatar .*? /-->", "", body_html)
         body_html = re.sub(r"<!--.*?-->", "", body_html, flags=re.S)
         body_html = re.sub(r"<p>\s*(&nbsp;)?\s*</p>", "", body_html)
         body_html = UPLOADS_RE.sub(lambda m: local_upload(m.group(0)), body_html)
@@ -425,12 +483,17 @@ def migrar_noticias(by_type, attachments, get):
                 return f'<p><img src="{src.group(1)}" alt=""></p>'
             return "<p>" + guardar(f'<img src="{src.group(1)}" alt="" width="{ancho.group(1)}" loading="lazy" />') + "</p>"
         body_html = re.sub(r"<figure[^>]*wp-block-image[^>]*>.*?</figure>", img_con_ancho, body_html, flags=re.S)
+        # Bloques con formato propio (cita destacada, verso, preformateado, texto centrado, citas
+        # con color o anidadas, espaciadores): se conservan como HTML para respetar el original
+        body_html = conservar_bloques(body_html, guardar)
         # Resaltados (fondo amarillo del tema)
         body_html = re.sub(r"<mark\b[^>]*>", "XMARKAX", body_html)
         body_html = body_html.replace("</mark>", "XMARKCX")
         body = a_markdown(body_html, crudos)
         # Imagen reducida con link a la original -> directamente la original
         body = re.sub(r"\[!\[([^\]]*)\]\([^)]+\)\]\((/uploads/[^)]+)\)", r"![\1](\2)", body)
+        # Bloques HTML consecutivos: una línea en blanco entre cada uno
+        body = re.sub(r"(</(?:figure|blockquote|pre|div)>)\n(?=<(?:figure|blockquote|pre|div|p)\b)", r"\1\n\n", body)
         body = re.sub(r"\n{3,}", "\n\n", body).strip() + "\n"
         excerpt = html.unescape(get(it, "excerpt:encoded")).strip()
         if not excerpt:
@@ -458,6 +521,10 @@ def main():
     if len(sys.argv) < 2:
         raise SystemExit(__doc__)
     by_type, attachments, get = load(sys.argv[1])
+    if "--solo-noticias" in sys.argv:
+        # No pisa los textos de las páginas (ya se editaron después de la migración)
+        migrar_noticias(by_type, attachments, get)
+        return
     print("Páginas:")
     migrar_paginas(by_type, get)
     print("Noticias:")

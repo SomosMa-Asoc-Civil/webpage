@@ -43,11 +43,13 @@ Entonces, si vamos a la realidad, observamos que los deudores siguen impunes y e
 
 Por ejemplo, según **datos del RDAM (Registro de Deudores Alimentarios  morosos ) de provincia de Buenos Aires,  a través de la abogada Sabrina Cartabia**, que trabaja desde hace años por la problemática desde el Ministerio de las mujeres, Género y Diversidad:
 
-> > Las inscripciones vigentes en el RDAM PBA son: **5175 deudores morosos**
-> >
-> > Hombres deudores: 5092 (representan el **98,39 %)**
-> >
-> > Mujeres deudoras: 83 (representan el 1,61 %)
+<blockquote class="wp-block-quote">
+<blockquote class="wp-block-quote">
+<p class="has-text-align-center">Las inscripciones vigentes en el RDAM PBA son: <strong>5175 deudores morosos</strong></p>
+<p class="has-text-align-center">Hombres deudores: 5092 (representan el <strong>98,39 %)</strong></p>
+<p class="has-text-align-center">Mujeres deudoras: 83 (representan el 1,61 %)</p>
+</blockquote>
+</blockquote>
 
 #### ***¿Cómo es el proceso de inscribirlos en el Registro?***
 

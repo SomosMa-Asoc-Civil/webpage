@@ -15,17 +15,17 @@ draft: false
 
 Dos nuevas leyes en la provincia de Buenos Aires impactan de modo positivo en la lucha de miles de mujeres y madres que litigan contra el incumplimiento alimentario de sus hijos e hijas. Ahora no será tan fácil evadir las notificaciones, negarse a firmarlas o no hacerse notificar, que es uno de los primeros artilugios que realizan los varones separados para evadir o demorar la demanda judicial. Estos datos y muchos más, surgen de la investigación y posterior informe que hizo público el primer organismo oficial en Argentina, luego de indagar a más de 6000 mujeres que respondieron a la encuesta. En el [INFORME 2022 sobre Incumplimiento de la Obligación Alimentaria en PBA](https://ministeriodelasmujeres.gba.gob.ar/gestor/uploads/OBLIGACI%C3%93N%20ALIMENTARIA%2021.6.pdf) del Ministerio de las Mujeres, políticas de género y Diversidad sexual se pone en evidencia una realidad escandalosa que lleva siglos de silenciamiento:
 
-> **7 de cada 10 varones no convivientes no cumplen, o lo hacen parcialmente, con la obligación alimentaria de sus hijos e hijas. Y del porcentaje menor que paga, sólo 1 de cada 10 lo hace en tiempo y forma como para cubrir las necesidades básicas.**
+<figure class="wp-block-pullquote"><blockquote><p><strong>7 de cada 10 varones no convivientes no cumplen, o lo hacen parcialmente, con la obligación alimentaria de sus hijos e hijas. Y del porcentaje menor que paga, sólo 1 de cada 10 lo hace en tiempo y forma como para cubrir las necesidades básicas.</strong></p></blockquote></figure>
 
 La encuesta revela además el camino crítico que deben transitar las madres o mujeres a cargo de menores para exigir en el poder judicial lo que le corresponde como derecho básico a sus hijxs, pero además de la violencia económica ejercida por estos progenitores hacia las mujeres como un modo de castigo, deben soportar la violencia institucional de todo un sistema de justicia que las re victimiza, con dilaciones, cuotas mínimas que no llegan a cubrir las necesidades de los niños, niñas y adolescentes, y como si esto fuera poco, la incobrabilidad de los deudores y la falta de medidas sancionatorias que estimulen el cese de esa conducta delictiva de abandono parental.
 
 ![](/uploads/2025/04/foto-2.jpeg)
 
-*Se presentaron en la casa de Gobierno de La Capital de la provincia, La Plata.*
+<pre class="wp-block-preformatted">Se presentaron en la casa de Gobierno de La Capital de la provincia, La Plata.</pre>
 
 ![](/uploads/2025/04/foto-3.jpeg)
 
-*Axel con la abogada Nelly Minyersky y la socióloga Dora Barrancos*
+<pre class="wp-block-verse">Axel con la abogada Nelly Minyersky y la socióloga Dora Barrancos</pre>
 
 El acto de presentación de las nuevas leyes se realizó en la casa de gobierno provincial, ubicada en la ciudad capital de La Plata, el lunes 14 de abril pasadas las 15 horas. La sala estuvo colmada de legisladoras, funcionarias de distintas áreas, pensadoras y activistas como Dora Barrancos, representantes del poder judicial, incluso jueces, la abogada, ícono del feminismo, Nelly Minyersky, representantes de gremios y sindicatos, y algunas integrantes de asociaciones civiles como el caso de representantes de MA (Monomarentales Argentina), y la prensa.
 
@@ -33,11 +33,11 @@ El acto de presentación de las nuevas leyes se realizó en la casa de gobierno 
 
 ![](/uploads/2025/04/foto-5.jpeg)
 
-*Una sala colmada de mujeres y funcionarias que lideran esta lucha en la provincia.*
+<pre class="wp-block-verse">Una sala colmada de mujeres y funcionarias que lideran esta lucha en la provincia.</pre>
 
 ![](/uploads/2025/04/foto-6.jpeg)
 
-*Algunas integrantes de MA, de Caba y provincia Bs.As., junto a la Ministra Estela Díaz y la abogada Sabrina Cartabia*
+<pre class="wp-block-verse">Algunas integrantes de MA, de Caba y provincia Bs.As., junto a la Ministra Estela Díaz y la abogada Sabrina Cartabia</pre>
 
 ## ¿Qué cambios traen las nuevas leyes?
 
@@ -68,15 +68,15 @@ Sabemos que estas leyes tampoco resuelven todo el problema, por ello vamos a seg
 
 ![](/uploads/2025/04/foto-7.jpeg)
 
-*Las MA junto a Lucía Portos y Sabrina Cartabia*
+<pre class="wp-block-verse">Las MA junto a Lucía Portos y Sabrina Cartabia<br/></pre>
 
 ![](/uploads/2025/04/foto-8.jpeg)
 
-*Con Luci Cavallero, Socióloga y representante de NiunaMenos*
+<pre class="wp-block-verse">Con Luci Cavallero, Socióloga y representante de NiunaMenos</pre>
 
 ![](/uploads/2025/04/foto-9.jpeg)
 
-*Con el juez Javier Heredia, que logra sentencias modelo en materia de incumplimiento alimentario.*
+<pre class="wp-block-verse">Con el juez Javier Heredia, que logra sentencias modelo en materia de incumplimiento alimentario.</pre>
 
 ![](/uploads/2025/04/foto-10.jpeg)
 

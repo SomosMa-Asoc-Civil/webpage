@@ -15,34 +15,17 @@ Fallo inédito en Entre Ríos
 
 El 19 de septiembre en **Paraná**, **Entre Ríos**, la **jueza de Familia nº 4, María Victoria G. Andrián** sentó un precedente fundamental en la provincia para los tiempos que corren. Resolvió establecer el **100 por ciento de la Canasta o índice de Crianza**, que estipula todos los meses el **Indec**, como piso de la cuota alimentaria que deberá pagar un progenitor ausente e incumplidor a su hija de 10 años. La demanda de **Diana Deharbe** fue un proceso de años con la tutela de la **Dra. Andrea Saxer y el Dr. Gabriel Borgetto.**
 
-> *“La cuestión no puede ser abordada de forma aislada ni meramente*  
-> *patrimonial, sino que exige una lectura integral del derecho de familia*  
-> *contemporáneo, en diálogo con el marco normativo interno y*  
-> *supranacional, en especial cuando —como en este caso— confluyen*  
-> *factores de vulnerabilidad social, la presencia de una niña con*  
-> *necesidades básicas insatisfechas, y antecedentes de violencia de género*  
-> *contra la madre, que no pueden ser soslayados.”*
->
-> (Textual sentencia)
+<figure class="wp-block-pullquote"><blockquote><p><em>“La cuestión no puede ser abordada de forma aislada ni meramente</em><br/><em>patrimonial, sino que exige una lectura integral del derecho de familia</em><br/><em>contemporáneo, en diálogo con el marco normativo interno y</em><br/><em>supranacional, en especial cuando —como en este caso— confluyen</em><br/><em>factores de vulnerabilidad social, la presencia de una niña con</em><br/><em>necesidades básicas insatisfechas, y antecedentes de violencia de género</em><br/><em>contra la madre, que no pueden ser soslayados.”</em></p><cite>(Textual sentencia)</cite></blockquote></figure>
 
 El fallo establece, por primera vez en esta provincia, un nuevo valor para el cálculo del *quantum* alimentario,  al reivindicar el índice de crianza (IC) deja de lado el salario mínimo, vital y móvil (SMVM) , monto más que insuficiente y seriamente discutido. Asimismo, recurre a la figura legal de **responsables subsidiarios** hacia los **abuelos paternos** en caso del no pago del demandado, con un valor de retención menor en el caso de los familiares, pero como medida acorde a lograr el cumplimiento.
 
-> *”...la subsidiariedad no debe ser entendida como una cláusula de exclusión,*  
-> *sino como un principio de solidaridad familiar intergeneracional que*  
-> *asegura el cumplimiento del derecho alimentario”*
+<figure class="wp-block-pullquote"><blockquote><p><em>”...la subsidiariedad no debe ser entendida como una cláusula de exclusión,</em><br/><em>sino como un principio de solidaridad familiar intergeneracional que</em><br/><em>asegura el cumplimiento del derecho alimentario”</em></p></blockquote></figure>
 
 Esta **sentencia de la jueza Andrián incorpora perspectiva de género** en todo su escrito y reconoce que no se puede menospreciar el hecho de la violencia de género sufrida por la demandante, además de la ausencia del demandado a sus obligaciones parentales para con la hija en común.
 
-> *“Relata su historia con el accionado, remarca los momentos de violencia vividos y la falta de toda dedicación -económica, afectiva y presencial- del progenitor. Sostiene que XXXX está a su exclusivo cargo y que los gastos que la niña tiene en su cotidianidad los asume unilateralmente.” (\*textual de sentencia, se borra el nombre de la menor para proteger su identidad)*
+<figure class="wp-block-pullquote"><blockquote><p> <em>“Relata su historia con el accionado, remarca los momentos de violencia vividos y la falta de toda dedicación -económica, afectiva y presencial- del progenitor. Sostiene que XXXX está a su exclusivo cargo y que los gastos que la niña tiene en su cotidianidad los asume unilateralmente.” (*textual de sentencia, se borra el nombre de la menor para proteger su identidad)</em></p></blockquote></figure>
 
-> *“Surge de la narrativa coherente, reiterada y no controvertida de la*  
-> *actora -avalada además por prueba producida en autos- que su vínculo*  
-> *con el progenitor estuvo atravesado por episodios de violencia, que si*  
-> *bien no constituyen el objeto central del proceso, resultan fundamentales*  
-> *para contextualizar el abandono afectivo, económico y parental del*  
-> *progenitor, y el impacto desproporcionado que ha recaído sobre la madre,*  
-> *quien ha sostenido en soledad la totalidad de las responsabilidades de*  
-> *crianza.”*
+<figure class="wp-block-pullquote"><blockquote><p><em>“Surge de la narrativa coherente, reiterada y no controvertida de la</em><br/><em>actora -avalada además por prueba producida en autos- que su vínculo</em><br/><em>con el progenitor estuvo atravesado por episodios de violencia, que si</em><br/><em>bien no constituyen el objeto central del proceso, resultan fundamentales</em><br/><em>para contextualizar el abandono afectivo, económico y parental del</em><br/><em>progenitor, y el impacto desproporcionado que ha recaído sobre la madre,</em><br/><em>quien ha sostenido en soledad la totalidad de las responsabilidades de</em><br/><em>crianza.”</em></p></blockquote></figure>
 
 ## Lo novedoso del Índice de crianza
 

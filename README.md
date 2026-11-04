@@ -83,6 +83,7 @@ scripts/migracion/            script de migración desde WordPress y descarga de
 ## Notas de la migración
 
 - Se migraron 8 noticias, 5 páginas y el equipo de Nosotras (10 integrantes) desde el export de WordPress del 03/11/2026.
+- Las noticias respetan el formato que les dio cada autora en WordPress: citas destacadas, versos y textos preformateados (usados como epígrafes), texto centrado, citas en violeta, espaciadores y fotos achicadas. Esos bloques quedaron en HTML dentro del `.md`, con las clases de WordPress, y sus estilos están en `src/styles/global.css` (sección `.prosa`), medidos sobre las notas publicadas.
 - `/noticias-2/` (dirección vieja) redirige a `/noticias/`.
 - El feed de Instagram (plugin Spotlight) se reemplazó por una sincronización diaria con GitHub Actions (ver sección Instagram).
 - En Nosotras hay dos nombres que parecen tener errores de tipeo en el original ("Paola Uquizo" / "Urquizo", "Piertropaolo" / "Pietropaolo"); se dejaron como estaban para que lo confirmen.
